@@ -1,0 +1,24 @@
+{
+  "npmScope": "bongist",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "admin": {
+      "tags": []
+    },
+    "admin-e2e": {
+      "tags": []
+    },
+    "account": {
+      "tags": []
+    },
+    "account-e2e": {
+      "tags": []
+    }
+  }
+}
