@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AngularFirest}
 
 @Component({
   selector: 'bongist-root',

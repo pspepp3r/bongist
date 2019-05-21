@@ -7,11 +7,18 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeaderComponent } from './layouts/header/header.component';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { AsideComponent } from './layouts/aside/aside.component';
 
-const routes = [];
+const routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DashboardComponent, HeaderComponent, FooterComponent, AsideComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
