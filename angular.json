@@ -19,8 +19,23 @@
             "polyfills": "apps/admin/src/polyfills.ts",
             "tsConfig": "apps/admin/tsconfig.app.json",
             "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
-            "styles": ["apps/admin/src/styles.css"],
-            "scripts": [],
+            "styles": [
+              "apps/admin/src/styles.css",
+              "apps/admin/src/assets/vendor/font-awesome/css/all.min.css",
+              "apps/admin/src/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
+              "apps/admin/src/assets/css/theme.css"
+            ],
+            "scripts": [
+              "apps/admin/src/assets/vendor/jquery/dist/jquery.min.js",
+              "apps/admin/src/assets/vendor/jquery-migrate/jquery-migrate.min.js",
+              "apps/admin/src/assets/vendor/popper.js/dist/umd/popper.min.js",
+              "apps/admin/src/assets/vendor/bootstrap/bootstrap.min.js",
+              "apps/admin/src/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
+              "apps/admin/src/assets/vendor/chart.js/dist/Chart.min.js",
+              "apps/admin/src/assets/js/sidebar-nav.js",
+              "apps/admin/src/assets/js/main.js",
+              "apps/admin/src/assets/js/dashboard-page-scripts.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

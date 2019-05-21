@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {log} from "util";
 
 @Component({
   selector: 'bongist-dashboard',
@@ -10,6 +11,7 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('good')
   }
 
 }
