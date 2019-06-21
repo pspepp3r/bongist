@@ -1,0 +1,2 @@
+Time : 12:34:47
+SQLSTATE[HY000] [1049] Unknown database 'janelleclothings'

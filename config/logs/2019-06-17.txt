@@ -1,0 +1,7 @@
+Time : 22:10:08
+SQLSTATE[HY000]: General error: 1364 Field 'address' doesn't have a default value
+Raw SQL : INSERT INTO accounts (name, email, password, timestamp) VALUES (:name, :email, :password, :timestamp)
+
+Time : 22:09:35
+SQLSTATE[HY000]: General error: 1364 Field 'phone' doesn't have a default value
+Raw SQL : INSERT INTO accounts (name, email, password, timestamp) VALUES (:name, :email, :password, :timestamp)

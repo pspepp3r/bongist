@@ -1,0 +1,33 @@
+Time : 12:56:53
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'janelleclothings.product_gallery' doesn't exist
+Raw SQL : SELECT * FROM product_gallery WHERE product_id = :id ORDER BY id DESC
+
+Time : 12:56:48
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'janelleclothings.product_gallery' doesn't exist
+Raw SQL : SELECT * FROM product_gallery WHERE product_id = :id ORDER BY id DESC
+
+Time : 12:56:42
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'janelleclothings.product_gallery' doesn't exist
+Raw SQL : SELECT * FROM product_gallery WHERE product_id = :id ORDER BY id DESC
+
+Time : 12:56:35
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'janelleclothings.product_gallery' doesn't exist
+Raw SQL : SELECT * FROM product_gallery WHERE product_id = :id ORDER BY id DESC
+
+Time : 12:56:04
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'janelleclothings.product_gallery' doesn't exist
+Raw SQL : SELECT * FROM product_gallery WHERE product_id = :id ORDER BY id DESC
+
+Time : 12:53:26
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+
+Time : 12:53:26
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+
+Time : 01:53:10
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.?.'%'' at line 1
+Raw SQL : SELECT * FROM products WHERE name LIKE '%'.:product.'%'
+
+Time : 00:40:02
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'fname' cannot be null
+Raw SQL : UPDATE accounts SET fname = :fname, lname = :lname, phone = :phone WHERE email = :email

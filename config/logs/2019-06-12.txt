@@ -1,0 +1,51 @@
+Time : 23:14:35
+SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'cost_price' at row 1
+Raw SQL : INSERT INTO products (name, thumbnail, price, cost_price, discount, description, timestamp) VALUES (:title, :image, :price, :c_price, :discount, :description, :now)
+
+Time : 23:14:01
+SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'cost_price' at row 1
+Raw SQL : INSERT INTO products (name, thumbnail, price, cost_price, discount, description, timestamp) VALUES (:title, :image, :price, :c_price, :discount, :description, :now)
+
+Time : 23:13:53
+SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'cost_price' at row 1
+Raw SQL : INSERT INTO products (name, thumbnail, price, cost_price, discount, description, timestamp) VALUES (:title, :image, :price, :c_price, :discount, :description, :now)
+
+Time : 23:11:34
+SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'cost_price' at row 1
+Raw SQL : INSERT INTO products (name, thumbnail, price, cost_price, discount, description, timestamp) VALUES (:title, :image, :price, :c_price, :discount, :description, :now)
+
+Time : 23:09:46
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO product_category (product_id, category_id) VALUES (:p_id, :cat_id)
+
+Time : 23:08:48
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : UPDATE products SET name = :title, description = :description, price = :price, cost_price = :c_price, discount = :discount, timestamp = :now WHERE id = :id
+
+Time : 18:14:06
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO product_category (product_id, category_id) VALUES (:p_id, :cat_id)
+
+Time : 18:13:39
+SQLSTATE[HY000]: General error: 1364 Field 'category' doesn't have a default value
+Raw SQL : INSERT INTO products (name, thumbnail, price, cost_price, discount, description, timestamp) VALUES (:title, :image, :price, :c_price, :discount, :description, :now)
+
+Time : 18:12:10
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list'
+Raw SQL : SELECT title FROM products WHERE name = :title
+
+Time : 18:09:05
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list'
+Raw SQL : SELECT title FROM products WHERE name = :title
+
+Time : 10:17:58
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list'
+Raw SQL : UPDATE categories SET title = :title, description = :description WHERE id = :id
+
+Time : 10:17:25
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category' in 'field list'
+Raw SQL : SELECT category FROM categories WHERE id = :id
+
+Time : 10:11:17
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list'
+Raw SQL : SELECT title FROM categories WHERE name = :title
