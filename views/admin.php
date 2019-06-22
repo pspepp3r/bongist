@@ -10,7 +10,7 @@ if ($routes[2] != 'admin') {
 
     } else {
 
-        $page = 'dashboard';
+        $page = '404';
 
     }
 
@@ -33,14 +33,15 @@ if ($page == 'login') {
 
         if ($account) {
             $staff_id = $account['id'];
-            $staff_role = $account['role'];
+//            $staff_role = $account['role'];
         }else{
             unset($_SESSION['logged_staff']);
             $page = 'login';
         }
     }
 
-    if ($page == 'login') {
+
+    if ($page == 'login' || $page == '404') {
         require('views/admin/'.$page.'.php');
     }else {
         require('views/admin/partials/header.php');

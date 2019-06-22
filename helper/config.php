@@ -8,8 +8,8 @@
 
 class config {
 
-//   static $url = "https://janelleclothings.com/";
-      static $url = "https://janelleclothings.dev/";
+//   static $url = "https://bongistk.com/";
+      static $url = "https://bongist.dev/";
 
 
     public static function base() {
@@ -17,16 +17,16 @@ class config {
     }
 
     public static function email() {
-        return "info@janelleclothings.com";
+        return "bongistk@gmail.com";
     }
 
     public static function name() {
-        return "Janelle Clothings";
+        return "Bongist Koncept";
     }
 
 
     public static function description() {
-        return "Janelle Clothings";
+        return "Bongist Koncept";
     }
 
     public static function address() {
@@ -46,15 +46,15 @@ class config {
     }
 
     public static function logo() {
-        return 'assets/images/logo.svg';
+        return 'assets/images/logo.png';
     }
 
     public static function favicon() {
-        return 'assets/images/favicon.png';
+        return 'assets/images/logo.png';
     }
 
-    public static function baseUploadProductUrl() {
-        return 'assets/images/products/';
+    public static function baseUploadStaffUrl() {
+        return 'assets/images/staff/';
     }
 
     public static function baseUploadSliderUrl() {

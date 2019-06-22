@@ -2,18 +2,18 @@
 
 class account {
 
-    public static function login($username, $password) {
+    public static function login($email, $password) {
 
         global $db;
 
         $param = array(
-            'user' => request::secureTxt($username)
+            'email' => request::secureTxt($email)
         );
 
-        $account = $db->query("SELECT * FROM staff WHERE username = :user", $param, false);
+        $account = $db->query("SELECT * FROM staff WHERE email = :email", $param, false);
 
         if (!$account) {
-            respond::alert('warning', '', 'Invalid username');
+            respond::alert('warning', '', 'Invalid email address');
             return false;
         }
             $account_pwd = $account['password'];
@@ -32,12 +32,12 @@ class account {
             }
 
 
-            $_SESSION['logged_staff'] = $_POST['username'];
+            $_SESSION['logged_staff'] = $email;
             if (isset($_SESSION['redirect_page'])) {
                 $page = $_SESSION['redirect_page'];
-                header('location: admin/'.$page);
+                header('location: '.$page);
             }else {
-                header('location: products');
+                header('location: dashboard');
             }
 
     }// LOGIN METHOD

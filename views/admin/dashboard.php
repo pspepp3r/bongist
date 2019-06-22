@@ -1,299 +1,788 @@
- <?php
-                if (isset($_SESSION['logged_staff'])) {
-                    ?> 
-<!-- BEGIN PAGE CONTAINER -->
-<div class="page-container">
-	<!-- BEGIN PAGE HEAD -->
-	<div class="page-head">
-		<div class="container">
-			<!-- BEGIN PAGE TITLE -->
-			<div class="page-title">
-				<h1>New Blog <small>write a new article</small></h1>
-			</div>
-			<!-- END PAGE TITLE -->
-			
-		</div>
-	</div>
-	<!-- END PAGE HEAD -->
-	<!-- BEGIN PAGE CONTENT -->
-	<div class="page-content">
-		<div class="container">
-		<!-- BEGIN PAGE CONTENT INNER -->
-			<div class="row margin-top-10">
-				<div class="col-md-6 col-sm-12">
-					<!-- BEGIN PORTLET-->
-					<div style="height:670px" class="portlet light ">
-						<div class="portlet-title">
-							<div class="caption caption-md">
-								<i class="icon-bar-chart theme-font hide"></i>
-								<span class="caption-subject theme-font bold uppercase">Latest Blog Articles</span>
-								<span class="caption-helper hide">weekly stats...</span>
-							</div>
-							<div class="actions">
-							<div style="height:auto; text-align:center;background:#d6e9c6;padding:5px; width:auto;display:none" class="notif"></div>
-							
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="scroller" style="height: 550px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
-								
-							<div class="row">
-						<div class="col-md-12 blog-page">
-							<div class="row">
-								<div class="col-md-12 col-sm-12 article-block">
-									<h1 style="margin-top:0px"></h1>
-									<?php
-									$per_page = 6;
-									$pages_query = $conn->query("SELECT COUNT('id') FROM blog");
-									$pages = ceil($pages_query->fetchColumn()/$per_page);
-									$pg = (isset($_GET['pg'])) ? (int)$_GET['pg'] : 1;
-									$start = ($pg - 1) * $per_page;
-			  
-									$bg = $conn->prepare("SELECT * FROM blog ORDER BY id DESC LIMIT ".$start.",".$per_page."");
-									$bg->execute();
-									while($blog = $bg->fetch()){
-									?>
-									<div class="row it<?php echo $blog['id'];?>">
-										<div class="col-md-3 blog-img blog-tag-data">
-											<img src="./assets/admin/pages/media/blog/<?php echo $blog['thumbnail'];?>" alt="" class="img-responsive">
-											<ul class="list-inline">
-												<li>
-													<i class="fa fa-calendar"></i>
-													<a href="javascript:;">
-														<?php
-															echo date("F d, Y", $blog['timestamp']);
-														?>
-													</a>
-												</li>
-												
-											</ul>
-											
-										</div>
-										<div class="col-md-9 blog-article">
-											<h4 class="media-heading">
-											<a href="javascript:;">
-											<?php
-												echo $blog['title'];
-											?>
-											</a>
-											</h4>
-											<p>
-												<?php
-													echo substr($blog['blog'],0,700);
-												?>
-												<div class="clearfix"></div>
-											</p>
-											<div class="btn-group">
-											<a class="btn red blogDel" id="<?php echo $blog['id'];?>" href="javascript:;">
-											Delete
-											</a>
-											<a class="btn green" href="edit-blog?id=<?php echo $blog['id'];?>">
-											Edit <i class="m-icon-swapright m-icon-white"></i>
-											</a>
-											</div>
-										</div>
-										
-									</div>
-									<hr class="it<?php echo $blog['id'];?>">
-									<?php }?>
-									
-								
-								</div>
-								<!--end col-md-9-->
-								
-							</div>
-							<?php
-							/*
-							
-							<ul class="pagination pull-right">
-								<li class="<?php if($pg == 1){echo "disabled";}?>">
-									<a href="blog<?php if($pg > 1){ echo "?pg=",$pg - 1;} else{}?>">
-									<i class="fa fa-angle-left"></i>
-									</a>
-								</li>
-								<?php 
-									if($pages >= 1 && $pg <= $pages){
-										for($x=1;$x<=$pages;$x++){
-											echo ($x==$pg) ? '<li class="active"><a href="?pg='.$x.'" >'.$x.'</a></li>' : '<li><a href="?pg='.$x.'" class="">'.$x.'</a></li>';
-								  
-										}
-									}
-								?>
-								<li>
-									<a href="blog<?php if($pg){ echo "?pg=",$pg + 1;}else{}?>">
-									<i class="fa fa-angle-right"></i>
-									</a>
-								</li>
-							</ul>
-							*/
-							?>
-						</div>
-					</div>
-						</div>
-					</div>
-					</div>
-					<!-- END PORTLET-->
-				</div>
-					<div class="col-md-6 col-sm-12">
-					<!-- BEGIN PORTLET-->
-					<div style="height:670px" class="portlet light ">
-						<div class="portlet-title">
-							<div class="caption caption-md">
-								<i class="icon-bar-chart theme-font hide"></i>
-								<span class="caption-subject theme-font bold uppercase">Blog Article</span>
-								
-							</div>
-							<div class="actions">
-								
-							</div>
-						</div>
-						<div class="portlet-body form ">
-						<div class="scroller" style="height: 600px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
-							
-						<div class="col-md-12">
-							<form action="" method="post" enctype="multipart/form-data" class="form-horizontal form-row-stripped">
-											
-											<div class="form-body ">
-											
-											<div class="form-group">
-												<?php
-												if(isset($_POST['blogs'])){
-													$title = secureTxt($_POST['title']);
-													$blog = $_POST['blog'];
-													$file = time().$_FILES['file']['name'];
-													$target_dir = "assets/admin/pages/media/blog/";
-													$time = time();
-													$target_file = $target_dir .time(). basename($_FILES["file"]["name"]);
-													$uploadOk = 1;
-													$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);               
-												 // Check if image file is a actual image or fake image
-												 
-													  $check = getimagesize($_FILES["file"]["tmp_name"]);
-													  if($check != false) {
-														  
-														  $uploadOk = 1;
-													  } else {
-														   ?>
-												<div class="alert alert-danger" >
-												  <strong>File is not an image.</strong><br>
-												  </div>
-													<?php
-														  $uploadOk = 0;
-													  }
-												  
-												// Check file size
-												if ($_FILES["file"]["size"] > 5000000) {
-												   
-													 ?>
-												<div class="alert alert-danger" >
-												  <strong>Sorry, your file is too large.</strong><br>
-												  </div>
-													<?php
-													$uploadOk = 0;
-												}
-												// Allow certain file formats
-												if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-												&& $imageFileType != "gif" ) {
-													
-													 ?>
-												<div class="alert alert-danger" >
-												  <strong>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</strong><br>
-												  </div>
-													<?php
+<div class="u-body">
+  <!-- Doughnut Chart -->
+  <div class="row">
+    <div class="col-sm-6 col-xl-3 mb-4">
+      <div class="card">
+        <div class="card-body media align-items-center px-xl-3">
+          <div class="u-doughnut u-doughnut--70 mr-3 mr-xl-2">
+            <canvas class="js-doughnut-chart" width="70" height="70"
+                    data-set="[65, 35]"
+                    data-colors='[
+                              "#2972fa",
+										          "#f6f9fc"
+										        ]'></canvas>
 
-													$uploadOk = 0;
-												}
-												// Check if $uploadOk is set to 0 by an error
-												if ($uploadOk == 0) {
-												   
-													?>
-												<div class="alert alert-danger" >
-												  <strong>Sorry, your file was not uploaded.</strong><br>
-												  </div>
-													<?php
-												// if everything is ok, try to upload file
+            <div class="u-doughnut__label text-info">65</div>
+          </div>
 
+          <div class="media-body">
+            <h5 class="h6 text-muted text-uppercase mb-2">
+              Total Sales <i class="fa fa-arrow-up text-success ml-1"></i>
+            </h5>
+            <span class="h2 mb-0">$56,400</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-												} else {
-													$q = $conn->prepare("INSERT INTO blog (title, thumbnail, blog, timestamp) VALUES (:title, :file, :blog, :date)");
+    <div class="col-sm-6 col-xl-3 mb-4">
+      <div class="card">
+        <div class="card-body media align-items-center px-xl-3">
+          <div class="u-doughnut u-doughnut--70 mr-3 mr-xl-2">
+            <canvas class="js-doughnut-chart" width="70" height="70"
+                    data-set="[35, 65]"
+                    data-colors='[
+                              "#fab633",
+										          "#f6f9fc"
+										        ]'></canvas>
 
-													$q->bindParam(':title', $title);
-													$q->bindParam(':file', $file);
-													$q->bindParam(':blog', $blog);
-													$q->bindParam(':date', $time);
-								 
-													if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file) && $q->execute()) {
-													  ?>
-												<div class="alert alert-success" >
-												  <strong>The file has been uploaded.</strong><br>
-												  </div>
-													<?php
-													   
-													} else {
-														
-														 ?>
-												<div class="alert alert-danger" >
-												  <strong>Sorry, there was an error uploading your file.</strong><br>
-												  </div>
-													<?php
-													}
-												}
-												
-												}?>
-											</div>
-										
-											<div class="form-group">
-													<label class="control-label ">Blog Title</label>
-													<input type="text" name="title" required placeholder="Title of blog article...." class="form-control"/>
-											</div>
-												<div class="form-group">
-													<label class="control-label">Thumbnail</label>
-												<div class="fileinput fileinput-new input-group" data-provides="fileinput">
-													<div class="form-control" data-trigger="fileinput">
-													<i class="glyphicon glyphicon-file fileinput-exists"></i> 
-													<span class="fileinput-filename"></span>
-													</div>
-													<span class="input-group-addon btn btn-primary btn-input  btn-file">
-													<span class="fileinput-new">Photo</span>
-													<span class="fileinput-exists">Change</span>
-													<input type="file" required id="pic" name="file">
-													</span>
-													<a href="#" class="input-group-addon btn btn-primary btn-input fileinput-exists" data-dismiss="fileinput"><span class="glyphicon glyphicon-trash"></span></a>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label">Description</label>
-														<textarea required name="blog" class="form-control" rows="6"></textarea>
-												</div>
-												
-											</div>
-											<div class="form-actions">
-												<div class="row">
-													<div class="">
-														<button type="submit" name="blogs" class="btn green btn-lg btn-block"><i class="fa fa-check"></i> Submit</button>
-													</div>
-												</div>
-											</div>
-										</form>
-										</div>
-										</div>
-						</div>
-					</div>
-					<!-- END PORTLET-->
-				</div>
-				
-						</div>
-		<!-- END QUICK SIDEBAR -->
-	</div>
-	<!-- END PAGE CONTENT -->
+            <div class="u-doughnut__label text-warning">35</div>
+          </div>
+
+          <div class="media-body">
+            <h5 class="h6 text-muted text-uppercase mb-2">
+              Spendings <i class="fa fa-arrow-down text-danger ml-1"></i>
+            </h5>
+            <span class="h2 mb-0">$6,700</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3 mb-4">
+      <div class="card">
+        <div class="card-body media align-items-center px-xl-3">
+          <div class="u-doughnut u-doughnut--70 mr-3 mr-xl-2">
+            <canvas class="js-doughnut-chart" width="70" height="70"
+                    data-set="[60, 40]"
+                    data-colors='[
+                              "#0dd157",
+										          "#f6f9fc"
+										        ]'></canvas>
+
+            <div class="u-doughnut__label text-success">60</div>
+          </div>
+
+          <div class="media-body">
+            <h5 class="h6 text-muted text-uppercase mb-2">
+              Income <i class="fa fa-arrow-up text-success ml-1"></i>
+            </h5>
+            <span class="h2 mb-0">$38,200</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3 mb-4">
+      <div class="card">
+        <div class="card-body media align-items-center px-xl-3">
+          <div class="u-doughnut u-doughnut--70 mr-3 mr-xl-2">
+            <canvas class="js-doughnut-chart" width="70" height="70"
+                    data-set="[25, 85]"
+                    data-colors='[
+                              "#fb4143",
+										          "#f6f9fc"
+										        ]'></canvas>
+
+            <div class="u-doughnut__label text-danger">25</div>
+          </div>
+
+          <div class="media-body">
+            <h5 class="h6 text-muted text-uppercase mb-2">
+              Cancels <i class="fa fa-arrow-up text-danger ml-1"></i>
+            </h5>
+            <span class="h2 mb-0">$3,400</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Doughnut Chart -->
+
+  <!-- Overall Income -->
+  <div class="card mb-4">
+    <!-- Card Header -->
+    <header class="card-header d-md-flex align-items-center">
+      <h2 class="h3 card-header-title">Overall Income</h2>
+
+      <!-- Nav Tabs -->
+      <ul id="overallIncomeTabsControl" class="nav nav-tabs card-header-tabs ml-md-auto mt-3 mt-md-0">
+        <li class="nav-item mr-4">
+          <a class="nav-link active" href="#overallIncomeTab1" role="tab" aria-selected="true" data-toggle="tab">
+            <span class="d-none d-md-inline">Last</span>
+            7 days
+          </a>
+        </li>
+        <li class="nav-item mr-4">
+          <a class="nav-link" href="#overallIncomeTab2" role="tab" aria-selected="false" data-toggle="tab">
+            <span class="d-none d-md-inline">Last</span>
+            30 days
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#overallIncomeTab3" role="tab" aria-selected="false" data-toggle="tab">
+            <span class="d-none d-md-inline">Last</span>
+            90 days
+          </a>
+        </li>
+      </ul>
+      <!-- End Nav Tabs -->
+    </header>
+    <!-- End Card Header -->
+
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="tab-content" id="overallIncomeTabs">
+        <!-- Tab Content -->
+        <div class="tab-pane fade show active" id="overallIncomeTab1" role="tabpanel">
+          <div class="row">
+            <!-- Chart -->
+            <div class="col-md-9 mb-4 mb-md-0" style="min-height: 300px;">
+              <canvas class="js-overall-income-chart" width="1000" height="300"></canvas>
+            </div>
+            <!-- End Chart -->
+
+            <div class="col-md-3">
+              <!-- Total Income -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-primary mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Total Income</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-success">
+                    <span>+9.5%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-up ml-2"></i>
+														</span>
+                  </div>
+                </div>
+                <span class="h3 mb-0">$6,400</span>
+              </div>
+              <!-- End Total Income -->
+
+              <hr>
+
+              <!-- Total Installs -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-secondary mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Total Installs</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-success">
+                    <span>+7.5%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-up ml-2"></i>
+														</span>
+                  </div>
+                </div>
+
+                <span class="h3 mb-0">1,346,600</span>
+              </div>
+              <!-- End Total Installs -->
+
+              <hr>
+
+              <!-- Active Users -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-info mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Active Users</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-danger">
+                    <span>-3.5%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-down ml-2"></i>
+														</span>
+                  </div>
+                </div>
+
+                <span class="h3 mb-0">896,200</span>
+              </div>
+              <!-- End Active Users -->
+
+              <hr>
+
+              <a class="btn btn-block btn-outline-primary" href="#">Learn More</a>
+            </div>
+          </div>
+        </div>
+        <!-- End Tab Content -->
+
+        <!-- Tab Content -->
+        <div class="tab-pane fade" id="overallIncomeTab2" role="tabpanel">
+          <div class="row">
+            <!-- Chart -->
+            <div class="col-md-9 mb-4 mb-md-0" style="min-height: 300px;">
+              <canvas class="js-overall-income-chart" width="1000" height="300"></canvas>
+            </div>
+            <!-- End Chart -->
+
+            <div class="col-md-3">
+              <!-- Total Income -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-primary mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Total Income</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-success">
+                    <span>+10.4%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-up ml-2"></i>
+														</span>
+                  </div>
+                </div>
+                <span class="h3 mb-0">$48,650</span>
+              </div>
+              <!-- End Total Income -->
+
+              <hr>
+
+              <!-- Total Installs -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-secondary mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Total Installs</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-success">
+                    <span>+7.9%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-up ml-2"></i>
+														</span>
+                  </div>
+                </div>
+
+                <span class="h3 mb-0">5,169,854</span>
+              </div>
+              <!-- End Total Installs -->
+
+              <hr>
+
+              <!-- Active Users -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-info mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Active Users</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-danger">
+                    <span>-2.5%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-down ml-2"></i>
+														</span>
+                  </div>
+                </div>
+
+                <span class="h3 mb-0">389,545</span>
+              </div>
+              <!-- End Active Users -->
+
+              <hr>
+
+              <a class="btn btn-block btn-outline-primary" href="#">Learn More</a>
+            </div>
+          </div>
+        </div>
+        <!-- End Tab Content -->
+
+        <!-- Tab Content -->
+        <div class="tab-pane fade" id="overallIncomeTab3" role="tabpanel">
+          <div class="row">
+            <!-- Chart -->
+            <div class="col-md-9 mb-4 mb-md-0" style="min-height: 300px;">
+              <canvas class="js-overall-income-chart" width="1000" height="300"></canvas>
+            </div>
+            <!-- End Chart -->
+
+            <div class="col-md-3">
+              <!-- Total Income -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-primary mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Total Income</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-success">
+                    <span>+12.8%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-up ml-2"></i>
+														</span>
+                  </div>
+                </div>
+                <span class="h3 mb-0">$112,800</span>
+              </div>
+              <!-- End Total Income -->
+
+              <hr>
+
+              <!-- Total Installs -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-secondary mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Total Installs</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-success">
+                    <span>+8.1%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-up ml-2"></i>
+														</span>
+                  </div>
+                </div>
+
+                <span class="h3 mb-0">9,151,304</span>
+              </div>
+              <!-- End Total Installs -->
+
+              <hr>
+
+              <!-- Active Users -->
+              <div>
+                <div class="media align-items-center">
+                  <div class="media-body d-flex align-items-baseline">
+                    <span class="u-indicator u-indicator--xxs bg-info mr-2"></span>
+                    <h5 class="h6 text-muted text-uppercase mb-1">Active Users</h5>
+                  </div>
+
+                  <div class="d-flex align-items-center h4 text-danger">
+                    <span>-1.5%</span>
+                    <span class="small">
+															<i class="fa fa-arrow-down ml-2"></i>
+														</span>
+                  </div>
+                </div>
+
+                <span class="h3 mb-0">3252,191</span>
+              </div>
+              <!-- End Active Users -->
+
+              <hr>
+
+              <a class="btn btn-block btn-outline-primary" href="#">Learn More</a>
+            </div>
+          </div>
+        </div>
+        <!-- End Tab Content -->
+      </div>
+    </div>
+    <!-- End Card Body -->
+  </div>
+  <!-- End Overall Income -->
+
+  <!-- Current Projects -->
+  <div class="row">
+    <!-- Current Projects -->
+    <div class="col-md-6 mb-4 mb-md-0">
+      <div class="card h-100">
+        <header class="card-header d-flex align-items-center">
+          <h2 class="h3 card-header-title">Current Projects</h2>
+
+          <!-- Card Header Icon -->
+          <ul class="list-inline ml-auto mb-0">
+            <li class="list-inline-item mr-3">
+              <a class="link-muted h3" href="#!">
+                <i class="far fa-bell"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="link-muted h3" href="#!">
+                <i class="far fa-edit"></i>
+              </a>
+            </li>
+          </ul>
+          <!-- End Card Header Icon -->
+        </header>
+
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-4">
+            <div>
+              <span class="d-none d-lg-block text-muted small text-uppercase mb-1">Total Project</span>
+              <span class="h4 text-primary">56</span>
+            </div>
+
+            <div class="divider divider-vertical mx-2"></div>
+
+            <div>
+              <span class="d-none d-lg-block text-muted small text-uppercase mb-1">Tasks</span>
+              <span class="h4 text-info">2,800</span>
+            </div>
+
+            <div class="divider divider-vertical mx-2"></div>
+
+            <div>
+              <span class="d-none d-lg-block text-muted small text-uppercase mb-1">Complete</span>
+              <span class="h4 text-success">1,050</span>
+            </div>
+
+            <div class="divider divider-vertical mx-2"></div>
+
+            <div>
+              <span class="d-none d-lg-block text-muted small text-uppercase mb-1">In Progress</span>
+              <span class="h4 text-warning">1,750</span>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <thead class="table-active text-muted">
+              <tr class="small text-muted text-uppercase">
+                <th>Project Name</th>
+                <th>Tasks</th>
+                <th>Budget</th>
+                <th>Progress</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+                <td class="align-middle">
+                  <div class="media align-items-center">
+                    <div class="u-icon u-icon--sm bg-success text-white rounded-circle mr-3">
+                      <i class="fab fa-spotify"></i>
+                    </div>
+
+                    <div class="media-body">
+                      <h4 class="mb-0">Spotify</h4>
+                    </div>
+                  </div>
+                </td>
+                <td class="align-middle font-weight-semibold">124 /
+                  <span class="text-muted">56</span>
+                </td>
+                <td class="align-middle font-weight-semibold">$13,250</td>
+                <td class="align-middle">
+                  <div class="progress" style="height: 6px; border-radius: 3px;">
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="align-middle">
+                  <div class="media align-items-center">
+                    <div class="u-icon u-icon--sm bg-info text-white rounded-circle mr-3">
+                      <i class="fab fa-facebook-f"></i>
+                    </div>
+
+                    <div class="media-body">
+                      <h4 class="mb-0">Facebook</h4>
+                    </div>
+                  </div>
+                </td>
+                <td class="align-middle font-weight-semibold">680 /
+                  <span class="text-muted">86</span>
+                </td>
+                <td class="align-middle font-weight-semibold">$28,100</td>
+                <td class="align-middle">
+                  <div class="progress" style="height: 6px; border-radius: 3px;">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="align-middle">
+                  <div class="media align-items-center">
+                    <div class="u-icon u-icon--sm bg-danger text-white rounded-circle mr-3">
+                      <i class="fab fa-google"></i>
+                    </div>
+
+                    <div class="media-body">
+                      <h4 class="mb-0">Google</h4>
+                    </div>
+                  </div>
+                </td>
+                <td class="align-middle font-weight-semibold">110 /
+                  <span class="text-muted">35</span>
+                </td>
+                <td class="align-middle font-weight-semibold">$98,900</td>
+                <td class="align-middle">
+                  <div class="progress" style="height: 6px; border-radius: 3px;">
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="align-middle">
+                  <div class="media align-items-center">
+                    <div class="u-icon u-icon--sm bg-info text-white rounded-circle mr-3">
+                      <i class="fab fa-twitter"></i>
+                    </div>
+
+                    <div class="media-body">
+                      <h4 class="mb-0">Twitter</h4>
+                    </div>
+                  </div>
+                </td>
+                <td class="align-middle font-weight-semibold">450 /
+                  <span class="text-muted">190</span>
+                </td>
+                <td class="align-middle font-weight-semibold">$19,000</td>
+                <td class="align-middle">
+                  <div class="progress" style="height: 6px; border-radius: 3px;">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <footer class="card-footer">
+          <a class="u-link u-link--primary" href="#!">All projects</a>
+        </footer>
+      </div>
+    </div>
+    <!-- End Current Projects -->
+
+    <!-- Comments -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <header class="card-header d-md-flex align-items-center">
+          <h2 class="h3 card-header-title">Comments</h2>
+
+          <!-- Nav Tabs -->
+          <ul id="commentsTabsControl" class="nav nav-tabs card-header-tabs ml-md-auto mt-4 mt-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="#commentsTab1" role="tab" aria-selected="true"
+                 data-toggle="tab">Pending
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#commentsTab2" role="tab" aria-selected="false"
+                 data-toggle="tab">Approved
+              </a>
+            </li>
+          </ul>
+          <!-- End Nav Tabs -->
+        </header>
+
+        <div class="card-body p-0 m-0">
+          <div class="tab-content" id="commentsTabs">
+            <!-- Tabs Content -->
+            <div class="tab-pane fade show active" id="commentsTab1" role="tabpanel">
+              <div class="list-group list-lg-group list-group-flush">
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img1.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Chad Cannon <span class="badge badge-soft-secondary mx-1">Pro</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">23 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">We've just done the project. What's gonna be next?</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img2.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Jane Ortega <span class="badge badge-soft-warning mx-1">Light</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">18 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">Forget Ebay and other forms of advertising for your property</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img3.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Brandon Baldwin <span class="badge badge-soft-info mx-1">Basic</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">15 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">I wanna discuss about two things that are quite important to me</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/user-unknown.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Stella Hoffman <span class="badge badge-soft-danger mx-1">Start</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">15 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">When the release date is expexted for the advacned settings?</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img4.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Htmlstream <span class="badge badge-soft-secondary mx-1">Pro</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">05 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">Adwords Keyword research for beginners</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+              </div>
+            </div>
+            <!-- End Tabs Content -->
+
+            <!-- Tabs Content -->
+            <div class="tab-pane fade" id="commentsTab2" role="tabpanel">
+              <div class="list-group list-lg-group list-group-flush">
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img2.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Jane Ortega <span class="badge badge-soft-warning mx-1">Light</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">18 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">Forget Ebay and other forms of advertising for your property</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img3.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Brandon Baldwin <span class="badge badge-soft-info mx-1">Basic</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">15 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">I wanna discuss about two things that are quite important to me</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img1.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Chad Cannon <span class="badge badge-soft-secondary mx-1">Pro</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">15 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">We've just done the project. What's gonna be next?</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img4.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Htmlstream <span class="badge badge-soft-secondary mx-1">Pro</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">12 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">Adwords Keyword research for beginners</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+
+                <!-- Comment -->
+                <a class="list-group-item list-group-item-action" href="#">
+                  <div class="media">
+                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/user-unknown.jpg" alt="Image description">
+
+                    <div class="media-body">
+                      <div class="d-md-flex align-items-center">
+                        <h4 class="mb-1">
+                          Stella Hoffman <span class="badge badge-soft-danger mx-1">Start</span>
+                        </h4>
+                        <small class="text-muted ml-md-auto">05 Jan 2018</small>
+                      </div>
+
+                      <p class="mb-0">When the release date is expexted for the advacned settings?</p>
+                    </div>
+                  </div>
+                </a>
+                <!-- End Comment -->
+              </div>
+            </div>
+            <!-- End Tabs Content -->
+          </div>
+        </div>
+
+        <footer class="card-footer">
+          <a class="u-link u-link--primary" href="#!">All comments</a>
+        </footer>
+      </div>
+    </div>
+    <!-- End Comments -->
+  </div>
+  <!-- End Current Projects -->
 </div>
-<!-- END PAGE CONTAINER -->
-
-<?php
-                }else{
-                    header("location: login"); 
-                    ?>
-                      
-                    <?php
-                }
-                ?>

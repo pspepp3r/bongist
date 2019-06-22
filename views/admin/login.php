@@ -1,151 +1,99 @@
-
 <!DOCTYPE html>
-
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en">
-<!--<![endif]-->
-<!-- BEGIN HEAD -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-
+<html lang="en" class="no-js">
+<!-- Head -->
 <head>
-<meta charset="utf-8"/>
-<title><?php echo config::name(); ?> | Admin Login</title>
-    <base href="<?php echo config::url(); ?>">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<?php echo config::meta(); ?>
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css"/>
-<link href="./assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="./assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-<!--    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>-->
-<link href="./assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="./assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-<!-- END GLOBAL MANDATORY STYLES -->
-<!-- BEGIN PAGE LEVEL STYLES -->
-<link href="./assets/admin/pages/css/login.css" rel="stylesheet" type="text/css"/>
-<!-- END PAGE LEVEL SCRIPTS -->
-<!-- BEGIN THEME STYLES -->
-<link href="./assets/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"/>
-<link href="./assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
-<link href="./assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-<link href="./assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-<link href="./assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
-<!-- END THEME STYLES -->
-<link rel="shortcut icon" href="<?php echo config::favicon(); ?>"/>
+  <title>Sign In | Stream - Dashboard UI Kit</title>
+
+  <base href="<?php echo config::url(); ?>">
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <?php echo config::meta(); ?>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="<?php echo config::favicon(); ?>" type="image/x-icon">
+
+  <!-- Web Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+  <!-- Components Vendor Styles -->
+  <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
+
+  <!-- Theme Styles -->
+  <link rel="stylesheet" href="assets/css/theme.css">
 </head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<body class="login">
-<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-<div class="menu-toggler sidebar-toggler">
-</div>
-<!-- END SIDEBAR TOGGLER BUTTON -->
-<!-- BEGIN LOGO -->
-<div class="logo">
-	<a href="../../admindd">
-	<img src="./../img/logo.png" alt=""/>
-	</a>
-</div>
-<!-- END LOGO -->
-<!-- BEGIN LOGIN -->
-<center><img src="<?php echo config::logo(); ?>" alt=""></center>
-<div class="content">
-	<!-- BEGIN LOGIN FORM -->
+<!-- End Head -->
 
-	<form class="login-form" action="" method="post">
-		<h3 class="form-title" style="color: #000;">Sign In</h3>
-		<div class="alert alert-danger display-hide">
-			<button class="close" data-close="alert"></button>
-			<span>
-			Enter your username and password </span>
-		</div>
-		<div class="form-group">
-	<?php
-                    
-                if (isset($_POST['username'])) {
-                    account::login($_POST['username'], $_POST['password']);
-                }
-    ?>
-	</div>
-		<div class="form-group">
-			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-			<label class="control-label visible-ie8 visible-ie9">Username</label>
-			<input class="form-control form-control-solid placeholder-no-fix" type="text" <?php
-			 if (isset($_POST['username'])) {
-			     echo "value='".$_POST['username']."'";
-             }
-			 ?> autocomplete="off" placeholder="Username" name="username"/>
-		</div>
-		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">Password</label>
-			<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
-		</div>
-		<div class="form-actions">
-			<button id="loginbtn" name="login" type="submit" class="btn btn-dark btn-block uppercase">Login</button>
-			<!--<a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>-->
-		</div>
-		
-	
-	</form>
-	<!-- END LOGIN FORM -->
-	<!-- BEGIN FORGOT PASSWORD FORM -->
-	<form class="forget-form" action="" method="post">
-		<h3>Forget Password ?</h3>
-		<p>
-			 Enter your e-mail address below to reset your password.
-		</p>
-		<div class="form-group">
-			<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
-		</div>
-		<div class="form-actions">
-			<button type="button" id="back-btn" class="btn btn-default">Back</button>
-			<button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
-		</div>
-	</form>
-	
-</div>
-<div class="copyright">
-	 <?php echo date("Y");?> © Developed by <a href="https://codekago.com" target="_blank">Codekago Interactive</a>.
-</div>
-<!-- END LOGIN -->
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-<!-- BEGIN CORE PLUGINS -->
-<!--[if lt IE 9]>
-<script src="../../admindd/assets/global/plugins/respond.min.js"></script>
-<script src="../../admindd/assets/global/plugins/excanvas.min.js"></script>
-<![endif]-->
-<script src="./assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="./assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-<script src="./assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="./assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="./assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="./assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<!-- END CORE PLUGINS -->
-<!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="./assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-<!-- END PAGE LEVEL PLUGINS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="./assets/global/scripts/metronic.js" type="text/javascript"></script>
-<script src="./assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
-<script src="./assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
-<script src="./assets/admin/pages/scripts/login.js" type="text/javascript"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<script>
-jQuery(document).ready(function() {     
-	Metronic.init(); // init metronic core components
-	Layout.init(); // init current layout
-	Login.init();
-	Demo.init();
-});
-</script>
-<!-- END JAVASCRIPTS -->
+<body>
+<main class="container-fluid w-100" role="main">
+  <div class="row">
+    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center bg-white mnh-100vh">
+      <a class="u-login-form py-3 mb-auto" href="/">
+        <img class="img-fluid" src="<?php echo config::logo(); ?>" style="height: 75px;" alt="Stream Dashboard UI Kit">
+      </a>
 
+      <div class="u-login-form">
+        <form class="mb-3" action="" method="post">
+          <div class="mb-3">
+            <h1 class="h2">Welcome Back!</h1>
+            <p class="small">Login to your dashboard with your registered email address and password.</p>
+          </div>
+
+          <?php
+
+            if (isset($_POST['login'])) {
+              account::login($_POST['email'], $_POST['password']);
+            }
+
+          ?>
+
+          <div class="form-group mb-4">
+            <label for="email">Your email</label>
+            <input id="email" class="form-control" name="email" type="email" placeholder="john.doe@example.com">
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="password">Password</label>
+            <input id="password" class="form-control" name="password" type="password" placeholder="Your password">
+          </div>
+
+          <div class="form-group d-flex justify-content-between align-items-center mb-4">
+            <div class="custom-control custom-checkbox">
+              <input id="rememberMe" class="custom-control-input" name="rememberMe" type="checkbox">
+              <label class="custom-control-label" for="rememberMe">Remember me</label>
+            </div>
+
+            <a class="link-muted small" href="#forgot-password" data-toggle="modal">Forgot Password?</a>
+          </div>
+
+          <button class="btn btn-primary btn-block" name="login" type="submit">Login</button>
+        </form>
+
+      </div>
+
+      <div class="u-login-form text-muted py-3 mt-auto">
+        <small><i class="far fa-question-circle mr-1"></i> If you are not able to sign in, please <a href="mailto:<?php echo config::email(); ?>" target="_blank">contact us</a>.</small>
+      </div>
+    </div>
+
+    <div class="col-lg-6 d-none d-lg-flex flex-column align-items-center justify-content-center bg-light">
+      <img class="img-fluid position-relative u-z-index-3 mx-5" src="assets/svg/mockups/mockup.svg" alt="Image description">
+
+      <figure class="u-shape u-shape--top-right u-shape--position-5">
+        <img src="assets/svg/shapes/shape-1.svg" alt="Image description">
+      </figure>
+      <figure class="u-shape u-shape--center-left u-shape--position-6">
+        <img src="assets/svg/shapes/shape-2.svg" alt="Image description">
+      </figure>
+      <figure class="u-shape u-shape--center-right u-shape--position-7">
+        <img src="assets/svg/shapes/shape-3.svg" alt="Image description">
+      </figure>
+      <figure class="u-shape u-shape--bottom-left u-shape--position-8">
+        <img src="assets/svg/shapes/shape-4.svg" alt="Image description">
+      </figure>
+    </div>
+  </div>
+</main>
 </body>
-
-<!-- END BODY -->
-
 </html>
