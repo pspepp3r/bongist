@@ -32,8 +32,7 @@ if ($page == 'login') {
         $account = $db->query("SELECT * FROM staff WHERE email = :email", array('email' => $email), false);
 
         if ($account) {
-            $staff_id = $account['id'];
-//            $staff_role = $account['role'];
+            $id = $account['id'];
         }else{
             unset($_SESSION['logged_staff']);
             $page = 'login';

@@ -2,7 +2,7 @@
 
 if ($routes[2] == 'orders' AND $routes[3] != 'account') {
     $order_id = $routes[3];
-    $order = user::order($order_id);
+    $order = customer::order($order_id);
 
     if (!$order) {
         header('location: ../../account/orders');

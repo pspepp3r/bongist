@@ -35,8 +35,8 @@ if (isset($_POST['name'])) {
 	$password = securePwd($_POST['password']);
 	$username = secureTxt($_POST['username']);
 
-	$check = $conn->prepare("SELECT * FROM staff WHERE username = :user");
-	$check->bindParam(':user', $username);
+	$check = $conn->prepare("SELECT * FROM staff WHERE username = :customer");
+	$check->bindParam(':customer', $username);
 	$check->execute();
 
 	if ($check->rowCount() > 0) {

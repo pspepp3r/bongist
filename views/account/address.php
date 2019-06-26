@@ -25,10 +25,10 @@
                         <?php
 
                         if (isset($_POST['address'])) {
-                            user::address($email, $_POST['country'], $_POST['state'], $_POST['city'], $_POST['address']);
+                            customer::address($email, $_POST['country'], $_POST['state'], $_POST['city'], $_POST['address']);
                         }
 
-                            $account = user::check($email);
+                            $account = customer::check($email);
                         ?>
                         <div class="block-body">
                             <div class="row">

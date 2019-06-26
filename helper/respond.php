@@ -18,7 +18,7 @@ class respond {
 
                                         if ($message != '') {
                                         	?>
-    									<p style="margin-bottom: 0px; color: #fff !important;"><?php echo $message; ?></p>
+    									<p style="margin-bottom: 0px; font-size: 14px;"><?php echo $message; ?></p>
                                         	<?php
                                         }
                                         ?>

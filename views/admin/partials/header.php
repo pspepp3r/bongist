@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 <!-- Head -->
 <head>
-  <title>Dashboard | Stream - Dashboard UI Kit</title>
+  <title>Dashboard | <?php echo config::name(); ?></title>
 
 <base href="<?php echo config::url(); ?>">
   <!-- Meta -->
@@ -178,21 +178,22 @@
 
 
           <hr>
+          <?php
 
+          $types = order::status();
+
+          foreach ($types as $type) {
+            ?>
           <li class="u-sidebar-nav-menu__item">
-            <a class="u-sidebar-nav-menu__link" href="admin/transactions/payments">
-              <span class="nav-icon no-fade">
-                                            <i class="badge badge-xs badge-o md b-warning"></i>
-                                        </span>
-              <span class="u-sidebar-nav-menu__item-title">payments</span>
+            <a class="u-sidebar-nav-menu__link" href="admin/orders/<?php  echo $type['slug']; ?>">
+              <span class="u-sidebar-nav-menu__item-title"><?php echo $type['name']; ?></span>
             </a>
           </li>
-          <li class="u-sidebar-nav-menu__item">
-            <a class="u-sidebar-nav-menu__link" href="admin/transactions/expenses">
-              <i class="far fa-book u-sidebar-nav-menu__item-icon"></i>
-              <span class="u-sidebar-nav-menu__item-title">Expenses</span>
-            </a>
-          </li>
+          <?php
+          }
+
+          ?>
+
 
         </ul>
       </nav>
@@ -201,5 +202,4 @@
   <!-- End Sidebar -->
 
   <div class="u-content">
-
 

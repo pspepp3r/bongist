@@ -37,7 +37,7 @@ class account {
                 $page = $_SESSION['redirect_page'];
                 header('location: '.$page);
             }else {
-                header('location: dashboard');
+                header('location: admin/dashboard');
             }
 
     }// LOGIN METHOD
@@ -270,7 +270,7 @@ class account {
 
     public static function photo() {
         global $db;
-        $username = $_SESSION['user'];
+        $username = $_SESSION['customer'];
         $photo = $db->single("SELECT photo FROM accounts WHERE username = :username", array('username' => $username));
         return config::baseUploadUrl().$photo;
     }

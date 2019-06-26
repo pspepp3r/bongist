@@ -27,7 +27,7 @@
                         <?php
 
                             if (isset($_POST['login'])) {
-                                user::login($_POST['email'], $_POST['password']);
+                                customer::login($_POST['email'], $_POST['password']);
                             }// Login
 
                             if (isset($_POST['orderUser'])) {
@@ -63,7 +63,7 @@
                         <?php
 
                             if (isset($_POST['register'])) {
-                                user::register($_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['password']);
+                                customer::register($_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['password']);
                             }// Register
 
                         ?>

@@ -25,5 +25,13 @@ class order {
 
     }
 
+    public static function status() {
+      global $db;
+
+      $types = $db->query("SELECT * FROM order_status ORDER BY id ASC");
+      return $types;
+
+    }
+
 
 }

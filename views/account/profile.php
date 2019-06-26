@@ -21,10 +21,10 @@
                     <div class="block-header"><strong class="text-uppercase">Personal details</strong></div>
                     <?php
                         if (isset($_POST['profile'])) {
-                            user::update($email, $_POST['fname'], $_POST['lname'], $_POST['phone'], $_FILES['photo']);
+                            customer::update($email, $_POST['fname'], $_POST['lname'], $_POST['phone'], $_FILES['photo']);
                         }
 
-                    $account = user::check($email);
+                    $account = customer::check($email);
 
                     ?>
                     <div class="block-body">
@@ -78,7 +78,7 @@
                     <div class="block-header"><strong class="text-uppercase">Change your password</strong></div>
                     <?php
                         if (isset($_POST['password'])) {
-                            user::change_password($email, $_POST['password_old'], $_POST['password_1'], $_POST['password_2']);
+                            customer::change_password($email, $_POST['password_old'], $_POST['password_1'], $_POST['password_2']);
                         }
                     ?>
                     <div class="block-body">

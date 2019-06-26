@@ -1,15 +1,22 @@
 
 <!-- Footer -->
 <footer class="u-footer d-md-flex align-items-md-center text-center text-md-left text-muted text-muted">
-  <p class="h5 mb-2 mb-md-0">More freebies on <a class="link-muted" href="/" target="_blank">Htmlstream</a></p>
-
-  <p class="h5 mb-0 ml-auto">
-    &copy; <?php echo date('Y'); ?> <a class="link-muted" href="../../index.html" target="_blank">Htmlstream</a>. All Rights Reserved.
+  <p class="h5 mb-2 mb-md-0">
+    &copy; <?php echo date('Y'); ?> <a class="link-muted" href="/"><?php echo config::name(); ?></a>. All Rights Reserved.
   </p>
+  <p class="h5 mb-0 ml-auto">developed by <a class="link-muted" href="https://codekago.com" target="_blank">Codekago Interactive</a></p>
+
 </footer>
 <!-- End Footer -->
 </div>
 </main>
+
+
+<?php
+
+  include 'views/admin/modals/customers.php';
+
+?>
 
 <!-- Global Vendor -->
 <script src="assets/vendor/jquery/dist/jquery.min.js"></script>

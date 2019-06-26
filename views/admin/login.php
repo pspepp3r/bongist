@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 <!-- Head -->
 <head>
-  <title>Sign In | Stream - Dashboard UI Kit</title>
+  <title>Sign In | <?php echo config::name(); ?></title>
 
   <base href="<?php echo config::url(); ?>">
   <!-- Meta -->

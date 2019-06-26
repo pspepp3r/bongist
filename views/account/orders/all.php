@@ -1,6 +1,6 @@
 <?php
 
-$orders = user::orders($account['id']);
+$orders = customer::orders($account['id']);
 
 if ($orders) {
     ?>

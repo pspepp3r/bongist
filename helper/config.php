@@ -62,15 +62,7 @@ class config {
     }
 
     public static function baseUploadProfileUrl() {
-        return 'assets/images/users/';
-    }
-
-    public static function baseUploadProductGalleryUrl() {
-        return 'assets/images/products/gallery/';
-    }
-
-    public static function baseUploadCategoryUrl() {
-        return 'assets/images/categories/';
+        return 'assets/images/customers/';
     }
 
 

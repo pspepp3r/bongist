@@ -1,5 +1,5 @@
 <?php
-$account = user::check($email);
+$account = customer::check($email);
 ?><!-- Customer Sidebar-->
 <div class="col-xl-3 col-lg-4 mb-5">
     <div class="customer-sidebar card border-0">
@@ -28,7 +28,7 @@ $account = user::check($email);
                     </svg>Orders</span>
                 <div class="badge badge-pill badge-light font-weight-normal px-3"><?php
 
-                    $orders = user::orders($account['id']);
+                    $orders = customer::orders($account['id']);
                     echo count($orders);
 
                     ?></div></a>

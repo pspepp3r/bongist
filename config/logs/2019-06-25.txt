@@ -1,0 +1,27 @@
+Time : 19:30:35
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+
+Time : 19:30:35
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+
+Time : 19:29:13
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+
+Time : 19:29:13
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+
+Time : 18:22:37
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+
+Time : 18:22:37
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+
+Time : 18:21:43
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+
+Time : 18:21:42
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: YES)
+
+Time : 18:12:43
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.accounts' doesn't exist
+Raw SQL : SELECT * FROM accounts ORDER BY id DESC

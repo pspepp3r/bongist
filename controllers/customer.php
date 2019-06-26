@@ -6,7 +6,7 @@
  * Time: 2:16 PM
  */
 
-class user {
+class customer {
 
 	public static function register($fname, $lname, $email, $password) {
 		global $db;
@@ -208,13 +208,18 @@ class user {
 		}
 	}// CONFIRM PASSWORD
 
-	static function check($email) {
+	static function check($value, $column, $id = null) {
 		global $db;
 
-		$statement = "SELECT * FROM accounts WHERE email = :email";
-		$param = array(
-					'email' => $email
-				);
+    $param = array(
+      'value' => $value
+    );
+		if ($id == null) {
+      $statement = "SELECT * FROM customers WHERE $column = :value";
+    }else {
+      $statement = "SELECT * FROM customers WHERE $column = :value AND id != :id";
+      $param['id'] = $id;
+    }
 
 		$user = $db->query($statement, $param, false);
 
@@ -259,15 +264,15 @@ class user {
 
 	public static function photo() {
 	    global $db;
-	    $username = $_SESSION['user'];
+	    $username = $_SESSION['customer'];
 	    $photo = $db->single("SELECT photo FROM accounts WHERE username = :username", array('username' => $username));
         return config::baseUploadUrl().$photo;
     }
 
-    public static function orders($user_id) {
+    public static function orders($customer_id) {
 	    global $db;
 
-        $orders = $db->query("SELECT * FROM orders LEFT JOIN order_status ON status = order_status.id WHERE user_id = :id ORDER BY orders.id DESC", array('id' => $user_id));
+        $orders = $db->query("SELECT * FROM orders LEFT JOIN order_status ON status = order_status.id WHERE customer_id = :id ORDER BY orders.id DESC", array('id' => $customer_id));
 
         return $orders;
 
@@ -289,7 +294,7 @@ class user {
     public static function address($email, $country, $state, $city, $address) {
 	    global $db;
 
-	    $update = $db->query("UPDATE accounts SET country = :country, state = :state, city = :city, address = :address WHERE email = :email", array(
+	    $update = $db->query("UPDATE customers SET country = :country, state = :state, city = :city, address = :address WHERE email = :email", array(
 	            'country' => $country,
 	            'state' => $state,
 	            'city' => $city,
@@ -308,7 +313,7 @@ class user {
     public static function all() {
 	    global $db;
 
-	    $users = $db->query("SELECT * FROM accounts ORDER BY id DESC");
+	    $users = $db->query("SELECT * FROM customers ORDER BY id DESC");
 
 	    if (count($users)) {
 	        return $users;
@@ -317,5 +322,71 @@ class user {
         }
 
     }// FETCH ALL USERS
+
+  public static function add($name, $email, $phone, $address) {
+	  global $db;
+
+	  $check_email = self::check($email, 'email');
+
+	  if ($check_email) {
+	    respond::alert('warning', '', 'Customer with the same email address already exist');
+	    return false;
+    }
+
+    $check_phone = self::check($phone, 'phone');
+
+    if ($check_phone) {
+      respond::alert('warning', '', 'Customer with the same phone number already exist');
+      return false;
+    }
+
+    $insert = $db->query("INSERT INTO customers (name, email, phone, address, timestamp) VALUES (:name, :email, :phone, :address, :now)", array(
+      'name' => $name,
+      'email' => $email,
+      'phone' => $phone,
+      'address' => $address,
+      'now' => time()
+    ));
+
+    if ($insert) {
+      respond::alert('success', '', 'Customer successfully added');
+    }else {
+      respond::alert('danger', '', 'Unable top add customer');
+    }
+
+  }// Add new customer
+
+  public static function edit($id, $name, $email, $phone, $address) {
+    global $db;
+
+    $check_email = self::check($email, 'email', $id);
+
+    if ($check_email) {
+      respond::alert('warning', '', 'Customer with the same email address already exist');
+      return false;
+    }
+
+    $check_phone = self::check($phone, 'phone', $id);
+
+    if ($check_phone) {
+      respond::alert('warning', '', 'Customer with the same phone number already exist');
+      return false;
+    }
+
+    $insert = $db->query("UPDATE customers SET name = :name, email = :email, phone = :phone, address = :address WHERE id = :id", array(
+      'name' => $name,
+      'email' => $email,
+      'phone' => $phone,
+      'address' => $address,
+      'id' => $id
+    ));
+
+    if ($insert) {
+      respond::alert('success', '', 'Customer successfully added');
+    }else {
+      respond::alert('danger', '', 'Unable top add customer');
+    }
+
+  }// Add new customer
 
 }

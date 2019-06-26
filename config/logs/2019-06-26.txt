@@ -1,0 +1,11 @@
+Time : 08:26:33
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.customer' doesn't exist
+Raw SQL : SELECT * FROM customer WHERE email = :value
+
+Time : 08:26:13
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.customer' doesn't exist
+Raw SQL : SELECT * FROM customer WHERE email = :value
+
+Time : 08:25:29
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.customer' doesn't exist
+Raw SQL : SELECT * FROM customer ORDER BY id DESC
