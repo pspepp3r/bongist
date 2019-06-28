@@ -36,12 +36,12 @@
           </div>
           <div class="col-md-6 form-group mb-3">
             <label for="">Initial Deposit</label>
-            <input type="number" required value="0" name="initial_deposit" placeholder="Initial Deposit" class="form-control">
+            <input type="number" required value="0" name="deposit" placeholder="Initial Deposit" class="form-control">
           </div>
 
           <div class="col-md-6 form-group mb-3">
             <label for="">Date of Delivery</label>
-            <input type="date" required name="dod" placeholder="Cost" class="form-control">
+            <input type="date" required name="dod" placeholder="Date of Delivery" class="form-control">
           </div>
           <div class="col-md-6 form-group mb-3">
             <label for="">Status</label>

@@ -162,15 +162,29 @@
           <!-- End Base UI -->
 
 
-          <li class="u-sidebar-nav-menu__item">
+          <?php
+
+          if ($role > 0) {
+            ?>
+            <li class="u-sidebar-nav-menu__item">
             <a class="u-sidebar-nav-menu__link <?php if ($page == 'staff') { echo 'active'; } ?>" href="admin/staff">
               <i class="fa fa-id-card-alt u-sidebar-nav-menu__item-icon"></i>
               <span class="u-sidebar-nav-menu__item-title">Staff</span>
             </a>
           </li>
+          <?php
+          }
+
+          ?>
 
 
           <hr>
+          <li class="u-sidebar-nav-menu__item">
+            <a class="u-sidebar-nav-menu__link" href="admin/orders">
+              <span class="u-sidebar-nav-menu__item-title">All Orders</span>
+              <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;"><?php echo count(order::status_orders()); ?></span>
+            </a>
+          </li>
           <?php
 
           $types = order::status();
@@ -200,5 +214,5 @@
 <?php
 
 if (isset($_POST['addOrder'])) {
-
+    order::add($staff_id, $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['cost'], $_POST['dod'], $_POST['deposit'], $_POST['status'], $_POST['note']);
 }

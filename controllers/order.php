@@ -24,9 +24,12 @@ class order {
 
       }
 
-      $insert = $db->query("INSERT INTO orders (customer_id, cost, date_of_delivery, initial_deposit, staff_id, status, timestamp) VALUES (:customer_id, :cost, :date_of_delivery, :initial_deposit, :staff_id, :status, :now)", array(
+      $order_id = request::generateRandomID(5);
+
+      $insert = $db->query("INSERT INTO orders (order_id, customer_id, cost, date_of_delivery, initial_deposit, staff_id, status, timestamp) VALUES (:order_id, :customer_id, :cost, :date_of_delivery, :initial_deposit, :staff_id, :status, :now)", array(
         'customer_id' => $customer_id,
         'cost' => $cost,
+        'order_id' => $order_id,
         'date_of_delivery' => $dod,
         'initial_deposit' => $deposit,
         'staff_id' => $staff_id,
@@ -35,8 +38,6 @@ class order {
       ));
 
       if ($insert) {
-
-        $order_id = $db->lastInsertId();
 
         if ($note != '') {
           $db->query("INSERT INTO order_notes (order_id, staff_id, note, timestamp) VALUES (:order_id, :staff_id, :note, :now)", array(
@@ -47,7 +48,7 @@ class order {
           ));
         }
 
-        respond::alert('success', '', 'Order successfully added');
+        respond::alert('success', '', 'Order successfully created');
 
       }else {
         respond::alert('danger', '', 'Unable to add order at the moment');
@@ -85,12 +86,29 @@ class order {
 
     }
 
-    public static function status_orders($id) {
+    public static function status_orders($id = null) {
       global $db;
 
-      $orders = $db->query("SELECT * FROM orders WHERE status = :id", array('id' => $id));
+      if ($id == null) {
+        $orders = $db->query("SELECT * FROM orders ORDER BY id DESC", array('id' => $id));
+      }else {
+        $orders = $db->query("SELECT * FROM orders WHERE status = :id ORDER BY id DESC", array('id' => $id));
+      }
 
       return $orders;
+
+    }
+
+    public static function check_status($slug) {
+      global $db;
+
+      $check = $db->query("SELECT * FROM order_status WHERE slug = :slug", array('slug' => $slug), false);
+
+      if ($check) {
+        return $check;
+      }else {
+        return false;
+      }
 
     }
 

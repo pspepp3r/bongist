@@ -3,11 +3,12 @@
 <!-- Head -->
 <head>
   <title>404 - Page Not Found | <?php echo config::name(); ?></title>
-  <base href="<?php echo config::url(); ?>admin/">
+  <base href="<?php echo config::url(); ?>">
   <!-- Meta -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+
   <?php echo config::meta(); ?>
 
   <!-- Favicon -->
@@ -29,7 +30,7 @@
 
       <div class="u-error__text">
         <h1 class="mb-2">Page Not Found</h1>
-        <a href="dashboard">Go to dashboard</a>
+        <a href="admin/dashboard">Go to dashboard</a>
       </div>
     </div>
   </div>

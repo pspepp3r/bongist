@@ -1,6 +1,6 @@
 <?php
 
-$pages = array("login", "password", "logout", "customers", "dashboard");
+$pages = array("login", "password", "logout", "orders", "customers", "dashboard", "staff", "transactions");
 
 if ($routes[2] != 'admin') {
 
@@ -32,7 +32,8 @@ if ($page == 'login') {
         $account = $db->query("SELECT * FROM staff WHERE email = :email", array('email' => $email), false);
 
         if ($account) {
-            $id = $account['id'];
+            $staff_id = $account['id'];
+            $role = $account['role'];
         }else{
             unset($_SESSION['logged_staff']);
             $page = 'login';
