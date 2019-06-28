@@ -59,14 +59,7 @@
       </a>
 
       <div id="headerSearch" class="u-header-search-form">
-        <form>
-          <div class="input-group">
-            <button class="btn-link input-group-prepend u-header-search__btn" type="submit">
-              <i class="fa fa-search"></i>
-            </button>
-            <input class="form-control u-header-search__field" type="search" placeholder="Type to search…">
-          </div>
-        </form>
+        <a class="btn btn-dark btn-block" href="#addModal" data-toggle="modal">New Order</a>
       </div>
     </div>
   </div>
@@ -187,6 +180,7 @@
           <li class="u-sidebar-nav-menu__item">
             <a class="u-sidebar-nav-menu__link" href="admin/orders/<?php  echo $type['slug']; ?>">
               <span class="u-sidebar-nav-menu__item-title"><?php echo $type['name']; ?></span>
+              <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;"><?php echo count(order::status_orders($type['id'])); ?></span>
             </a>
           </li>
           <?php

@@ -28,8 +28,17 @@ class order {
     public static function status() {
       global $db;
 
-      $types = $db->query("SELECT * FROM order_status ORDER BY id ASC");
-      return $types;
+      $status = $db->query("SELECT * FROM order_status ORDER BY id ASC");
+      return $status;
+
+    }
+
+    public static function status_orders($id) {
+      global $db;
+
+      $orders = $db->query("SELECT * FROM orders WHERE status = :id", array('id' => $id));
+
+      return $orders;
 
     }
 
