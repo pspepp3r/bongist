@@ -4,7 +4,7 @@
   <p class="h5 mb-2 mb-md-0">
     &copy; <?php echo date('Y'); ?> <a class="link-muted" href="/"><?php echo config::name(); ?></a>. All Rights Reserved.
   </p>
-  <p class="h5 mb-0 ml-auto">developed by <a class="link-muted" href="https://codekago.com" target="_blank">Codekago Interactive</a></p>
+  <p class="h5 mb-0 ml-auto">Developed by <a class="link-muted" href="https://codekago.com" target="_blank">Codekago Interactive</a></p>
 
 </footer>
 <!-- End Footer -->
@@ -15,6 +15,7 @@
 <?php
 
   include 'views/admin/modals/customers.php';
+  include 'views/admin/modals/orders.php';
 
 ?>
 

@@ -3,6 +3,58 @@
 
 class order {
 
+  public static function add($staff_id, $name, $email, $phone, $address, $cost, $dod, $deposit, $status, $note) {
+      global $db;
+
+      $check = customer::check($phone, 'phone');
+
+      if ($check) {
+        $customer_id = $check['id'];
+      }else {
+
+        $db->query("INSERT INTO customers (name, email, phone, address, timestamp) VALUES (:name, :email, :phone, :address, :now)", array(
+          'name' => $name,
+          'email' => $email,
+          'phone' => $phone,
+          'address' => $address,
+          'now' => time()
+        ));
+
+        $customer_id = $db->lastInsertId();
+
+      }
+
+      $insert = $db->query("INSERT INTO orders (customer_id, cost, date_of_delivery, initial_deposit, staff_id, status, timestamp) VALUES (:customer_id, :cost, :date_of_delivery, :initial_deposit, :staff_id, :status, :now)", array(
+        'customer_id' => $customer_id,
+        'cost' => $cost,
+        'date_of_delivery' => $dod,
+        'initial_deposit' => $deposit,
+        'staff_id' => $staff_id,
+        'status' => $status,
+        'now' => time()
+      ));
+
+      if ($insert) {
+
+        $order_id = $db->lastInsertId();
+
+        if ($note != '') {
+          $db->query("INSERT INTO order_notes (order_id, staff_id, note, timestamp) VALUES (:order_id, :staff_id, :note, :now)", array(
+            'order_id' => $order_id,
+            'staff_id' => $staff_id,
+            'note' => $note,
+            'now' => time()
+          ));
+        }
+
+        respond::alert('success', '', 'Order successfully added');
+
+      }else {
+        respond::alert('danger', '', 'Unable to add order at the moment');
+      }
+
+  }
+
     public static function details($order_id) {
         global $db;
 
@@ -15,7 +67,7 @@ class order {
     public static function all() {
         global $db;
 
-        $orders = $db->query("SELECT orders.*, fname, lname, email FROM orders LEFT JOIN accounts ON user_id = accounts.id ORDER BY orders.id DESC");
+        $orders = $db->query("SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id ORDER BY orders.id DESC");
 
         if (count($orders) > 0) {
             return $orders;

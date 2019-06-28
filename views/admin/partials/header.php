@@ -59,7 +59,7 @@
       </a>
 
       <div id="headerSearch" class="u-header-search-form">
-        <a class="btn btn-dark btn-block" href="#addModal" data-toggle="modal">New Order</a>
+        <button class="btn btn-dark btn-block" data-target="#addOrderModal" data-toggle="modal" onclick="$('#addOrderModal').modal('show')">New Order</button>
       </div>
     </div>
   </div>
@@ -197,3 +197,8 @@
 
   <div class="u-content">
 
+<?php
+
+if (isset($_POST['addOrder'])) {
+
+}

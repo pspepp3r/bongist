@@ -351,7 +351,7 @@ class customer {
     if ($insert) {
       respond::alert('success', '', 'Customer successfully added');
     }else {
-      respond::alert('danger', '', 'Unable top add customer');
+      respond::alert('danger', '', 'Unable to add customer');
     }
 
   }// Add new customer
@@ -382,11 +382,24 @@ class customer {
     ));
 
     if ($insert) {
-      respond::alert('success', '', 'Customer successfully added');
+      respond::alert('success', '', 'Customer account successfully edited');
     }else {
-      respond::alert('danger', '', 'Unable top add customer');
+      respond::alert('danger', '', 'Unable to edit customer account');
     }
 
-  }// Add new customer
+  }// Edit customer
+
+  public static function remove($id) {
+	  global $db;
+
+	  $remove = $db->query("DELETE FROM customers WHERE id = :id", array('id' => $id));
+
+	  if ($remove) {
+      respond::alert('success', '', 'Customer successfully removed');
+    }else {
+      respond::alert('danger', '', 'Unable to remove this customer');
+    }
+
+  }// remove customer
 
 }

@@ -1,7 +1,7 @@
 <div class="u-body">
   <h1 class="h2 font-weight-semibold mb-4 float-left">Customers</h1>
   <div class="float-right">
-    <a class="btn btn-dark btn-block" href="#addModal" data-toggle="modal">New Customer</a>
+    <a class="btn btn-dark btn-block" href="#addCustomer" data-toggle="modal">New Customer</a>
   </div>
 
   <div class="card mb-4" style="clear: both;">
@@ -12,9 +12,18 @@
     <div class="card-body">
       <?php
 
-      if (isset($_POST['add'])) {
+      if (isset($_POST['addCustomer'])) {
         customer::add($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address']);
       }
+
+      if (isset($_POST['editCustomer'])) {
+        customer::edit($_POST['id'], $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address']);
+      }
+
+      if (isset($_POST['removeCustomer'])) {
+        customer::remove($_POST['id']);
+      }
+
       $customers = customer::all();
 
       if ($customers) {
@@ -59,12 +68,12 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
                   <ul class="list-unstyled mb-0">
                     <li>
-                      <a class="d-flex align-items-center link-muted py-2 px-3" href="#!">
-                        <i class="fa fa-plus mr-2"></i> Add Order
+                      <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>'); $('.customer_email').val('<?php echo $email; ?>'); $('.customer_phone').val('<?php echo $phone; ?>'); $('.customer_name').val('<?php echo $name; ?>'); $('.customer_address').val('<?php echo $address; ?>');">
+                        <i class="fa fa-plus mr-2"></i> Edit Customer
                       </a>
                     </li>
                     <li>
-                      <a class="d-flex align-items-center link-muted py-2 px-3" href="#!">
+                      <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#removeCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>');">
                         <i class="fa fa-minus mr-2"></i> Remove
                       </a>
                     </li>
