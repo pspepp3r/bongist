@@ -19,7 +19,20 @@
             <h5 class="h6 text-muted text-uppercase mb-2">
               Total Sales <i class="fa fa-arrow-up text-success ml-1"></i>
             </h5>
-            <span class="h2 mb-0">$56,400</span>
+            <span class="h2 mb-0">
+                <?php
+                $tot = order::totalSales();
+                if($tot){
+                    $total_qty = 0;
+                    foreach($tot as $total){
+                        $total_qty += $total['cost'];
+                    ?>
+                        <a href=""><?php echo $total_qty; ?></a>
+                <?php
+                    }
+                }
+                ?>
+            </span>
           </div>
         </div>
       </div>
@@ -41,9 +54,12 @@
 
           <div class="media-body">
             <h5 class="h6 text-muted text-uppercase mb-2">
-              Spendings <i class="fa fa-arrow-down text-danger ml-1"></i>
+              Customers <i class="fa fa-arrow-down text-danger ml-1"></i>
             </h5>
-            <span class="h2 mb-0">$6,700</span>
+              <?php
+              $totalCustomers = count(customer::all());
+              ?>
+            <span class="h2 mb-0"><?php echo $totalCustomers; ?></span>
           </div>
         </div>
       </div>
@@ -65,9 +81,12 @@
 
           <div class="media-body">
             <h5 class="h6 text-muted text-uppercase mb-2">
-              Income <i class="fa fa-arrow-up text-success ml-1"></i>
+              Orders <i class="fa fa-arrow-up text-success ml-1"></i>
             </h5>
-            <span class="h2 mb-0">$38,200</span>
+              <?php
+              $totalOrder = count(order::all());
+              ?>
+            <span class="h2 mb-0"><?php echo $totalOrder; ?></span>
           </div>
         </div>
       </div>
@@ -446,6 +465,19 @@
               </thead>
 
               <tbody>
+              <?php
+              $orders = order::all();
+              if($orders)
+              {
+                  foreach($orders as $order)
+                  {
+                      $name = $order['name'];
+                      $cost = $order['cost'];
+
+                      $slug = $order['status'];
+                      $stat = order::check_status($slug);
+
+              ?>
               <tr>
                 <td class="align-middle">
                   <div class="media align-items-center">
@@ -454,89 +486,25 @@
                     </div>
 
                     <div class="media-body">
-                      <h4 class="mb-0">Spotify</h4>
+                      <h4 class="mb-0"><?php echo $name; ?></h4>
                     </div>
                   </div>
                 </td>
                 <td class="align-middle font-weight-semibold">124 /
                   <span class="text-muted">56</span>
                 </td>
-                <td class="align-middle font-weight-semibold">$13,250</td>
+                <td class="align-middle font-weight-semibold">₦ <?php echo $cost; ?></td>
                 <td class="align-middle">
-                  <div class="progress" style="height: 6px; border-radius: 3px;">
-                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
+                    <?php echo $stat; ?>
+<!--                  <div class="progress" style="height: 6px; border-radius: 3px;">-->
+<!--                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                  </div>-->
                 </td>
               </tr>
-
-              <tr>
-                <td class="align-middle">
-                  <div class="media align-items-center">
-                    <div class="u-icon u-icon--sm bg-info text-white rounded-circle mr-3">
-                      <i class="fab fa-facebook-f"></i>
-                    </div>
-
-                    <div class="media-body">
-                      <h4 class="mb-0">Facebook</h4>
-                    </div>
-                  </div>
-                </td>
-                <td class="align-middle font-weight-semibold">680 /
-                  <span class="text-muted">86</span>
-                </td>
-                <td class="align-middle font-weight-semibold">$28,100</td>
-                <td class="align-middle">
-                  <div class="progress" style="height: 6px; border-radius: 3px;">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="align-middle">
-                  <div class="media align-items-center">
-                    <div class="u-icon u-icon--sm bg-danger text-white rounded-circle mr-3">
-                      <i class="fab fa-google"></i>
-                    </div>
-
-                    <div class="media-body">
-                      <h4 class="mb-0">Google</h4>
-                    </div>
-                  </div>
-                </td>
-                <td class="align-middle font-weight-semibold">110 /
-                  <span class="text-muted">35</span>
-                </td>
-                <td class="align-middle font-weight-semibold">$98,900</td>
-                <td class="align-middle">
-                  <div class="progress" style="height: 6px; border-radius: 3px;">
-                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="align-middle">
-                  <div class="media align-items-center">
-                    <div class="u-icon u-icon--sm bg-info text-white rounded-circle mr-3">
-                      <i class="fab fa-twitter"></i>
-                    </div>
-
-                    <div class="media-body">
-                      <h4 class="mb-0">Twitter</h4>
-                    </div>
-                  </div>
-                </td>
-                <td class="align-middle font-weight-semibold">450 /
-                  <span class="text-muted">190</span>
-                </td>
-                <td class="align-middle font-weight-semibold">$19,000</td>
-                <td class="align-middle">
-                  <div class="progress" style="height: 6px; border-radius: 3px;">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </td>
-              </tr>
+              <?php
+                  }
+              }
+              ?>
               </tbody>
             </table>
           </div>
@@ -577,6 +545,16 @@
             <div class="tab-pane fade show active" id="commentsTab1" role="tabpanel">
               <div class="list-group list-lg-group list-group-flush">
                 <!-- Comment -->
+                  <?php
+                  $activities = activity::all();
+
+                  foreach($activities as $activity)
+                  {
+                      $name = $activity['name'];
+                      $comment = $activity['comment'];
+                      $timestamp = $activity['timestamp'];
+
+                  ?>
                 <a class="list-group-item list-group-item-action" href="#">
                   <div class="media">
                     <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img1.jpg" alt="Image description">
@@ -584,15 +562,18 @@
                     <div class="media-body">
                       <div class="d-md-flex align-items-center">
                         <h4 class="mb-1">
-                          Chad Cannon <span class="badge badge-soft-secondary mx-1">Pro</span>
+                          <?php echo $name; ?> <span class="badge badge-soft-secondary mx-1">Pro</span>
                         </h4>
-                        <small class="text-muted ml-md-auto">23 Jan 2018</small>
+                        <small class="text-muted ml-md-auto"><?php echo request::timeago($timestamp); ?></small>
                       </div>
 
-                      <p class="mb-0">We've just done the project. What's gonna be next?</p>
+                      <p class="mb-0"><?php echo $name . ' ' . $comment ?></p>
                     </div>
                   </div>
                 </a>
+                  <?php
+                  }
+                  ?>
                 <!-- End Comment -->
 
                 <!-- Comment -->

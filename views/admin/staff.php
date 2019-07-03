@@ -1,7 +1,8 @@
 <div class="u-body">
   <h1 class="h2 font-weight-semibold mb-4 float-left">Staff Accounts</h1>
   <div class="float-right">
-    <a class="btn btn-dark btn-block" href="#addStaff" data-toggle="modal">New Staff</a>
+<!--    <a class="btn btn-dark btn-block" href="#addStaff" data-toggle="modal">New Staff</a>-->
+      <button class="btn btn-dark btn-block" data-target="#addStaffModal" data-toggle="modal" onclick="$('#addStaffModal').modal('show')">New Staff</button>
   </div>
 
   <div class="card mb-4" style="clear: both;">
@@ -12,21 +13,21 @@
     <div class="card-body">
       <?php
 
-      if (isset($_POST['addCustomer'])) {
-        customer::add($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address']);
+      if (isset($_POST['addStaff'])) {
+        staff::add($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['password'], $_POST['role']);
       }
 
-      if (isset($_POST['editCustomer'])) {
-        customer::edit($_POST['id'], $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address']);
+      if (isset($_POST['editStaff'])) {
+        staff::edit($_POST['id'], $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address']);
       }
 
       if (isset($_POST['removeCustomer'])) {
         customer::remove($_POST['id']);
       }
 
-      $customers = customer::all();
+      $staffs = staff::all();
 
-      if ($customers) {
+      if ($staffs) {
         ?>
         <div class="table-responsive">
           <table class="table table-hover">
@@ -35,7 +36,7 @@
               <th scope="col">Name</th>
               <th scope="col">Email Address</th>
               <th scope="col">Phone Number</th>
-              <th scope="col">No of Order(s)</th>
+<!--              <th scope="col">No of Order(s)</th>-->
               <th scope="col">Date Added</th>
               <th class="text-center" scope="col">Actions</th>
             </tr>
@@ -44,20 +45,20 @@
             <tbody>
             <?php
 
-            foreach ($customers as $customer) {
-              $id = $customer['id'];
-              $name = $customer['name'];
-              $email = $customer['email'];
-              $phone = $customer['phone'];
-              $address = $customer['address'];
+            foreach ($staffs as $staff) {
+              $id = $staff['id'];
+              $name = $staff['name'];
+              $email = $staff['email'];
+              $phone = $staff['phone'];
+              $address = $staff['address'];
               ?>
               <tr>
                 <td><?php echo $name; ?></td>
                 <td><?php echo $email; ?></td>
                 <td><?php echo $phone; ?></td>
-                <td><?php echo count(customer::orders($id)); ?></td>
+<!--                <td>--><?php //echo count(customer::orders($id)); ?><!--</td>-->
                 <td>
-                  <span class="badge badge-dark"><?php echo request::timeago($customer['timestamp']); ?></span>
+                  <span class="badge badge-dark"><?php echo request::timeago($staff['timestamp']); ?></span>
                 </td>
                 <td class="text-center">
                   <a id="actions1Invoker" class="link-muted" href="#!" aria-haspopup="true" aria-expanded="false"
@@ -68,8 +69,8 @@
                   <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
                     <ul class="list-unstyled mb-0">
                       <li>
-                        <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>'); $('.customer_email').val('<?php echo $email; ?>'); $('.customer_phone').val('<?php echo $phone; ?>'); $('.customer_name').val('<?php echo $name; ?>'); $('.customer_address').val('<?php echo $address; ?>');">
-                          <i class="fa fa-plus mr-2"></i> Edit Customer
+                        <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editStaffModal" onclick="$('.staff_id').val('<?php echo $id; ?>'); $('.staff_email').val('<?php echo $email; ?>'); $('.staff_phone').val('<?php echo $phone; ?>'); $('.staff_name').val('<?php echo $name; ?>'); $('.staff_address').val('<?php echo $address; ?>');">
+                          <i class="fa fa-plus mr-2"></i> Edit Staff
                         </a>
                       </li>
                       <li>

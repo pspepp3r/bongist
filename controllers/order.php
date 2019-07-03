@@ -46,6 +46,16 @@ class order {
             'note' => $note,
             'now' => time()
           ));
+
+          if($note)
+          {
+              $db->query("INSERT INTO activities (staff_id, order_id, comment, timestamp) VALUES (:staff_id, :order_id, :comment, :timestamp)", array(
+                  'staff_id'    => $staff_id,
+                  'order_id'    => $order_id,
+                  'comment'     => "just added an order",
+                  'timestamp'   => time()
+              ));
+          }
         }
 
         respond::alert('success', '', 'Order successfully created');
@@ -112,5 +122,11 @@ class order {
 
     }
 
+    public static function totalSales()
+    {
+        global $db;
 
+        $total = $db->query("SELECT cost FROM orders");
+        return $total;
+    }
 }
