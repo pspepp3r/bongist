@@ -102,7 +102,7 @@ class order {
       if ($id == null) {
         $orders = $db->query("SELECT * FROM orders ORDER BY id DESC", array('id' => $id));
       }else {
-        $orders = $db->query("SELECT * FROM orders WHERE status = :id ORDER BY id DESC", array('id' => $id));
+        $orders = $db->query("SELECT orders.*, name, status_name FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id WHERE status = :id ORDER BY id DESC", array('id' => $id));
       }
 
       return $orders;
@@ -128,5 +128,31 @@ class order {
 
         $total = $db->query("SELECT SUM(cost) FROM orders");
         return $total;
+    }
+
+    public static function update($id, $status, $staff_id)
+    {
+        global $db;
+
+        $orderUpdate = $db->query("UPDATE orders SET status = :status WHERE id = :id", array(
+            'id'        => $id,
+            'status'    => $status
+        ));
+
+        if($orderUpdate)
+        {
+            $expense_id = $db->lastInsertId();
+            $activity = $db->query("INSERT INTO activities (staff_id, expense_id, comment, timestamp) VALUES (:staff_id, :expense_id, :comment, :timestamp)", array(
+                'staff_id'      => $staff_id,
+                'expense_id'    => $expense_id,
+                'comment'       => 'just edited an order',
+                'timestamp'     => time()
+            ));
+
+            if($activity)
+            {
+                respond::alert('success', '', 'Order edited successfully');
+            }
+        }
     }
 }

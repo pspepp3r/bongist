@@ -1,7 +1,7 @@
 <div class="u-body">
     <div class="card mb-4">
         <header class="card-header">
-            <h2 class="h3 card-header-title">Basic Table</h2>
+            <h2 class="h3 card-header-title">All Orders</h2>
         </header>
 
         <div class="card-body">
@@ -21,10 +21,16 @@
 
                     <tbody>
                     <?php
+                    if(isset($_POST['editOrder']))
+                    {
+                        order::update($_POST['id'], $_POST['status'], $staff_id);
+                    }
+
                     $orders = order::all();
 
                     foreach($orders as $order)
                     {
+                        $id = $order['id'];
                         $order_id = $order['order_id'];
                         $customer = $order['name'];
                         $deposit = $order['initial_deposit'];
@@ -51,9 +57,7 @@
                         <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
                             <ul class="list-unstyled mb-0">
                                 <li>
-                                    <a class="d-flex align-items-center link-muted py-2 px-3" href="#!">
-                                        <i class="fa fa-plus mr-2"></i> Add
-                                    </a>
+                                    <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editOrderModal" onclick="$('.order_id').val('<?php echo $id; ?>'); $('.order_status').val('<?php echo $status; ?>');"><i class="fa fa-plus mr-2"></i>Edit</a>
                                 </li>
                                 <li>
                                     <a class="d-flex align-items-center link-muted py-2 px-3" href="#!">

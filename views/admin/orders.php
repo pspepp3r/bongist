@@ -10,6 +10,7 @@ if ($routes[3] == 'admin') {
 
   if ($check) {
     $page = 'status';
+//    return $check;
   }else {
     $order = order::details($order_id);
     if (!$order) {

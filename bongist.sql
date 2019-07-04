@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2019 at 01:58 PM
+-- Generation Time: Jul 04, 2019 at 07:09 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -53,7 +53,13 @@ INSERT INTO `activities` (`id`, `staff_id`, `order_id`, `expense_id`, `comment`,
 (20, 13, NULL, 3, 'just edited an expense', 1562239993),
 (21, 13, NULL, 3, 'just edited an expense', 1562240218),
 (22, 14, NULL, NULL, 'was just added as a staff', 1562240814),
-(23, 15, NULL, NULL, 'was just added as a staff', 1562240971);
+(23, 15, NULL, NULL, 'was just added as a staff', 1562240971),
+(24, 15, NULL, 4, 'just made an expense', 1562254887),
+(25, 15, NULL, 4, 'just edited an expense', 1562254941),
+(26, 15, NULL, 0, 'just edited an order', 1562258563),
+(27, 15, NULL, 0, 'just edited an order', 1562258921),
+(28, 15, NULL, NULL, 'just deleted an expense', 1562260097),
+(29, 15, NULL, 5, 'just made an expense', 1562260120);
 
 -- --------------------------------------------------------
 
@@ -102,7 +108,8 @@ CREATE TABLE `expenses` (
 
 INSERT INTO `expenses` (`id`, `staff_id`, `title`, `cost`, `category_id`, `timestamp`) VALUES
 (1, 1, 'this is the first expense', 3000, 1, 1562171653),
-(3, 13, 'A very unusual test again', 2500, 1, 1562240218);
+(3, 13, 'A very unusual test again', 2500, 1, 1562240218),
+(5, 15, 'this is an expense', 2000, 1, 1562260120);
 
 -- --------------------------------------------------------
 
@@ -148,7 +155,7 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `customer_id`, `cost`, `date_of_delivery`, `initial_deposit`, `staff_id`, `status`, `timestamp`, `order_id`) VALUES
 (2, 2, 2300, '2019-07-16', 1000, 1, 1, 1561702013, 'd2a37'),
 (3, 3, 3000, '2019-07-11', 1000, 1, 1, 1562086602, '38oji'),
-(7, 3, 2000, '2019-07-26', 2000, 1, 1, 1562155292, '8y5r2');
+(7, 3, 2000, '2019-07-26', 2000, 1, 4, 1562155292, '8y5r2');
 
 -- --------------------------------------------------------
 
@@ -184,7 +191,7 @@ INSERT INTO `order_notes` (`id`, `order_id`, `staff_id`, `note`, `timestamp`) VA
 
 CREATE TABLE `order_status` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
+  `status_name` varchar(100) DEFAULT NULL,
   `color` varchar(50) DEFAULT NULL,
   `slug` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -193,7 +200,7 @@ CREATE TABLE `order_status` (
 -- Dumping data for table `order_status`
 --
 
-INSERT INTO `order_status` (`id`, `name`, `color`, `slug`) VALUES
+INSERT INTO `order_status` (`id`, `status_name`, `color`, `slug`) VALUES
 (1, 'Pending', NULL, 'pending'),
 (2, 'Cutting', NULL, 'cutting'),
 (3, 'Preparation', NULL, 'preparation'),
@@ -288,7 +295,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -300,7 +307,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `expense_category`

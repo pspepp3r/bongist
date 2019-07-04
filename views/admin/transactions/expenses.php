@@ -11,11 +11,6 @@
                 {
                     expense::add($staff_id,$_POST['title'], $_POST['cost'], $_POST['category_id']);
                 }
-
-                if(isset($_POST['removeExpense']))
-                {
-                    expense::delete($_POST['id'], $staff_id);
-                }
                 ?>
 
                 <div class="col-md-12 form-group mb-3">
@@ -93,9 +88,7 @@
                                                     <!--                                                    </small>-->
                                                     <span class="text-muted ml-md-auto">
                                                         <a data-toggle="modal" href="#editExpenseModal" onclick="$('.expense_id').val('<?php echo $id; ?>'); $('.expense_title').val('<?php echo $title; ?>'); $('.expense_cost').val('<?php echo $cost; ?>');"><i class="fas fa-edit text-info"></i></a>
-                                                        <a class="" data-toggle="modal" href="#removeExpenseModal" onclick="$('.expense_id').val('<?php echo $id; ?>');">
-                        <i class="fa fa-trash text-danger"></i>
-                      </a>
+                                                        <button style="background: transparent;border: none;"><i class="fa fa-trash text-danger"></i></button>
                                                     </span>
                                                 </div>
                                                 <p class="mb-0">

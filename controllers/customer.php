@@ -234,6 +234,8 @@ class customer {
 	public static function update($email, $fname, $lname, $phone, $photo = array()) {
 		global $db;
 
+
+
         if ($photo['size'] > 0) {
 
             $file = $db->single("SELECT photo FROM accounts WHERE email = :email", array('email' => $email));

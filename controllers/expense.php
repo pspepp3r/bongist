@@ -58,4 +58,27 @@ class expense {
             }
         }
     }
+
+    public static function delete($id, $staff_id)
+    {
+        global $db;
+
+        $delete = $db->query("DELETE FROM expenses WHERE id = :id", array(
+            'id' => $id
+        ));
+
+        if($delete)
+        {
+            $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUE (:staff_id, :comment, :timestamp)", array(
+                'staff_id'  => $staff_id,
+                'comment'   => 'just deleted an expense',
+                'timestamp' => time()
+            ));
+
+            if($activity)
+            {
+                respond::alert('success', '', 'expense has been deleted successfully');
+            }
+        }
+    }
 }
