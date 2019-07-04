@@ -7,7 +7,7 @@ class account {
         global $db;
 
         $param = array(
-            'email' => request::secureTxt($email)
+            'email' => request::secureTxt($email),
         );
 
         $account = $db->query("SELECT * FROM staff WHERE email = :email", $param, false);

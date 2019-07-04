@@ -1,0 +1,95 @@
+Time : 21:55:52
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT * FROM staff WHERE email = :email
+
+Time : 16:47:26
+SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1
+Raw SQL : INSERT INTO staff (name, email, phone, password, address, role, timestamp) VALUES (:name, :email, :phone, :password, :photo, :address, :role, :timestamp)
+
+Time : 15:12:12
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, timestamp)
+
+Time : 13:10:14
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email, slug FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 13:03:19
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email, order_status.name FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 13:03:10
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email, order_status.name FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:39:08
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.id FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN orde' at line 1
+Raw SQL : SELECT orders.*, name, email, named order.id FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:38:46
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email, named FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:37:08
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.name FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN or' at line 1
+Raw SQL : SELECT orders.*, name, email, named as order_status.name FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:36:02
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email, name FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:30:42
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'field list'
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:30:39
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'field list'
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:30:31
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'field list'
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:28:34
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders INNER JOIN customers ON customer_id = customers.id JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:28:28
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders INNER JOIN customers ON customer_id = customers.id JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:25:57
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders INNER JOIN customers ON customer_id = customers.id INNER JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:19:46
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:19:44
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:19:42
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:19:27
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:19:26
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:19:22
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:19:06
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 12:18:58
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in field list is ambiguous
+Raw SQL : SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC

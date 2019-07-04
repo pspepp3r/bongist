@@ -23,9 +23,9 @@
                 <?php
                 $tot = order::totalSales();
                 if($tot){
-                    $total_qty = 0;
+//                    $total_qty = 0;
                     foreach($tot as $total){
-                        $total_qty += $total['cost'];
+                        $total_qty = $total['SUM(cost)'];
                     ?>
                         <a href=""><?php echo $total_qty; ?></a>
                 <?php
@@ -56,10 +56,7 @@
             <h5 class="h6 text-muted text-uppercase mb-2">
               Customers <i class="fa fa-arrow-down text-danger ml-1"></i>
             </h5>
-              <?php
-              $totalCustomers = count(customer::all());
-              ?>
-            <span class="h2 mb-0"><?php echo $totalCustomers; ?></span>
+            <span class="h2 mb-0"><?php echo count(customer::all()); ?></span>
           </div>
         </div>
       </div>
@@ -83,10 +80,7 @@
             <h5 class="h6 text-muted text-uppercase mb-2">
               Orders <i class="fa fa-arrow-up text-success ml-1"></i>
             </h5>
-              <?php
-              $totalOrder = count(order::all());
-              ?>
-            <span class="h2 mb-0"><?php echo $totalOrder; ?></span>
+            <span class="h2 mb-0"><?php echo count(order::all()); ?></span>
           </div>
         </div>
       </div>
@@ -403,10 +397,10 @@
   <!-- Current Projects -->
   <div class="row">
     <!-- Current Projects -->
-    <div class="col-md-6 mb-4 mb-md-0">
+    <div class="col-md-7 mb-4 mb-md-0">
       <div class="card h-100">
         <header class="card-header d-flex align-items-center">
-          <h2 class="h3 card-header-title">Current Projects</h2>
+          <h2 class="h3 card-header-title">Latest Orders</h2>
 
           <!-- Card Header Icon -->
           <ul class="list-inline ml-auto mb-0">
@@ -427,8 +421,8 @@
         <div class="card-body">
           <div class="d-flex justify-content-between mb-4">
             <div>
-              <span class="d-none d-lg-block text-muted small text-uppercase mb-1">Total Project</span>
-              <span class="h4 text-primary">56</span>
+                <span class="d-none d-lg-block text-muted small text-uppercase mb-1">Total Orders</span>
+                <span class="h4 text-primary"><?php echo count(order::all()); ?></span>
             </div>
 
             <div class="divider divider-vertical mx-2"></div>
@@ -457,10 +451,10 @@
             <table class="table align-middle mb-0">
               <thead class="table-active text-muted">
               <tr class="small text-muted text-uppercase">
-                <th>Project Name</th>
-                <th>Tasks</th>
+                <th>Customer Name</th>
+                <th>Timestamp</th>
                 <th>Budget</th>
-                <th>Progress</th>
+                <th>Status</th>
               </tr>
               </thead>
 
@@ -473,9 +467,8 @@
                   {
                       $name = $order['name'];
                       $cost = $order['cost'];
-
-                      $slug = $order['status'];
-                      $stat = order::check_status($slug);
+                      $time = $order['timestamp'];
+                      $status = $order['status_name'];
 
               ?>
               <tr>
@@ -490,12 +483,11 @@
                     </div>
                   </div>
                 </td>
-                <td class="align-middle font-weight-semibold">124 /
-                  <span class="text-muted">56</span>
+                <td class="align-middle font-weight-semibold"><?php echo request::timeago($time); ?>
                 </td>
                 <td class="align-middle font-weight-semibold">₦ <?php echo $cost; ?></td>
                 <td class="align-middle">
-                    <?php echo $stat; ?>
+                    <a class="badge badge-soft-info" href="#"><?php echo $status; ?></a>
 <!--                  <div class="progress" style="height: 6px; border-radius: 3px;">-->
 <!--                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>-->
 <!--                  </div>-->
@@ -511,17 +503,17 @@
         </div>
 
         <footer class="card-footer">
-          <a class="u-link u-link--primary" href="#!">All projects</a>
+          <a class="u-link u-link--primary" href="#!">All Orders</a>
         </footer>
       </div>
     </div>
     <!-- End Current Projects -->
 
     <!-- Comments -->
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="card h-100">
         <header class="card-header d-md-flex align-items-center">
-          <h2 class="h3 card-header-title">Comments</h2>
+          <h2 class="h3 card-header-title">Activities</h2>
 
           <!-- Nav Tabs -->
           <ul id="commentsTabsControl" class="nav nav-tabs card-header-tabs ml-md-auto mt-4 mt-md-0">
@@ -574,82 +566,6 @@
                   <?php
                   }
                   ?>
-                <!-- End Comment -->
-
-                <!-- Comment -->
-                <a class="list-group-item list-group-item-action" href="#">
-                  <div class="media">
-                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img2.jpg" alt="Image description">
-
-                    <div class="media-body">
-                      <div class="d-md-flex align-items-center">
-                        <h4 class="mb-1">
-                          Jane Ortega <span class="badge badge-soft-warning mx-1">Light</span>
-                        </h4>
-                        <small class="text-muted ml-md-auto">18 Jan 2018</small>
-                      </div>
-
-                      <p class="mb-0">Forget Ebay and other forms of advertising for your property</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- End Comment -->
-
-                <!-- Comment -->
-                <a class="list-group-item list-group-item-action" href="#">
-                  <div class="media">
-                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img3.jpg" alt="Image description">
-
-                    <div class="media-body">
-                      <div class="d-md-flex align-items-center">
-                        <h4 class="mb-1">
-                          Brandon Baldwin <span class="badge badge-soft-info mx-1">Basic</span>
-                        </h4>
-                        <small class="text-muted ml-md-auto">15 Jan 2018</small>
-                      </div>
-
-                      <p class="mb-0">I wanna discuss about two things that are quite important to me</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- End Comment -->
-
-                <!-- Comment -->
-                <a class="list-group-item list-group-item-action" href="#">
-                  <div class="media">
-                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/user-unknown.jpg" alt="Image description">
-
-                    <div class="media-body">
-                      <div class="d-md-flex align-items-center">
-                        <h4 class="mb-1">
-                          Stella Hoffman <span class="badge badge-soft-danger mx-1">Start</span>
-                        </h4>
-                        <small class="text-muted ml-md-auto">15 Jan 2018</small>
-                      </div>
-
-                      <p class="mb-0">When the release date is expexted for the advacned settings?</p>
-                    </div>
-                  </div>
-                </a>
-                <!-- End Comment -->
-
-                <!-- Comment -->
-                <a class="list-group-item list-group-item-action" href="#">
-                  <div class="media">
-                    <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img4.jpg" alt="Image description">
-
-                    <div class="media-body">
-                      <div class="d-md-flex align-items-center">
-                        <h4 class="mb-1">
-                          Htmlstream <span class="badge badge-soft-secondary mx-1">Pro</span>
-                        </h4>
-                        <small class="text-muted ml-md-auto">05 Jan 2018</small>
-                      </div>
-
-                      <p class="mb-0">Adwords Keyword research for beginners</p>
-                    </div>
-                  </div>
-                </a>
                 <!-- End Comment -->
               </div>
             </div>
@@ -759,7 +675,7 @@
         </div>
 
         <footer class="card-footer">
-          <a class="u-link u-link--primary" href="#!">All comments</a>
+          <a class="u-link u-link--primary" href="#!">All activities</a>
         </footer>
       </div>
     </div>

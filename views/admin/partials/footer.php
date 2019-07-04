@@ -16,7 +16,8 @@
 
   include 'views/admin/modals/customers.php';
   include 'views/admin/modals/orders.php';
-  include 'views/admin/modals/staff.php';
+  include 'views/admin/modals/staffs.php';
+  include 'views/admin/modals/expenses.php';
 
 ?>
 

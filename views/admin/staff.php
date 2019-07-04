@@ -14,7 +14,7 @@
       <?php
 
       if (isset($_POST['addStaff'])) {
-        staff::add($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['password'], $_POST['role']);
+        staff::add($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['role'], $_POST['password'], $_FILES['photo']);
       }
 
       if (isset($_POST['editStaff'])) {
@@ -69,7 +69,7 @@
                   <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
                     <ul class="list-unstyled mb-0">
                       <li>
-                        <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editStaffModal" onclick="$('.staff_id').val('<?php echo $id; ?>'); $('.staff_email').val('<?php echo $email; ?>'); $('.staff_phone').val('<?php echo $phone; ?>'); $('.staff_name').val('<?php echo $name; ?>'); $('.staff_address').val('<?php echo $address; ?>');">
+                        <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editStaffModal" onclick="$('.staff_id').val('<?php echo $id; ?>'); $('.staff_name').val('<?php echo $name; ?>'); $('.staff_email').val('<?php echo $email; ?>'); $('.staff_phone').val('<?php echo $phone; ?>'); $('.staff_address').val('<?php echo $address; ?>');">
                           <i class="fa fa-plus mr-2"></i> Edit Staff
                         </a>
                       </li>

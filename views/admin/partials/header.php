@@ -21,7 +21,7 @@
   <!-- Components Vendor Styles -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
 
   <!-- Theme Styles -->
   <link rel="stylesheet" href="assets/css/theme.css">
@@ -194,7 +194,7 @@
             ?>
           <li class="u-sidebar-nav-menu__item">
             <a class="u-sidebar-nav-menu__link" href="admin/orders/<?php  echo $type['slug']; ?>">
-              <span class="u-sidebar-nav-menu__item-title"><?php echo $type['name']; ?></span>
+              <span class="u-sidebar-nav-menu__item-title"><?php echo $type['status_name']; ?></span>
               <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;"><?php echo count(order::status_orders($type['id'])); ?></span>
             </a>
           </li>

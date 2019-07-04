@@ -21,3 +21,5 @@ if ($routes[3] == 'admin') {
   }
 
 }
+
+require('views/admin/orders/'. $page .'.php');

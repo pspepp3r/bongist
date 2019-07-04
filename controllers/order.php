@@ -78,7 +78,7 @@ class order {
     public static function all() {
         global $db;
 
-        $orders = $db->query("SELECT orders.*, name, email FROM orders LEFT JOIN customers ON customer_id = customers.id ORDER BY orders.id DESC");
+        $orders = $db->query("SELECT orders.*, name, email, status_name FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC");
 
         if (count($orders) > 0) {
             return $orders;
@@ -126,7 +126,7 @@ class order {
     {
         global $db;
 
-        $total = $db->query("SELECT cost FROM orders");
+        $total = $db->query("SELECT SUM(cost) FROM orders");
         return $total;
     }
 }
