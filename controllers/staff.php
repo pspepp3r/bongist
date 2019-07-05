@@ -6,7 +6,7 @@ class staff {
     {
         global $db;
 
-        $check = staff::check_staff();
+        $check = self::check_staff($name, 'name');
 
         if($check)
         {
@@ -58,34 +58,89 @@ class staff {
         }
     }
 
-    public static function edit($id, $name, $email, $phone, $address)
+    public static function edit($id, $name, $email, $phone, $address, $photo = array())
     {
         global $db;
 
-        $editStaff = $db->query("UPDATE staff SET name = :name, email = :email, phone = :phone, address = :address WHERE id = :id", array(
+        if($photo['size'] > 0)
+        {
+            $file = $db->query("SELECT photo FROM staff WHERE name = :name", array(
+                'name' => $name
+            ));
+
+            if($file != 'avatar.png')
+            {
+                upload::remove($file, config::baseUploadStaffUrl(), true);
+            }
+
+            $upload = upload::add($photo, config::baseUploadStaffUrl(), true);
+            $photo = $upload['file'];
+        }
+
+        $editStaff = $db->query("UPDATE staff SET name = :name, email = :email, phone = :phone, address = :address, photo = :photo WHERE id = :id", array(
             'id'        => $id,
             'name'      => $name,
             'email'     => $email,
             'phone'     => $phone,
             'address'   => $address,
+            'photo'     => $photo
         ));
 
         if($editStaff)
         {
-            respond::alert('success', '', 'Staff has been updated successfully');
-        }else {
-            respond::alert('error', '', 'Staff has not been updated');
+            $staff_id = $db->lastInsertId();
+
+            $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, :timestamp)", array(
+                'staff_id'  => $staff_id,
+                'comment'   => 'just updated staff',
+                'timestamp' => time()
+            ));
+
+            if($activity)
+            {
+                respond::alert('success', '', 'staff has been updated successfully');
+            }else {
+                respond::alert('error', '', 'Staff has not been updated');
+            }
         }
     }
 
-    public static function check_staff()
+    public static function check_staff($value, $column, $id = null)
     {
         global $db;
 
-        $check = $db->query("SELECT name FROM staff");
+        if($id == null)
+        {
+            $check = $db->query("SELECT * FROM staff WHERE $column = :value", array('value' => $value));
+        }else {
+            $check = $db->query("SELECT * FROM staff WHERE $column = :value AND id != :id", array('value' => $value));
+        }
         if($check)
         {
             return $check;
+        }
+    }
+
+    public static function remove($id, $staff_id)
+    {
+        global $db;
+
+        $remove = $db->query("DELETE FROM staff WHERE id = :id", array('id' => $id));
+
+        if($remove)
+        {
+            $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, :timestamp)", array(
+                'staff_id'  => $staff_id,
+                'comment'   => 'has just deleted a staff',
+                'timestamp' => time()
+            ));
+
+            if($activity)
+            {
+                respond::alert('success', '', 'staff has been deleted successfully');
+            }else {
+                respond::alert('error', '', 'Staff has not been deleted');
+            }
         }
     }
 }

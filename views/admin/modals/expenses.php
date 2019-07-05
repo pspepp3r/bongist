@@ -63,3 +63,32 @@
         </div>
     </div>
 </div>
+
+<!--Edit Staff-->
+
+<div class="modal fade" id="addExpenseCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><strong>Add Expense Category</strong></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-md-12 mb-3">
+                        <label for="">Name</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="addExpenseCategory" class="btn btn-dark">Add Category</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

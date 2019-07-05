@@ -12,8 +12,8 @@ if ($routes[3] == 'admin') {
     $page = 'status';
 //    return $check;
   }else {
-    $order = order::details($order_id);
-    if (!$order) {
+    $ordered = order::details($order_id);
+    if (!$ordered) {
       header('location: admin/orders');
       return false;
     }

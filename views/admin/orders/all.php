@@ -23,9 +23,8 @@
                     <?php
                     if(isset($_POST['editOrder']))
                     {
-                        order::update($_POST['id'], $_POST['status'], $staff_id);
+                        order::update($_POST['order_id'], $_POST['status'], $_POST['note'], $staff_id);
                     }
-
                     $orders = order::all();
 
                     foreach($orders as $order)
@@ -40,7 +39,7 @@
 
                     ?>
                     <tr>
-                    <td><?php echo $order_id; ?></td>
+                    <td><a href="admin/orders/<?php echo $order_id; ?>/details"><?php echo $order_id; ?></a></td>
                     <td><?php echo $customer; ?></td>
                     <td><?php echo '₦' . $deposit; ?></td>
                     <td><?php echo $dod; ?></td>
@@ -57,7 +56,7 @@
                         <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
                             <ul class="list-unstyled mb-0">
                                 <li>
-                                    <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editOrderModal" onclick="$('.order_id').val('<?php echo $id; ?>'); $('.order_status').val('<?php echo $status; ?>');"><i class="fa fa-plus mr-2"></i>Edit</a>
+                                    <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editOrderModal" onclick="$('.order_id').val('<?php echo $order_id; ?>'); $('.order_status').val('<?php echo $status; ?>');"><i class="fa fa-plus mr-2"></i>Edit</a>
                                 </li>
                                 <li>
                                     <a class="d-flex align-items-center link-muted py-2 px-3" href="#!">

@@ -69,7 +69,7 @@ class order {
     public static function details($order_id) {
         global $db;
 
-        $items = $db->query("SELECT order_details.*, thumbnail, slug, name FROM order_details LEFT JOIN products ON product_id = products.id WHERE order_id = :order_id", array('order_id' => $order_id));
+        $items = $db->query("SELECT orders.*, name, status_name FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id WHERE order_id = :order_id", array('order_id' => $order_id));
 
     return $items;
 
@@ -130,21 +130,41 @@ class order {
         return $total;
     }
 
-    public static function update($id, $status, $staff_id)
+    public static function update($order_id, $status, $note, $staff_id)
     {
         global $db;
 
-        $orderUpdate = $db->query("UPDATE orders SET status = :status WHERE id = :id", array(
-            'id'        => $id,
+        $orderUpdate = $db->query("UPDATE orders SET status = :status WHERE order_id = :order_id", array(
+            'order_id'  => $order_id,
             'status'    => $status
         ));
 
         if($orderUpdate)
         {
-            $expense_id = $db->lastInsertId();
-            $activity = $db->query("INSERT INTO activities (staff_id, expense_id, comment, timestamp) VALUES (:staff_id, :expense_id, :comment, :timestamp)", array(
+            if($note != '')
+            {
+                $addNote = $db->query("INSERT INTO order_notes (order_id, staff_id, note, timestamp) VALUES (:order_id, :staff_id, :note, :timestamp)", array(
+                    'order_id'  => $order_id,
+                    'staff_id'  => $staff_id,
+                    'note'      => $note,
+                    'timestamp' => time()
+                ));
+
+                if($addNote)
+                {
+                    $db->query("INSERT INTO activities (staff_id, order_id, comment, timestamp) VALUES (:staff_id, :order_id, :comment, :timestamp)", array(
+                        'staff_id'      => $staff_id,
+                        'order_id'    => $order_id,
+                        'comment'       => 'just added a note',
+                        'timestamp'     => time()
+                    ));
+                }
+            }else{
+                return false;
+            }
+            $activity = $db->query("INSERT INTO activities (staff_id, order_id, comment, timestamp) VALUES (:staff_id, :order_id, :comment, :timestamp)", array(
                 'staff_id'      => $staff_id,
-                'expense_id'    => $expense_id,
+                'order_id'    => $order_id,
                 'comment'       => 'just edited an order',
                 'timestamp'     => time()
             ));
@@ -153,6 +173,17 @@ class order {
             {
                 respond::alert('success', '', 'Order edited successfully');
             }
+        }
+    }
+
+    public static function order_note($order_id)
+    {
+        global $db;
+
+        $order_notes = $db->query("SELECT * FROM order_notes WHERE order_id = :order_id", array('order_id' => $order_id));
+        if($order_notes)
+        {
+            return $order_notes;
         }
     }
 }

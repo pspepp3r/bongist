@@ -401,21 +401,6 @@
       <div class="card h-100">
         <header class="card-header d-flex align-items-center">
           <h2 class="h3 card-header-title">Latest Orders</h2>
-
-          <!-- Card Header Icon -->
-          <ul class="list-inline ml-auto mb-0">
-            <li class="list-inline-item mr-3">
-              <a class="link-muted h3" href="#!">
-                <i class="far fa-bell"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a class="link-muted h3" href="#!">
-                <i class="far fa-edit"></i>
-              </a>
-            </li>
-          </ul>
-          <!-- End Card Header Icon -->
         </header>
 
         <div class="card-body">
@@ -503,7 +488,7 @@
         </div>
 
         <footer class="card-footer">
-          <a class="u-link u-link--primary" href="#!">All Orders</a>
+          <a class="u-link u-link--primary" href="admin/orders">All Orders</a>
         </footer>
       </div>
     </div>

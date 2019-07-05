@@ -1,4 +1,5 @@
 <div class="u-body">
+    <button style="margin-left: -15px;margin-bottom: 10px;" class="btn btn-dark" data-target="#addExpenseCategoryModal" data-toggle="modal" onclick="$('#addExpenseCategoryrModal').modal('show')">Add Expense Category</button>
     <div class="row">
         <div class="card col-md-4">
             <header class="card-header">
@@ -7,6 +8,11 @@
             <form action="" method="post">
 
                 <?php
+                if(isset($_POST['addExpenseCategory']))
+                {
+                    expense::addExpenseCategory($_POST['name'], $staff_id);
+                }
+
                 if(isset($_POST['addExpense']))
                 {
                     expense::add($staff_id,$_POST['title'], $_POST['cost'], $_POST['category_id']);

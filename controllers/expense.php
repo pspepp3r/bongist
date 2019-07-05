@@ -69,7 +69,7 @@ class expense {
 
         if($delete)
         {
-            $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUE (:staff_id, :comment, :timestamp)", array(
+            $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, :timestamp)", array(
                 'staff_id'  => $staff_id,
                 'comment'   => 'just deleted an expense',
                 'timestamp' => time()
@@ -78,6 +78,26 @@ class expense {
             if($activity)
             {
                 respond::alert('success', '', 'expense has been deleted successfully');
+            }
+        }
+    }
+
+    public static function addExpenseCategory($name, $staff_id)
+    {
+        global $db;
+
+        $add = $db->query("INSERT INTO expense_category (name) VALUES (:name)", array('name' => $name));
+
+        if($add) {
+            $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, :timestamp)", array(
+                'staff_id'  => $staff_id,
+                'comment'   => 'just added an expense category',
+                'timestamp' => time()
+            ));
+
+            if($activity)
+            {
+                respond::alert('success', '', 'expense category has been added successfully');
             }
         }
     }

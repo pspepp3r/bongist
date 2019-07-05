@@ -86,8 +86,8 @@
                 </div>
                 <div class="modal-body row">
 
-                    <div class="col-md-6 form-group mb-3">
-                        <input type="hidden" name="id" class="order_id">
+                    <div class="col-md-12 form-group mb-3">
+                        <input type="hidden" name="order_id" class="order_id">
                         <label for="">Status</label>
                         <select name="status" id="" class="form-control">
                             <?php
@@ -99,6 +99,10 @@
                             }
                             ?>
                         </select>
+                    </div>
+                    <div class="col-md-12 form-group mb-3">
+                        <label for="">Note</label>
+                        <textarea name="note" id="" cols="30" rows="3" class="form-control"></textarea>
                     </div>
 
                 </div>

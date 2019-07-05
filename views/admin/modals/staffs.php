@@ -83,15 +83,51 @@
                         <label for="">Phone Number</label>
                         <input type="number" name="phone" required placeholder="Phone Number" class="staff_phone form-control">
                     </div>
-                    <div class="col-md-12 form-group mb-3">
+                    <div class="col-md-6 form-group mb-3">
                         <label for="">Address</label>
                         <input type="text" name="address" placeholder="Address" class="staff_address form-control">
+                    </div>
+                    <div class="col-md-6 form-group mb-3">
+<!--                        <label for="">Address</label>-->
+                        <input type="file" name="photo" class="staff_photo form-control">
                     </div>
 
 
                 </div>
                 <div class="modal-footer">
                     <button type="submit" name="editStaff" class="btn btn-dark">Save Changes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Remove Staff Modal -->
+<div class="modal fade" id="removeStaffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <form action="" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove Staff</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="hidden" name="id" class="staff_id">
+                            <p class="text-center">
+                                Are you sure you want to remove this Staff?
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="removeStaff" class="btn btn-dark">Remove Staff</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
