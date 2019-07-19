@@ -1,0 +1,15 @@
+Time : 13:20:02
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'role' in field list is ambiguous
+Raw SQL : SELECT staff.*, role FROM staff LEFT JOIN staff_role ON role = staff_role.id
+
+Time : 13:20:00
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'role' in field list is ambiguous
+Raw SQL : SELECT staff.*, role FROM staff LEFT JOIN staff_role ON role = staff_role.id
+
+Time : 13:17:00
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'role' in field list is ambiguous
+Raw SQL : SELECT staff.*, role FROM staff LEFT JOIN staff_role ON role = staff_role.id
+
+Time : 13:16:58
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'role' in field list is ambiguous
+Raw SQL : SELECT staff.*, role FROM staff LEFT JOIN staff_role ON role = staff_role.id

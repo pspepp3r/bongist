@@ -1,0 +1,123 @@
+Time : 14:21:13
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:19:13
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:19:11
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:19:01
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:18:50
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:18:45
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:18:00
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:13:43
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:13:40
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:11:24
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:11:20
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:11:08
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:11:05
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:09:12
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 14:09:08
+SQLSTATE[HY000]: General error: 2031 
+Raw SQL : SELECT * FROM orders WHERE month = :monthArray
+
+Time : 13:34:20
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order WHERE year = ?' at line 1
+Raw SQL : SELECT * FROM order WHERE year = :year
+
+Time : 13:34:10
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order WHERE year = ?' at line 1
+Raw SQL : SELECT * FROM order WHERE year = :year
+
+Time : 13:33:29
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order WHERE year = ?' at line 1
+Raw SQL : SELECT * FROM order WHERE year = :year
+
+Time : 13:08:38
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT month FROM orders WHERE year =
+
+Time : 13:08:30
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT month FROM orders WHERE year =
+
+Time : 12:18:53
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category_id' in 'field list'
+Raw SQL : SELECT activities.*, category_id FROM activities WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:18:52
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category_id' in 'field list'
+Raw SQL : SELECT activities.*, category_id FROM activities WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:18:50
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category_id' in 'field list'
+Raw SQL : SELECT activities.*, category_id FROM activities WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:18:29
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category_id' in 'field list'
+Raw SQL : SELECT activities.*, category_id FROM activities WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:18:25
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category_id' in 'field list'
+Raw SQL : SELECT activities.*, category_id FROM activities WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:18:22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category_id' in 'field list'
+Raw SQL : SELECT activities.*, category_id FROM activities WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:18:07
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'staff_id' in where clause is ambiguous
+Raw SQL : SELECT activities.*, category_id FROM activities LEFT JOIN expenses ON expense_id = :id WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:18:04
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'staff_id' in where clause is ambiguous
+Raw SQL : SELECT activities.*, category_id FROM activities LEFT JOIN expenses ON expense_id = :id WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:17:54
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'staff_id' in where clause is ambiguous
+Raw SQL : SELECT activities.*, category_id FROM activities LEFT JOIN expenses ON expense_id = :id WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 12:08:51
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'staff_id' in where clause is ambiguous
+Raw SQL : SELECT activities.*, category_id FROM activities LEFT JOIN expenses ON expense_id = :id WHERE staff_id = :staff_id ORDER BY id DESC
+
+Time : 10:46:18
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in where clause is ambiguous
+Raw SQL : SELECT staff.*, role_type FROM staff LEFT JOIN staff_role ON role = staff_role.id WHERE id = :id
