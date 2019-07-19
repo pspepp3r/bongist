@@ -1,4 +1,4 @@
-<!--Edit Staff-->
+<!--Edit Expense-->
 
 <div class="modal fade" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<!--Edit Staff-->
+<!--Add Expense Category-->
 
 <div class="modal fade" id="addExpenseCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -78,8 +78,8 @@
                 </div>
                 <div class="modal-body row">
                     <div class="col-md-12 mb-3">
-                        <label for="">Name</label>
-                        <input type="text" name="name" class="form-control">
+                        <label for="">Category</label>
+                        <input type="text" name="category" class="form-control">
                     </div>
 
 

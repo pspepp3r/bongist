@@ -2,11 +2,6 @@
 
 class expense_category {
 
-    public static function add()
-    {
-
-    }
-
     public static function all()
     {
         global $db;

@@ -1,21 +1,39 @@
 <div class="u-body">
+    <button style="margin-left: -15px;margin-bottom: 10px;" class="btn btn-dark" data-target="#addExpenseCategoryModal" data-toggle="modal" onclick="$('#addExpenseCategoryrModal').modal('show')">Add Expense Category</button>
     <div class="row">
-        <div class="card col-md-4">
+        <div class="card col-md-4" style="max-height: 500px;">
             <header class="card-header">
                 <h2 class="h3 card-header-title">Add Expense</h2>
             </header>
             <form action="" method="post">
 
                 <?php
+                if(isset($_POST['addExpenseCategory']))
+                {
+                    expense::addExpenseCategory($_POST['category'], $staff_id);
+                }
+
                 if(isset($_POST['addExpense']))
                 {
-                    expense::add($staff_id,$_POST['title'], $_POST['cost'], $_POST['category_id']);
+                    expense::add($staff_id,$_POST['title'], $_POST['expense_type'], $_POST['cost'], $_POST['category_id']);
+                }
+
+                if(isset($_POST['removeExpense']))
+                {
+                    expense::delete($_POST['id'], $staff_id);
                 }
                 ?>
 
                 <div class="col-md-12 form-group mb-3">
                     <label for="">Title</label>
-                    <textarea name="title" id="" cols="30" rows="3" class="form-control"></textarea>
+                    <input type="text" name="title" class="form-control">
+                </div>
+                <div class="col-md-12 form-group mb-3">
+                    <label for="">Type</label>
+                    <select name="expense_type" id="" class="form-control">
+                        <option value="office">office</option>
+                        <option value="factory">factory</option>
+                    </select>
                 </div>
                 <div class="col-md-12 form-group mb-3">
                     <label for="">Cost</label>
@@ -30,7 +48,7 @@
                         foreach($categories as $category)
                         {
                             $id = $category['id'];
-                            $name = $category['name'];
+                            $name = $category['category'];
                             ?>
                             <option value="<?php echo $id ?>"><?php echo $name ?></option>
                             <?php
@@ -83,13 +101,17 @@
                                                     <h4 class="mb-1">
                                                         <?php echo '<strong>' . $name . '</strong>' . ' - ' . '₦' . $cost; ?>
                                                     </h4>
-                                                    <!--                                                    <small class="text-muted ml-md-auto">-->
-                                                    <!--                                                    --><?php //echo request::timeago($timestamp);?>
-                                                    <!--                                                    </small>-->
-                                                    <span class="text-muted ml-md-auto">
+                                                    <?php
+                                                    if($role == 1)
+                                                    {
+                                                        ?>
+                                                        <span class="text-muted ml-md-auto">
                                                         <a data-toggle="modal" href="#editExpenseModal" onclick="$('.expense_id').val('<?php echo $id; ?>'); $('.expense_title').val('<?php echo $title; ?>'); $('.expense_cost').val('<?php echo $cost; ?>');"><i class="fas fa-edit text-info"></i></a>
-                                                        <button style="background: transparent;border: none;"><i class="fa fa-trash text-danger"></i></button>
+                                                        <a class="" data-toggle="modal" href="#removeExpenseModal" onclick="$('.expense_id').val('<?php echo $id; ?>');"><i class="fa fa-trash text-danger"></i></a>
                                                     </span>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                                 <p class="mb-0">
                                                     <?php echo $title;
@@ -111,10 +133,6 @@
 
                     </div>
                 </div>
-
-                <footer class="card-footer">
-                    <a class="u-link u-link--primary" href="#!">All activities</a>
-                </footer>
             </div>
         </div>
         <!-- End Comments -->

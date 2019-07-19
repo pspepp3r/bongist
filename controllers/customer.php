@@ -325,7 +325,7 @@ class customer {
 
     }// FETCH ALL USERS
 
-  public static function add($name, $email, $phone, $address) {
+  public static function add($customer_name, $email, $phone, $address, $staff_id) {
 	  global $db;
 
 	  $check_email = self::check($email, 'email');
@@ -342,8 +342,8 @@ class customer {
       return false;
     }
 
-    $insert = $db->query("INSERT INTO customers (name, email, phone, address, timestamp) VALUES (:name, :email, :phone, :address, :now)", array(
-      'name' => $name,
+    $insert = $db->query("INSERT INTO customers (customer_name, email, phone, address, timestamp) VALUES (:customer_name, :email, :phone, :address, :now)", array(
+      'customer_name' => $customer_name,
       'email' => $email,
       'phone' => $phone,
       'address' => $address,
@@ -351,14 +351,25 @@ class customer {
     ));
 
     if ($insert) {
-      respond::alert('success', '', 'Customer successfully added');
+        $customer_id = $db->lastInsertId();
+        $activities = $db->query("INSERT INTO activities (customer_id, staff_id, comment, timestamp) VALUES (:customer_id, :staff_id, :comment, :timestamp)", array(
+           'customer_id' => $customer_id,
+           'staff_id' => $staff_id,
+           'comment' => config::customerActivity(),
+           'timestamp' => time()
+        ));
+
+        if($activities)
+        {
+            respond::alert('success', '', 'Customer successfully added');
+        }
     }else {
       respond::alert('danger', '', 'Unable to add customer');
     }
 
   }// Add new customer
 
-  public static function edit($id, $name, $email, $phone, $address) {
+  public static function edit($id, $customer_name, $email, $phone, $address) {
     global $db;
 
     $check_email = self::check($email, 'email', $id);
@@ -375,8 +386,8 @@ class customer {
       return false;
     }
 
-    $insert = $db->query("UPDATE customers SET name = :name, email = :email, phone = :phone, address = :address WHERE id = :id", array(
-      'name' => $name,
+    $insert = $db->query("UPDATE customers SET customer_name = :customer_name, email = :email, phone = :phone, address = :address WHERE id = :id", array(
+      'customer_name' => $customer_name,
       'email' => $email,
       'phone' => $phone,
       'address' => $address,

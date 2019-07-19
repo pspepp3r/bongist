@@ -2,13 +2,14 @@
 
 class expense {
 
-    public static function add($staff_id, $title, $cost, $category_id)
+    public static function add($staff_id, $title, $expense_type, $cost, $category_id)
     {
         global $db;
 
-        $expense = $db->query("INSERT INTO expenses (staff_id, title, cost, category_id, timestamp) VALUES (:staff_id, :title, :cost, :category_id, :timestamp)", array(
+        $expense = $db->query("INSERT INTO expenses (staff_id, title, expense_type, cost, category_id, timestamp) VALUES (:staff_id, :title, :expense_type, :cost, :category_id, :timestamp)", array(
             'staff_id'      => $staff_id,
             'title'         => $title,
+            'expense_type'  => $expense_type,
             'cost'          => $cost,
             'category_id'   => $category_id,
             'timestamp'     => time()
@@ -20,7 +21,7 @@ class expense {
             $activity = $db->query("INSERT INTO activities (staff_id, expense_id, comment,timestamp) VALUES (:staff_id, :expense_id, :comment, :timestamp)",array(
                 'staff_id'      => $staff_id,
                 'expense_id'    => $expense_id,
-                'comment'       => 'just made an expense',
+                'comment'       => config::expenseActivity(),
                 'timestamp'     => time()
             ));
 
@@ -46,7 +47,7 @@ class expense {
         {
             $expense_id = $id;
             $editActivity = $db->query("INSERT INTO activities (comment, expense_id, staff_id, timestamp) VALUES (:comment, :expense_id, :staff_id, :timestamp)", array(
-                'comment'       => 'just edited an expense',
+                'comment'       => '',
                 'expense_id'    => $expense_id,
                 'staff_id'      => $staff_id,
                 'timestamp'     => time()
@@ -71,7 +72,7 @@ class expense {
         {
             $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, :timestamp)", array(
                 'staff_id'  => $staff_id,
-                'comment'   => 'just deleted an expense',
+                'comment'   => config::expenseActivity(),
                 'timestamp' => time()
             ));
 
@@ -82,16 +83,16 @@ class expense {
         }
     }
 
-    public static function addExpenseCategory($name, $staff_id)
+    public static function addExpenseCategory($category, $staff_id)
     {
         global $db;
 
-        $add = $db->query("INSERT INTO expense_category (name) VALUES (:name)", array('name' => $name));
+        $add = $db->query("INSERT INTO expense_category (category) VALUES (:category)", array('category' => $category));
 
         if($add) {
             $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, :timestamp)", array(
                 'staff_id'  => $staff_id,
-                'comment'   => 'just added an expense category',
+                'comment'   => config::expenseCategoryActivity(),
                 'timestamp' => time()
             ));
 
@@ -100,5 +101,22 @@ class expense {
                 respond::alert('success', '', 'expense category has been added successfully');
             }
         }
+    }
+
+    public static function totalExpense()
+    {
+        global $db;
+
+        $total = $db->query("SELECT SUM(cost) FROM expenses");
+        return $total;
+    }
+
+    public static function all()
+    {
+        global $db;
+
+        $expenses = $db->query("SELECT expenses.*, name, category FROM expenses LEFT JOIN staff ON staff_id = staff.id LEFT JOIN expense_category ON category_id = expense_category.id ORDER BY id DESC");
+
+        return $expenses;
     }
 }

@@ -8,7 +8,6 @@
 
 class config {
 
-//   static $url = "https://bongistk.com/";
       static $url = "http://localhost/bongist/";
 
 
@@ -57,12 +56,66 @@ class config {
         return 'assets/images/staff/';
     }
 
+    public static function defaultPhoto() {
+        return 'avatar.png';
+    }
+
     public static function baseUploadSliderUrl() {
         return 'assets/images/sliders/';
     }
 
     public static function baseUploadProfileUrl() {
         return 'assets/images/customers/';
+    }
+
+    public static function paymentActivity()
+    {
+        return 'added a payment';
+    }
+
+    public static function expenseActivity()
+    {
+        return 'added an expense';
+    }
+
+    public static function expenseUpdateActivity()
+    {
+        return 'edited an expense';
+    }
+
+    public static function orderActivity()
+    {
+        return 'added an order';
+    }
+
+    public static function orderUpdateActivity()
+    {
+        return 'updated an order';
+    }
+
+    public static function noteActivity()
+    {
+        return 'added a note';
+    }
+
+    public static function staffActivity()
+    {
+        return 'was added as a staff';
+    }
+
+    public static function staffUpdateActivity()
+    {
+        return 'updated a staff';
+    }
+
+    public static function expenseCategoryActivity()
+    {
+        return 'added an expense category';
+    }
+
+    public static function customerActivity()
+    {
+        return 'added a customer';
     }
 
 

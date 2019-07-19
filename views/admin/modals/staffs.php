@@ -33,9 +33,18 @@
                     <div class="col-md-6 form-group mb-3">
                         <label for="">Role</label>
                         <select name="role" id="" class="form-control">
-                            <option value="1" selected>Tailor</option>
-                            <option value="2" >designer</option>
-                            <option value="3" >manager</option>
+                            <?php
+                            $roles = staff::role();
+
+                            foreach($roles as $role)
+                            {
+                                $role_id = $role['id'];
+                                $name = $role['role_type'];
+                                ?>
+                                <option value="<?= $role_id; ?>"><?= $name; ?></option>
+                            <?php
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="col-md-6 form-group mb-3">

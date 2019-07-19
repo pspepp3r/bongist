@@ -1,6 +1,6 @@
 <?php
 
-$pages = array("login", "password", "logout", "orders", "customers", "dashboard", "staff", "transactions");
+$pages = array("login", "password", "logout", "orders", "customers", "dashboard", "staff", "transactions", "activities", "account");
 
 if ($routes[2] != 'admin') {
 
@@ -34,6 +34,7 @@ if ($page == 'login') {
         if ($account) {
             $staff_id = $account['id'];
             $role = $account['role'];
+            $name = $account['name'];
         }else{
             unset($_SESSION['logged_staff']);
             $page = 'login';

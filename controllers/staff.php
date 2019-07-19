@@ -33,7 +33,7 @@ class staff {
 
                 $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, :timestamp)", array(
                     'staff_id'  => $staff_id,
-                    'comment'   => 'was just added as a staff',
+                    'comment'   => config::staffActivity(),
                     'timestamp' => time()
                 ));
 
@@ -49,7 +49,7 @@ class staff {
     {
         global $db;
 
-        $staffs = $db->query("SELECT * FROM staff");
+        $staffs = $db->query("SELECT staff.*, role_type FROM staff LEFT JOIN staff_role ON role = staff_role.id");
         if($staffs > 0)
         {
             return $staffs;
@@ -92,7 +92,7 @@ class staff {
 
             $activity = $db->query("INSERT INTO activities (staff_id, comment, timestamp) VALUES (:staff_id, :comment, :timestamp)", array(
                 'staff_id'  => $staff_id,
-                'comment'   => 'just updated staff',
+                'comment'   => config::staffUpdateActivity(),
                 'timestamp' => time()
             ));
 
@@ -142,5 +142,56 @@ class staff {
                 respond::alert('error', '', 'Staff has not been deleted');
             }
         }
+    }
+
+    public static function role()
+    {
+        global $db;
+
+        $roles = $db->query("SELECT * FROM staff_role");
+
+        if($roles)
+        {
+            return $roles;
+        }
+    }
+
+    public static function details($name)
+    {
+        global $db;
+
+        $details = $db->query("SELECT staff.*, role_type FROM staff LEFT JOIN staff_role ON role = staff_role.id WHERE name = :name", array('name' => $name));
+
+        if(!empty($details))
+        {
+            return $details;
+        }
+    }
+
+    public static function staff_orders($staff_id)
+    {
+        global $db;
+
+        $staff_orders = $db->query("SELECT * FROM orders WHERE staff_id = :staff_id ORDER BY id DESC", array('staff_id' => $staff_id));
+
+        return $staff_orders;
+    }
+
+    public static function staff_expenses($staff_id)
+    {
+        global $db;
+
+        $staff_orders = $db->query("SELECT * FROM expenses WHERE staff_id = :staff_id ORDER BY id DESC", array('staff_id' => $staff_id));
+
+        return $staff_orders;
+    }
+
+    public static function staff_activities($staff_id)
+    {
+        global $db;
+
+        $staff_orders = $db->query("SELECT * FROM activities WHERE staff_id = :staff_id ORDER BY id DESC", array('staff_id' => $staff_id));
+
+        return $staff_orders;
     }
 }

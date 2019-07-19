@@ -36,9 +36,16 @@
               <th scope="col">Name</th>
               <th scope="col">Email Address</th>
               <th scope="col">Phone Number</th>
-<!--              <th scope="col">No of Order(s)</th>-->
+              <th scope="col">Type</th>
               <th scope="col">Date Added</th>
-              <th class="text-center" scope="col">Actions</th>
+                <?php
+                if($role == 1)
+                {
+                    ?>
+                    <th class="text-center" scope="col">Actions</th>
+                <?php
+                }
+                ?>
             </tr>
             </thead>
 
@@ -52,36 +59,44 @@
               $phone = $staff['phone'];
               $address = $staff['address'];
               $photo = $staff['photo'];
+              $role_type = $staff['role_type'];
               ?>
               <tr>
-                <td><?php echo $name; ?></td>
+                <td><a href="admin/account?name=<?= $name; ?>"><?php echo $name; ?></a></td>
                 <td><?php echo $email; ?></td>
                 <td><?php echo $phone; ?></td>
-<!--                <td>--><?php //echo count(customer::orders($id)); ?><!--</td>-->
+                <td><?php echo $role_type; ?></td>
                 <td>
                   <span class="badge badge-dark"><?php echo request::timeago($staff['timestamp']); ?></span>
                 </td>
-                <td class="text-center">
-                  <a id="actions1Invoker" class="link-muted" href="#!" aria-haspopup="true" aria-expanded="false"
-                     data-toggle="dropdown">
-                    <i class="fa fa-sliders-h"></i>
-                  </a>
+                  <?php
+                  if($role == 1)
+                  {
+                      ?>
+                      <td class="text-center">
+                          <a id="actions1Invoker" class="link-muted" href="#!" aria-haspopup="true" aria-expanded="false"
+                             data-toggle="dropdown">
+                              <i class="fa fa-sliders-h"></i>
+                          </a>
 
-                  <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
-                    <ul class="list-unstyled mb-0">
-                      <li>
-                        <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editStaffModal" onclick="$('.staff_id').val('<?php echo $id; ?>'); $('.staff_name').val('<?php echo $name; ?>'); $('.staff_email').val('<?php echo $email; ?>'); $('.staff_phone').val('<?php echo $phone; ?>'); $('.staff_address').val('<?php echo $address; ?>'); $('.staff_photo').val('<?php echo $photo; ?>')">
-                          <i class="fa fa-plus mr-2"></i> Edit Staff
-                        </a>
-                      </li>
-                      <li>
-                        <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#removeStaffModal" onclick="$('.staff_id').val('<?php echo $id; ?>');">
-                          <i class="fa fa-minus mr-2"></i> Remove
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </td>
+                          <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
+                              <ul class="list-unstyled mb-0">
+                                  <li>
+                                      <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editStaffModal" onclick="$('.staff_id').val('<?php echo $id; ?>'); $('.staff_name').val('<?php echo $name; ?>'); $('.staff_email').val('<?php echo $email; ?>'); $('.staff_phone').val('<?php echo $phone; ?>'); $('.staff_address').val('<?php echo $address; ?>'); $('.staff_photo').val('<?php echo $photo; ?>')">
+                                          <i class="fa fa-plus mr-2"></i> Edit Staff
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#removeStaffModal" onclick="$('.staff_id').val('<?php echo $id; ?>');">
+                                          <i class="fa fa-minus mr-2"></i> Remove
+                                      </a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </td>
+                  <?php
+                  }
+                  ?>
               </tr>
               <?php
             }

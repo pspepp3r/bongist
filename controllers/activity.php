@@ -6,7 +6,7 @@ class activity {
     {
         global $db;
 
-        $activities = $db->query("SELECT activities.*, name FROM activities LEFT JOIN staff ON staff_id = staff.id ORDER BY id DESC ");
+        $activities = $db->query("SELECT activities.*, name, photo, category_id FROM activities LEFT JOIN staff ON staff_id = staff.id LEFT JOIN expenses ON expense_id = expenses.id ORDER BY id DESC");
         if($activities > 0)
         {
             return $activities;
@@ -17,7 +17,7 @@ class activity {
     {
         global $db;
 
-        $expenseAct = $db->query("SELECT expenses.*, name FROM expenses LEFT JOIN expense_category ON category_id = expense_category.id WHERE staff_id = :staff_id", array(
+        $expenseAct = $db->query("SELECT expenses.*, category FROM expenses LEFT JOIN expense_category ON category_id = expense_category.id WHERE staff_id = :staff_id", array(
             'staff_id' => $staff_id
         ));
 

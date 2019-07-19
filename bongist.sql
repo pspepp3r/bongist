@@ -83,7 +83,7 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `name`, `email`, `password`, `photo`, `phone`, `address`, `suspend`, `timestamp`) VALUES
+INSERT INTO `customers` (`id`, customer_name, `email`, `password`, `photo`, `phone`, `address`, `suspend`, `timestamp`) VALUES
 (2, 'James Audu', 'psalm294u@gmail.com', NULL, 'avatar.png', '07037788243', '86 Atiku Abubakar Way', 0, 1561689986),
 (3, 'Kenneth Ekandem', 'lilkenzy02@gmail.com', NULL, 'avatar.png', '08081730456', 'idoro', 0, 1562086602);
 
@@ -126,7 +126,7 @@ CREATE TABLE `expense_category` (
 -- Dumping data for table `expense_category`
 --
 
-INSERT INTO `expense_category` (`id`, `name`) VALUES
+INSERT INTO `expense_category` (`id`, category) VALUES
 (1, 'fuel'),
 (2, 'office');
 

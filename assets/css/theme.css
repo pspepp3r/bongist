@@ -5476,7 +5476,6 @@ input[type="button"].btn-block {
   padding: 7px 10px;
   margin-bottom: 1rem;
   border: 1px solid transparent;
-  border-radius: 0.25rem;
 }
 
 .alert-heading {
@@ -9946,7 +9945,7 @@ canvas {
   background-color: #fff;
 }
 
-.alert {padding: 10px;margin-bottom: 20px;border: 1px solid transparent;border-radius: 4px;}
+.alert {padding: 10px;margin-bottom: 20px;border: 1px solid transparent;}
 
 .alert-icon {
   font-size: 1.25rem;
@@ -11327,10 +11326,10 @@ body.mobile-mode .u-sidebar-nav-menu--second-level {
   color: #fff;
 }
 
-.u-sidebar-nav--opened .u-sidebar-nav-menu__item-arrow {
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
-}
+/*.u-sidebar-nav--opened .u-sidebar-nav-menu__item-arrow {*/
+/*  -webkit-transform: rotate(90deg);*/
+/*          transform: rotate(90deg);*/
+/*}*/
 
 @media (min-width: 768px) {
   .u-sidebar.tablet.mini .u-sidebar-nav-menu__item-icon {
@@ -11564,3 +11563,9 @@ body.mobile-mode .u-sidebar-nav-menu--second-level {
 /*------------------------------------
   File for your custom SCSS style
 ------------------------------------*/
+
+@media only screen and (max-width:768px){
+    .staff_activity {
+        display: none;
+    }
+}
