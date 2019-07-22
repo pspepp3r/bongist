@@ -30,7 +30,7 @@
   <div class="row">
     <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center bg-white mnh-100vh">
       <a class="u-login-form py-3 mb-auto" href="/">
-        <img class="img-fluid" src="<?php echo config::logo(); ?>" style="height: 75px;" alt="Stream Dashboard UI Kit">
+        <img class="img-fluid" src="<?php echo config::logo(); ?>" style="height: 50px;" alt="logo">
       </a>
 
       <div class="u-login-form">
