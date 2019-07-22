@@ -59,5 +59,36 @@
       scrollbarPosition: 'outside',
       scrollInertia: 150
     });
+
+      $('#order_type').change(function() {
+          if ($(this).val() == 2) {
+              $('.subCat').show();
+          } else {
+              $('.subCat').hide();
+          }
+          if ($(this).val() == 3) {
+              $('.subCat2').show();
+          } else {
+              $('.subCat2').hide();
+          }
+      });
+
+      $('#subCater').change(function() {
+          if ($(this).val() == 5 || $(this).val() == 6) {
+              $('.subCater1').show();
+              $('.subCater2').show();
+          } else {
+              $('.subCater1').hide();
+              $('.subCater2').hide();
+          }
+      });
+      $('#costly').keyup(function() {
+          $priced = $('#priced').val();
+          $costly = $('#costly').val();
+          $sum = $priced * $costly;
+          $fin = $(".finalPrice").val($sum);
+          $place = $(".finalPrice").attr("placeholder", $sum);
+      })
+
   });
 })(jQuery);

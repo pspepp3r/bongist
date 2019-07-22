@@ -1,0 +1,15 @@
+Time : 15:40:31
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_st' at line 1
+Raw SQL : SELECT orders.*, name, email, status_name, FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 15:40:28
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_st' at line 1
+Raw SQL : SELECT orders.*, name, email, status_name, FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id ORDER BY orders.id DESC
+
+Time : 13:18:12
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.expense' doesn't exist
+Raw SQL : UPDATE expense SET title = :title, cost = :cost WHERE id = :id
+
+Time : 11:34:42
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM expenses WHERE staff_id = ?' at line 1
+Raw SQL : SELECT expenses.*,  FROM expenses WHERE staff_id = :staff_id

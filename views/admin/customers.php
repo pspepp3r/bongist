@@ -13,11 +13,11 @@
       <?php
 
       if (isset($_POST['addCustomer'])) {
-        customer::add($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address']);
+        customer::add($_POST['customer_name'], $_POST['email'], $_POST['phone'], $_POST['address'], $staff_id);
       }
 
       if (isset($_POST['editCustomer'])) {
-        customer::edit($_POST['id'], $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address']);
+        customer::edit($_POST['id'], $_POST['customer_name'], $_POST['email'], $_POST['phone'], $_POST['address']);
       }
 
       if (isset($_POST['removeCustomer'])) {
@@ -37,7 +37,14 @@
             <th scope="col">Phone Number</th>
             <th scope="col">No of Order(s)</th>
             <th scope="col">Date Added</th>
-            <th class="text-center" scope="col">Actions</th>
+              <?php
+              if($role == 1)
+              {
+                  ?>
+                  <th class="text-center" scope="col">Actions</th>
+                  <?php
+              }
+              ?>
           </tr>
           </thead>
 
@@ -46,7 +53,7 @@
 
           foreach ($customers as $customer) {
             $id = $customer['id'];
-            $name = $customer['name'];
+            $name = $customer['customer_name'];
             $email = $customer['email'];
             $phone = $customer['phone'];
             $address = $customer['address'];
@@ -59,27 +66,34 @@
               <td>
                 <span class="badge badge-dark"><?php echo request::timeago($customer['timestamp']); ?></span>
               </td>
-              <td class="text-center">
-                <a id="actions1Invoker" class="link-muted" href="#!" aria-haspopup="true" aria-expanded="false"
-                   data-toggle="dropdown">
-                  <i class="fa fa-sliders-h"></i>
-                </a>
+                <?php
+                if($role == 1)
+                {
+                    ?>
+                    <td class="text-center">
+                        <a id="actions1Invoker" class="link-muted" href="#!" aria-haspopup="true" aria-expanded="false"
+                           data-toggle="dropdown">
+                            <i class="fa fa-sliders-h"></i>
+                        </a>
 
-                <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>'); $('.customer_email').val('<?php echo $email; ?>'); $('.customer_phone').val('<?php echo $phone; ?>'); $('.customer_name').val('<?php echo $name; ?>'); $('.customer_address').val('<?php echo $address; ?>');">
-                        <i class="fa fa-plus mr-2"></i> Edit Customer
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#removeCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>');">
-                        <i class="fa fa-minus mr-2"></i> Remove
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </td>
+                        <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>'); $('.customer_email').val('<?php echo $email; ?>'); $('.customer_phone').val('<?php echo $phone; ?>'); $('.customer_name').val('<?php echo $name; ?>'); $('.customer_address').val('<?php echo $address; ?>');">
+                                        <i class="fa fa-plus mr-2"></i> Edit Customer
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#removeCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>');">
+                                        <i class="fa fa-minus mr-2"></i> Remove
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                <?php
+                }
+                ?>
             </tr>
           <?php
             }

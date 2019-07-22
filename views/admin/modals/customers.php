@@ -13,7 +13,7 @@
 
             <div class="col-md-12 mb-3">
               <label for="">Name</label>
-              <input type="text" name="name" required placeholder="Customer Name" class="form-control">
+              <input type="text" name="customer_name" required placeholder="Customer Name" class="form-control">
             </div>
 
           <div class="col-md-6 form-group mb-3">
@@ -55,7 +55,7 @@
           <input type="hidden" name="id" class="customer_id">
           <div class="col-md-12 mb-3">
             <label for="">Name</label>
-            <input type="text" name="name" required placeholder="Customer Name" class="customer_name form-control">
+            <input type="text" name="customer_name" required placeholder="Customer Name" class="customer_name form-control">
           </div>
 
           <div class="col-md-6 form-group mb-3">

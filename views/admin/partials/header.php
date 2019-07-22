@@ -21,6 +21,7 @@
   <!-- Components Vendor Styles -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
 
   <!-- Theme Styles -->
   <link rel="stylesheet" href="assets/css/theme.css">
@@ -66,8 +67,325 @@
 
   <div class="u-header-right">
 
+      <!-- Notifications -->
+      <div class="dropdown mr-4">
+          <a class="link-muted" href="#!" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+				    <span class="h3">
+			    		<i class="far fa-bell"></i>
+				    </span>
+              <span class="u-indicator u-indicator-top-right u-indicator--xxs bg-info"></span>
+          </a>
 
-    <!-- User Profile -->
+          <div class="dropdown-menu dropdown-menu-right border-0 py-0 mt-4" aria-labelledby="dropdownMenuLink" style="width: 360px;">
+              <div class="card">
+                  <div class="card-header d-flex align-items-center py-3">
+                      <h2 class="h4 card-header-title">Activities</h2>
+                  </div>
+
+                  <div class="card-body p-0">
+                      <div class="list-group list-group-flush">
+                          <?php
+                          $activities = activity::all();
+                          foreach(array_slice($activities,0,5) as $activity)
+                          {
+                              $category_id = $activity['category_id'];
+                              $name = $activity['name'];
+                              $order_id = $activity['order_id'];
+                              $photo = $activity['photo'];
+                              $comment = $activity['comment'];
+                              ?>
+                              <!-- Notification -->
+                                  <?php
+                                  if($comment == config::noteActivity())
+                                  {
+                                      ?>
+                                      <a class="list-group-item list-group-item-action" href="admin/orders/<?= $order_id; ?>/details">
+                                          <div class="media align-items-center">
+                                              <?php
+                                              if(!empty($photo))
+                                              {
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                  <?php
+                                              }
+                                              ?>
+                                              <div class="media-body">
+                                                  <div class="d-flex align-items-center">
+                                                      <h4 class="mb-1"><span class="badge badge-soft-info mx-1">New Note</span></h4>
+                                                      <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                  </div>
+
+                                                  <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                      <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                      <?php
+                                  }elseif($comment == config::orderActivity())
+                                  {
+                                      ?>
+                                      <a class="list-group-item list-group-item-action" href="admin/orders/<?= $order_id; ?>/details">
+                                          <div class="media align-items-center">
+                                              <?php
+                                              if(!empty($photo))
+                                              {
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                  <?php
+                                              }
+                                              ?>
+                                              <div class="media-body">
+                                                  <div class="d-flex align-items-center">
+                                                      <h4 class="mb-1"><span class="badge badge-soft-primary mx-1">New Order</span></h4>
+                                                      <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                  </div>
+
+                                                  <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                      <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                      <?php
+                                  }elseif($comment == config::staffActivity())
+                                  {
+                                      ?>
+                                      <a class="list-group-item list-group-item-action" href="admin/account?name=<?= $name; ?>">
+                                          <div class="media align-items-center">
+                                              <?php
+                                              if(!empty($photo))
+                                              {
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                  <?php
+                                              }
+                                              ?>
+                                              <div class="media-body">
+                                                  <div class="d-flex align-items-center">
+                                                      <h4 class="mb-1"><span class="badge badge-soft-secondary mx-1">New Staff</span></h4>
+                                                      <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                  </div>
+
+                                                  <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                      <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                      <?php
+                                  }elseif($comment == config::customerActivity())
+                                  {
+                                      ?>
+                                      <a class="list-group-item list-group-item-action" href="admin/customers">
+                                          <div class="media align-items-center">
+                                              <?php
+                                              if(!empty($photo))
+                                              {
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                  <?php
+                                              }
+                                              ?>
+                                              <div class="media-body">
+                                                  <div class="d-flex align-items-center">
+                                                      <h4 class="mb-1"><span class="badge badge-soft-success mx-1">New Customer</span></h4>
+                                                      <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                  </div>
+
+                                                  <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                      <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                      <?php
+                                  }elseif($comment == config::paymentActivity())
+                                  {
+                                      ?>
+                                      <a class="list-group-item list-group-item-action" href="admin/transactions/payments">
+                                          <div class="media align-items-center">
+                                              <?php
+                                              if(!empty($photo))
+                                              {
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                  <?php
+                                              }
+                                              ?>
+                                              <div class="media-body">
+                                                  <div class="d-flex align-items-center">
+                                                      <h4 class="mb-1"><span class="badge badge-soft-success mx-1">New Payment</span></h4>
+                                                      <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                  </div>
+
+                                                  <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                      <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                      <?php
+                                  }elseif($comment == config::expenseActivity())
+                                  {
+                                      ?>
+                                      <a class="list-group-item list-group-item-action" href="#">
+                                          <div class="media align-items-center">
+                                              <?php
+                                              if(!empty($photo))
+                                              {
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                  <?php
+                                              }
+                                              ?>
+                                              <div class="media-body">
+                                                  <div class="d-flex align-items-center">
+                                                      <h4 class="mb-1"><span class="badge badge-soft-danger mx-1">New Expense</span></h4>
+                                                      <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                  </div>
+
+                                                  <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                      <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                      <?php
+                                  }elseif($comment == config::orderUpdateActivity())
+                                  {
+                                      ?>
+                                      <a class="list-group-item list-group-item-action" href="admin/orders/<?= $order_id; ?>/details">
+                                          <div class="media align-items-center">
+                                              <?php
+                                              if(!empty($photo))
+                                              {
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                  <?php
+                                              }
+                                              ?>
+                                              <div class="media-body">
+                                                  <div class="d-flex align-items-center">
+                                                      <h4 class="mb-1"><span class="badge badge-soft-secondary mx-1">New Order Update</span></h4>
+                                                      <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                  </div>
+
+                                                  <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                      <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                      <?php
+                                  }elseif($comment == config::staffUpdateActivity())
+                                  {
+                                      ?>
+                                      <a class="list-group-item list-group-item-action" href="admin/account?name=<?= $name; ?>">
+                                          <div class="media align-items-center">
+                                              <?php
+                                              if(!empty($photo))
+                                              {
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                  <?php
+                                              }else{
+                                                  ?>
+                                                  <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                  <?php
+                                              }
+                                              ?>
+                                              <div class="media-body">
+                                                  <div class="d-flex align-items-center">
+                                                      <h4 class="mb-1"><span class="badge badge-soft-info mx-1">New staff Update</span></h4>
+                                                      <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                  </div>
+
+                                                  <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                      <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                      <?php
+                                  }
+                                  if($role == 1)
+                                  {
+                                      if($category_id == 4)
+                                      {
+                                          ?>
+                                          <a class="list-group-item list-group-item-action" href="admin/account?name=admin; ?>">
+                                              <div class="media align-items-center">
+                                                  <?php
+                                                  if(!empty($photo))
+                                                  {
+                                                      ?>
+                                                      <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl().$photo; ?>" alt="Image description">
+                                                      <?php
+                                                  }else{
+                                                      ?>
+                                                      <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl(). config::defaultPhoto(); ?>" alt="Image description">
+                                                      <?php
+                                                  }
+                                                  ?>
+                                                  <div class="media-body">
+                                                      <div class="d-flex align-items-center">
+                                                          <h4 class="mb-1"><span class="badge badge-soft-info mx-1">New Salary Expense</span></h4>
+                                                          <small class="text-muted ml-auto"><?= request::timeago($activity['timestamp']); ?></small>
+                                                      </div>
+
+                                                      <p class="text-truncate mb-0" style="max-width: 250px;">
+                                                          <span class="text-primary"><?= $activity['name']; ?></span> <?= $activity['comment']; ?>
+                                                      </p>
+                                                  </div>
+                                              </div>
+                                          </a>
+                                          <?php
+                                      }
+                                  }
+                          }
+                          ?>
+                      </div>
+                  </div>
+
+                  <div class="card-footer py-3">
+                      <a class="btn btn-block btn-outline-primary" href="admin/activities">View all activities</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- End Notifications -->
+
+
+      <!-- User Profile -->
     <div class="dropdown ml-2">
       <a class="link-muted d-flex align-items-center" href="#!" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
         <img class="u-avatar--xs img-fluid rounded-circle mr-2" src="<?php echo config::baseUploadStaffUrl().$account['photo']; ?>" style="height: 35px; width: 35px;" alt="User Profile">
@@ -82,7 +400,7 @@
           <div class="card-body">
             <ul class="list-unstyled mb-0">
               <li class="mb-4">
-                <a class="d-flex align-items-center link-dark" href="admin/account">
+                <a class="d-flex align-items-center link-dark" href="admin/account?name=<?= $name; ?>">
                   <span class="h3 mb-0"><i class="far fa-user-circle text-muted mr-3"></i></span> Profile
                 </a>
               </li>
@@ -187,15 +505,42 @@
           </li>
           <?php
 
-          $types = order::status();
+          $types = order::type();
 
           foreach ($types as $type) {
+              $type_id = $type['id'];
             ?>
           <li class="u-sidebar-nav-menu__item">
-            <a class="u-sidebar-nav-menu__link" href="admin/orders/<?php  echo $type['slug']; ?>">
-              <span class="u-sidebar-nav-menu__item-title"><?php echo $type['name']; ?></span>
-              <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;"><?php echo count(order::status_orders($type['id'])); ?></span>
-            </a>
+              <a class="u-sidebar-nav-menu__link" href="#!"
+                 data-target="#baseUI<?= $type_id; ?>">
+                  <i class="fas fa-filter u-sidebar-nav-menu__item-icon"></i>
+                  <span class="u-sidebar-nav-menu__item-title"><?php echo $type['type']; ?></span>
+                  <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;">
+                      <?php echo count(order::type_order($type_id)); ?>
+                  </span>
+              </a>
+
+              <ul id="baseUI<?= $type_id; ?>" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level" style="display: none;">
+                  <?php
+                  $statuses = order::status();
+                  foreach($statuses as $status)
+                  {
+                      $status_id = $status['id'];
+                      ?>
+                      <li class="u-sidebar-nav-menu__item">
+                          <a class="u-sidebar-nav-menu__link" href="admin/orders/<?= $status['slug']; ?>">
+                              <i class="far fa-wallet u-sidebar-nav-menu__item-icon"></i>
+                              <span class="u-sidebar-nav-menu__item-title"><?= $status['status_name'] ?></span>
+                              <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;"> <?php
+                                  echo count(order::type_status($status_id, $type_id));
+                                  ?>
+                              </span>
+                          </a>
+                      </li>
+                      <?php
+                  }
+                  ?>
+              </ul>
           </li>
           <?php
           }
@@ -214,5 +559,5 @@
 <?php
 
 if (isset($_POST['addOrder'])) {
-    order::add($staff_id, $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['cost'], $_POST['dod'], $_POST['deposit'], $_POST['status'], $_POST['note']);
+    order::add($staff_id, $_POST['customer_name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['cost'], $_POST['dod'], $_POST['deposit'], $_POST['status'], $_POST['type_id'], $_POST['subcat_id'] = !empty($_POST['subcat_id'][1]) ? $_POST['subcat_id'][1] : $_POST['subcat_id'][2], $_POST['note']);
 }

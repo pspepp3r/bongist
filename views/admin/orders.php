@@ -11,8 +11,8 @@ if ($routes[3] == 'admin') {
   if ($check) {
     $page = 'status';
   }else {
-    $order = order::details($order_id);
-    if (!$order) {
+    $ordered = order::details($order_id);
+    if (!$ordered) {
       header('location: admin/orders');
       return false;
     }
@@ -21,3 +21,5 @@ if ($routes[3] == 'admin') {
   }
 
 }
+
+require('views/admin/orders/'. $page .'.php');

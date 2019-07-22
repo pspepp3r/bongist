@@ -1,0 +1,5 @@
+Time : 17:51:19
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+
+Time : 17:48:53
+SQLSTATE[HY000] [1044] Access denied for user ''@'localhost' to database 'bongist'

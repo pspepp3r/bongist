@@ -1,6 +1,6 @@
 ;<?php return; ?>
 [SQL]
-host = 127.0.0.1
+host = localhost
 user = root
-password = psalm294u
+password =
 dbname = bongist
