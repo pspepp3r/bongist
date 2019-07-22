@@ -62,7 +62,7 @@
 
                 <!-- Text -->
                 <p class="font-size-lg text-gray-700 mb-6">
-                    Our goal is to redefine tailoring by providing easy, efficient, satisfactory and above all timely service at very affordable prices using latest technologies.
+                    Our goal is to redefine branding by providing easy, efficient, satisfactory and above all timely service at very affordable prices using latest technologies.
                 </p>
 
                 <div class="row">

@@ -26,7 +26,7 @@ class config {
 
 
     public static function description() {
-        return "Bongist Koncept";
+        return "Bongist Koncepts is redefining branding by providing easy, efficient, satisfactory and above all timely service at very affordable prices using latest technologies.";
     }
 
     public static function address() {
