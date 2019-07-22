@@ -8,7 +8,8 @@
 
 class config {
 
-      static $url = "http://localhost/bongist/";
+//      static $url = "http://localhost/bongist/";
+      static $url = "https://bongist.dev";
 
 
     public static function base() {

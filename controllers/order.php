@@ -104,16 +104,20 @@ class order {
 
     }
 
-    public static function status_orders($id = null) {
+    public static function status_orders($status_id = null, $type_id = null) {
       global $db;
 
-      if ($id == null) {
-        $orders = $db->query("SELECT * FROM orders ORDER BY id DESC", array('id' => $id));
+      if ($status_id == null) {
+        $orders = $db->query("SELECT * FROM orders ORDER BY id DESC");
       }else {
-        $orders = $db->query("SELECT orders.*, customer_name, status_name, type FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id LEFT JOIN order_type ON type_id = order_type.id WHERE status = :id ORDER BY id DESC", array('id' => $id));
+        $orders = $db->query("SELECT orders.*, customer_name, status_name, type FROM orders LEFT JOIN customers ON customer_id = customers.id LEFT JOIN order_status ON status = order_status.id LEFT JOIN order_type ON type_id = order_type.id WHERE orders.status = :status_id AND type_id = :type_id ORDER BY id DESC", array('status_id' => $status_id, 'type_id' => $type_id));
       }
 
-      return $orders;
+      if (count($orders) > 0) {
+        return $orders;
+      }else {
+        return false;
+      }
 
     }
 

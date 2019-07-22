@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 <!-- Head -->
 <head>
-  <title>Dashboard | <?php echo config::name(); ?></title>
+  <title><?php echo ucfirst($page).' | '.config::name(); ?></title>
 
 <base href="<?php echo config::url(); ?>">
   <!-- Meta -->
@@ -513,11 +513,12 @@
           <li class="u-sidebar-nav-menu__item">
               <a class="u-sidebar-nav-menu__link" href="#!"
                  data-target="#baseUI<?= $type_id; ?>">
-                  <i class="fas fa-filter u-sidebar-nav-menu__item-icon"></i>
+
                   <span class="u-sidebar-nav-menu__item-title"><?php echo $type['type']; ?></span>
-                  <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;">
-                      <?php echo count(order::type_order($type_id)); ?>
-                  </span>
+<!--                  <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;">-->
+<!--                      --><?php //echo count(order::type_order($type_id)); ?>
+<!--                  </span>-->
+                <i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
               </a>
 
               <ul id="baseUI<?= $type_id; ?>" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level" style="display: none;">
@@ -528,8 +529,7 @@
                       $status_id = $status['id'];
                       ?>
                       <li class="u-sidebar-nav-menu__item">
-                          <a class="u-sidebar-nav-menu__link" href="admin/orders/<?= $status['slug']; ?>">
-                              <i class="far fa-wallet u-sidebar-nav-menu__item-icon"></i>
+                          <a class="u-sidebar-nav-menu__link" href="admin/orders/<?php echo lcfirst($type['type'].'/'.$status['slug']); ?>">
                               <span class="u-sidebar-nav-menu__item-title"><?= $status['status_name'] ?></span>
                               <span class="badge badge-dark u-sidebar-nav-menu__item-arrow" style="color: #fff;"> <?php
                                   echo count(order::type_status($status_id, $type_id));

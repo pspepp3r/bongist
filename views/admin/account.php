@@ -17,7 +17,7 @@ foreach($details as $detail)
             <div class="card mb-4 col-md-4" style="max-height: 400px;">
                 <div class="card-body">
                     <div class="text-center">
-                        <img class="img-fluid rounded-circle mb-3" src="<?= config::baseUploadStaffUrl() . $photo; ?>" alt="Image description" width="84">
+                        <img class="img-fluid rounded-circle mb-3" src="<?= config::baseUploadStaffUrl() . $photo; ?>" alt="Image description" style="width: 100px; height: 100px; object-fit: cover;">
 
                         <h2 class="mb-2"><?= $name; ?></h2>
                         <h5 class="mb-4 badge badge-soft-info"><?= $role_type; ?></h5>

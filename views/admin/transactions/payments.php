@@ -29,7 +29,7 @@
                         <tr>
                             <td><?= $payment['customer_name']; ?></td>
                             <td><a href="admin/orders/<?php echo $order_id; ?>/details" style="text-transform: uppercase;" class="btn btn-disabled btn-secondary"><?= $order_id; ?></a></td>
-                            <td>₦ <?= $payment['amount']; ?></td>
+                            <td>₦ <?= number_format($payment['amount']); ?></td>
                             <td style="text-transform: uppercase;"><?= $payment['type'] ?></td>
                             <td><?= $payment['ref_no'] ?></td>
                             <td><?= request::timeago($payment['timestamp']); ?></td>
