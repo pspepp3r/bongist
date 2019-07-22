@@ -21,7 +21,7 @@ class config {
     }
 
     public static function name() {
-        return "Bongist Koncept";
+        return "Bongist Koncepts";
     }
 
 
@@ -46,11 +46,11 @@ class config {
     }
 
     public static function logo() {
-        return 'assets/images/logo.png';
+        return 'assets/images/logo.svg';
     }
 
     public static function favicon() {
-        return 'assets/images/logo.png';
+        return 'assets/images/favicon.png';
     }
 
     public static function baseUploadStaffUrl() {
