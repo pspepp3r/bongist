@@ -8,8 +8,10 @@ class payment {
 
         $check = self::checkPayment($customer_id, 'customer_id');
 
-        if($check)
-        {
+        $order = $db->query("SELECT orders.* FROM orders LEFT JOIN payments ON orders.order_id = payments.order_id WHERE order_id = :order_id", array('order_id' => $order_id));
+        request::pre($order);
+        return false;
+        if($check) {
             respond::alert('danger', '', 'Payment already exist');
 
         }else {
@@ -63,16 +65,11 @@ class payment {
         }
     }
 
-    public static function checkPayment($value, $column, $id = null)
+    public static function checkPayment($order_id)
     {
         global $db;
 
-        if($id == null)
-        {
-            $check = $db->query(" SELECT * FROM payments WHERE $column = :value", array('value' => $value));
-        }else {
-            $check = $db->query("SELECT * FROM payments WHERE $column = :value AND id != :id", array('value' => $value));
-        }
+        $check = $db->query("SELECT * FROM payments WHERE order_id = :order_id", array('order_id' => $order_id));
 
         if($check)
         {

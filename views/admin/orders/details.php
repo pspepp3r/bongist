@@ -38,11 +38,12 @@ foreach($ordered as $order)
                     <!-- Card Header Icon -->
                     <ul class="list-inline ml-auto mb-0">
                         <?php
+
                         if($role == 1)
                         {
                             ?>
                             <li class="list-inline-item mr-3">
-                                <a class="link-muted h3" data-toggle="modal" href="#editOrderModal" onclick="$('.order_id').val('<?= $order_id; ?>'); $('.order_status').val('<?= $status; ?>'); $('.customer_id').val('<?= $customer_id; ?>');"><i class="fas fa-edit text-info"></i></a>
+                                <a class="link-muted h3 text-info" data-toggle="modal" href="#editOrderModal" onclick="$('.order_id').val('<?= $order_id; ?>'); $('.order_status').val('<?= $status; ?>'); $('.customer_id').val('<?= $customer_id; ?>');"><i class="fas fa-edit"></i> Update</a>
                             </li>
                             <?php
                         }
@@ -52,7 +53,7 @@ foreach($ordered as $order)
                 </header>
 
                 <div class="card-body">
-                    <div class=" list-group-item-action" href="#">
+                    <div class=" list-group-item-action">
                         <div class="media">
                             <img class="u-avatar rounded-circle mr-3"
                                  src="<?= config::baseUploadProfileUrl() . $photo; ?>" alt="Image description">
@@ -65,7 +66,8 @@ foreach($ordered as $order)
                                     <p class="mb-0">Deliver address: <?= $address; ?></p>
                                     <p class="mb-0">Cost: <?= '₦' . number_format($cost); ?></p>
                                     <span>Type: <p class="badge badge-soft-info"><?= $type ?></p> Category: <p class="badge badge-soft-secondary"><?= $category; ?></p></span>
-                                    <span>
+                                    <div>
+                                      <h4 class="mb-1"><strong>Payments</strong></h4>
                                         <?php
                                         $payments = payment::order_payment($order_id);
 
@@ -76,13 +78,14 @@ foreach($ordered as $order)
                                                 $amount = $payment['amount'];
                                                 $type = $payment['type'];
                                                 ?>
-                                                <br>
-                                                Payment method: <p class="badge badge-soft-success"><?= $type; ?> </p> Amount : <span><?= '₦' . number_format($amount); ?></span>
+                                              <p>Amount : <?= '₦' . number_format($amount); ?> <span class="badge badge-soft-success"><?= $type; ?> </span></p>
                                                 <?php
                                             }
+                                        }else {
+                                          respond::alert('info', '', 'No payment has been made');
                                         }
                                         ?>
-                                    </span>
+                                    </div>
                                     <p>
                                         <small class="mb-0">
                                             Added : <?= request::timeago($timestamp); ?>
