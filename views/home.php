@@ -34,7 +34,7 @@
                 </p>
 
                 <!-- Buttons -->
-                <a href="#!" class="btn btn-primary mr-1 lift">
+                <a href="account" class="btn btn-primary mr-1 lift">
                     Get Started <i class="fe fe-arrow-right ml-3"></i>
                 </a>
 
