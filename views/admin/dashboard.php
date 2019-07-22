@@ -277,26 +277,26 @@ foreach($months as $key => $value)
                       if($status == 'Pending')
                       {
                           ?>
-                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-info" href="#"><?php echo $status; ?></a></td>
+                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-info" href="#"><?= $status; ?></a></td>
                           <?php
                       }elseif($status == 'Digitalizing') {
                           ?>
-                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-secondary" href="#"><?php echo $status; ?></a></td>
+                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-secondary" href="#"><?= $status; ?></a></td>
                           <?php
                       }elseif($status == 'Machine Processing')
                       {
                           ?>
-                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-warning" href="#"><?php echo $status; ?></a></td>
+                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-warning" href="#"><?= $status; ?></a></td>
                           <?php
                       }elseif($status == 'Finishing')
                       {
                           ?>
-                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-primary" href="#"><?php echo $status; ?></a></td>
+                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-primary" href="#"><?= $status; ?></a></td>
                           <?php
                       }elseif($status = 'Delivered')
                       {
                           ?>
-                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-success" href="#"><?php echo $status; ?></a></td>
+                          <td class="align-middle font-weight-semibold"><a class="badge badge-soft-success" href="#"><?= $status; ?></a></td>
                           <?php
                       }
                       ?>

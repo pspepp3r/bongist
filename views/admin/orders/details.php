@@ -92,9 +92,6 @@ foreach($ordered as $order)
                             </div>
                         </div>
                     </div>
-<!--                    <h5 class="h4 card-title">cost : ₦--><?//= $cost ?><!--</h5>-->
-<!--                    <p>Status : <button class="btn btn-soft-info btn-disabled">--><?//= $status; ?><!--</button></p>-->
-<!--                    <p>Order ID : <button class="btn btn-soft-secondary">--><?//= $order_id; ?><!--</button></p>-->
                 </div>
 
                 <footer class="card-footer d-flex align-items-center">

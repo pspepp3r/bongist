@@ -86,7 +86,7 @@
                                 foreach($expenseAct as $act) {
                                     $id = $act['id'];
                                     $title = $act['title'];
-                                    $name = $act['name'];
+                                    $category = $act['category'];
                                     $cost = $act['cost'];
                                     $timestamp = $act['timestamp'];
 
@@ -99,7 +99,7 @@
                                             <div class="media-body">
                                                 <div class="d-md-flex align-items-center">
                                                     <h4 class="mb-1">
-                                                        <?php echo '<strong>' . $name . '</strong>' . ' - ' . '₦' . $cost; ?>
+                                                        <?php echo '<strong>' . $category . '</strong>' . ' - ' . '₦' . $cost; ?>
                                                     </h4>
                                                     <?php
                                                     if($role == 1)

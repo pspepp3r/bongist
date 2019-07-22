@@ -97,10 +97,6 @@
                 <label for="">Amount</label>
                 <input type="number" class="form-control" id="priced" placeholder="Price">
             </div>
-            <div class="col-md-6 form-group mb-3 subCater1" style="display:none;">
-                <label for="">Amount</label>
-                <input type="number" class="form-control" id="priced" placeholder="Price">
-            </div>
             <div class="col-md-6 form-group mb-3 subCater2" style="display:none;">
                 <label for="">No. of Clothes</label>
                 <input type="number" class="form-control" id="costly" placeholder="amount of cloth">
