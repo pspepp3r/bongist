@@ -33,7 +33,7 @@ foreach($ordered as $order)
         <div class="col-md-6 mb-4">
             <div class="card h-100" style="max-height: 350px;">
                 <header class="card-header d-flex align-items-center">
-                    <h2 class="h3 card-header-title">Order ID : <span class="text-info"><?= $order_id; ?></span></h2>
+                    <h2 class="h3 card-header-title">Order ID : <span class="text-dark text-uppercase"><?= $order_id; ?></span></h2>
 
                     <!-- Card Header Icon -->
                     <ul class="list-inline ml-auto mb-0">

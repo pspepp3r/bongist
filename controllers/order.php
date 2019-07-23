@@ -6,6 +6,13 @@ class order {
   public static function add($staff_id, $customer_name, $email, $phone, $address, $cost, $dod, $deposit, $status, $type_id, $subcat_id, $note) {
       global $db;
 
+    if ($deposit > $cost) {
+      respond::alert('warning', '', 'Initial deposit is greater than order cost');
+      return false;
+    }
+
+    $balance = $cost - $deposit;
+
       $check = customer::check($phone, 'phone');
 
       if ($check) {
@@ -30,10 +37,11 @@ class order {
 
       $order_id = request::generateRandomID(5);
 
-      $insert = $db->query("INSERT INTO orders (order_id, customer_id, cost, date_of_delivery, initial_deposit, staff_id, status, type_id, subcat_id, timestamp, month, year) VALUES (:order_id, :customer_id, :cost, :date_of_delivery, :initial_deposit, :staff_id, :status, :type_id, :subcat_id, :now, :month, :year)", array(
+      $insert = $db->query("INSERT INTO orders (order_id, customer_id, cost, date_of_delivery, initial_deposit, staff_id, status, type_id, subcat_id, timestamp, month, year, balance) VALUES (:order_id, :customer_id, :cost, :date_of_delivery, :initial_deposit, :staff_id, :status, :type_id, :subcat_id, :now, :month, :year, :balance)", array(
         'order_id' => $order_id,
         'customer_id' => $customer_id,
         'cost' => $cost,
+        'balance' => $balance,
         'date_of_delivery' => $dod,
         'initial_deposit' => $deposit,
         'staff_id' => $staff_id,
@@ -103,6 +111,19 @@ class order {
       return $status;
 
     }
+
+  public static function get_status_orders($status_id) {
+    global $db;
+
+      $orders = $db->query("SELECT * FROM orders WHERE status = :status_id ORDER BY id DESC", array('status_id' => $status_id));
+
+    if (count($orders) > 0) {
+      return $orders;
+    }else {
+      return array();
+    }
+
+  }
 
     public static function status_orders($status_id = null, $type_id = null) {
       global $db;

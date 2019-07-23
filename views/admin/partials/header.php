@@ -40,7 +40,7 @@
 <header class="u-header">
   <div class="u-header-left">
     <a class="u-header-logo" href="/">
-      <img class="u-logo-desktop" src="<?php echo config::logo(); ?>" height="60" alt="<?php echo config::name(); ?>">
+      <img class="u-logo-desktop" src="<?php echo config::logo(); ?>" height="50" alt="<?php echo config::name(); ?>">
     </a>
   </div>
 
@@ -430,7 +430,7 @@
     <div class="u-sidebar-inner">
       <header class="u-sidebar-header">
         <a class="u-sidebar-logo" href="/">
-          <img class="" src="<?php echo config::logo(); ?>" height="60" alt="<?php echo config::name(); ?>">
+          <img class="" src="<?php echo config::logo(); ?>" style="height: 50px;" alt="<?php echo config::name(); ?>">
         </a>
       </header>
 

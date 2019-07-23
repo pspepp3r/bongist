@@ -1,0 +1,11 @@
+Time : 08:31:07
+SQLSTATE[HY000]: General error: 1364 Field 'staff_id' doesn't have a default value
+Raw SQL : INSERT INTO activities (payment_id, comment, timestamp) VALUES (:payment_id, :comment, :timestamp)
+
+Time : 08:29:54
+SQLSTATE[HY000]: General error: 1364 Field 'ref_no' doesn't have a default value
+Raw SQL : INSERT INTO payments (order_id, customer_id, payment_method, amount, timestamp) VALUES (:order_id, :customer_id, :payment_method, :amount, :timestamp)
+
+Time : 08:28:40
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'order_id' in where clause is ambiguous
+Raw SQL : SELECT orders.* FROM orders LEFT JOIN payments ON orders.order_id = payments.order_id WHERE order_id = :order_id

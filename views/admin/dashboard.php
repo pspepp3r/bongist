@@ -206,7 +206,7 @@ foreach($months as $key => $value)
               <span class="h4 text-info">
                   <?php
                   $id = 1;
-                  echo count(order::status_orders($id));
+                  echo count(order::get_status_orders($id));
                   ?>
               </span>
             </div>
@@ -218,7 +218,7 @@ foreach($months as $key => $value)
               <span class="h4 text-warning">
                   <?php
                   $id = 4;
-                  echo count(order::status_orders($id));
+                  echo count(order::get_status_orders($id));
                   ?>
               </span>
             </div>
@@ -230,7 +230,7 @@ foreach($months as $key => $value)
               <span class="h4 text-success">
                   <?php
                   $id = 5;
-                  echo count(order::status_orders($id));
+                  echo count(order::get_status_orders($id));
                   ?>
               </span>
             </div>
