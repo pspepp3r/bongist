@@ -37,7 +37,7 @@ class account {
                 $page = $_SESSION['redirect_page'];
                 header('location: '.$page);
             }else {
-                header('location: admin/dashboard');
+                header('location: ../admin/dashboard');
             }
 
     }// LOGIN METHOD
@@ -106,22 +106,17 @@ class account {
                 'email' => request::secureTxt($email),
                 'password_reset' => $reset_code
             );
-            $statement = "UPDATE accounts SET password_reset = :password_reset WHERE email = :email";
+            $statement = "UPDATE staff SET password_reset = :password_reset WHERE email = :email";
 
             if ($db->query($statement, $param)) {
-
-                $username = self::fetch_username($email);
 
                 $from = config::email();
                 $subject = "Password Reset";
                 $sender = config::name();
-                $url = config::base().'reset-password/'.$reset_code;
+                $url = config::base().'admin/reset-password/'.$reset_code;
 
                 $msg = '<p>
-                       Someone requested that the password be reset for the following account:
-                     </p>
-                     <p>
-                       Username: '.$username.'
+                       Someone requested that the password be reset for your account
                      </p>
                      <p>
                        If this was a mistake, just ignore this email and nothing will happen.
@@ -212,7 +207,7 @@ class account {
     static function check_email($email) {
         global $db;
 
-        $statement = "SELECT email FROM accounts WHERE email = :email";
+        $statement = "SELECT email FROM staff WHERE email = :email";
         $param = array(
             'email' => $email
         );

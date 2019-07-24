@@ -1,0 +1,23 @@
+Time : 07:07:09
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.accounts' doesn't exist
+Raw SQL : SELECT email FROM accounts WHERE email = :email
+
+Time : 07:04:47
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.accounts' doesn't exist
+Raw SQL : SELECT email FROM accounts WHERE email = :email
+
+Time : 07:04:15
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.accounts' doesn't exist
+Raw SQL : SELECT email FROM accounts WHERE email = :email
+
+Time : 06:13:00
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== 1' at line 1
+Raw SQL : SELECT staff.*, role_type FROM staff LEFT JOIN staff_role ON role = staff_role.id WHERE role == 1
+
+Time : 06:12:14
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'staff.staff_role' in 'where clause'
+Raw SQL : SELECT staff.*, role_type FROM staff LEFT JOIN staff_role ON role = staff_role.id WHERE staff.staff_role < 2
+
+Time : 06:12:04
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'staff_role' in 'where clause'
+Raw SQL : SELECT staff.*, role_type FROM staff LEFT JOIN staff_role ON role = staff_role.id WHERE staff_role < 2

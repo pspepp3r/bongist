@@ -1,8 +1,8 @@
 <?php
 
-$pages = array("login", "reset-password", "logout", "orders", "customers", "dashboard", "staff", "transactions", "activities", "account");
+$pages = array("login", "reset-password", "logout", "orders", "profile");
 
-if ($routes[2] != 'admin') {
+if ($routes[2] != 'account') {
 
     if (in_array($routes[2], $pages)) {
 
@@ -10,19 +10,19 @@ if ($routes[2] != 'admin') {
 
     } else {
 
-        $page = 'dashboard';
+        $page = 'orders';
 
     }
 
 } else {
-    $page = 'dashboard';
+    $page = 'orders';
 }
 
 if ($page == 'login' || $page == 'reset-password') {
     if (isset($_SESSION['logged_staff'])) {
-        $page = 'dashboard';
+        $page = 'orders';
     }
-    require('views/admin/'.$page.'.php');
+    require('views/account/'.$page.'.php');
 } else{
 
     if (!isset($_SESSION['logged_staff'])) {
@@ -43,10 +43,10 @@ if ($page == 'login' || $page == 'reset-password') {
 
 
     if ($page == 'login' || $page == 'reset-password') {
-        require('views/admin/'.$page.'.php');
+        require('views/account/'.$page.'.php');
     }else {
-        require('views/admin/partials/header.php');
-        require('views/admin/'.$page.'.php');
-        require('views/admin/partials/footer.php');
+        require('views/account/partials/header.php');
+        require('views/account/'.$page.'.php');
+        require('views/account/partials/footer.php');
     }
 }

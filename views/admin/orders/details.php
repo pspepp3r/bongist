@@ -13,6 +13,9 @@ if(isset($_POST['addPayment']))
 {
     payment::add($_POST['order_id'], $_POST['customer_id'], $_POST['payment_method'], $_POST['amount']);
 }
+
+$ordered = order::details($order_id);
+
 foreach($ordered as $order)
 {
     $id = $order['id'];
@@ -21,6 +24,7 @@ foreach($ordered as $order)
     $customer_id = $order['customer_id'];
     $address = $order['address'];
     $customer_name = $order['customer_name'];
+    $balance = $order['balance'];
     $cost = $order['cost'];
     $photo = $order['photo'];
     $status = $order['status_name'];
@@ -31,7 +35,7 @@ foreach($ordered as $order)
 <div class="u-body">
     <div class="row">
         <div class="col-md-6 mb-4">
-            <div class="card h-100" style="max-height: 350px;">
+            <div class="card h-100">
                 <header class="card-header d-flex align-items-center">
                     <h2 class="h3 card-header-title">Order ID : <span class="text-dark text-uppercase"><?= $order_id; ?></span></h2>
 
@@ -65,6 +69,13 @@ foreach($ordered as $order)
                                     </h4>
                                     <p class="mb-0">Deliver address: <?= $address; ?></p>
                                     <p class="mb-0">Cost: <?= '₦' . number_format($cost); ?></p>
+                                    <p class="mb-0">Balance: <?php
+                                      if ($balance == 0) {
+                                        echo '<span class="text-success">FULLY PAID</span>';
+                                      }else {
+                                        echo '₦' . number_format($balance);
+                                      }
+                                      ?></p>
                                     <span>Type: <p class="badge badge-soft-info"><?= $type ?></p> Category: <p class="badge badge-soft-secondary"><?= $category; ?></p></span>
                                     <div>
                                       <h4 class="mb-1"><strong>Payments</strong></h4>
@@ -78,7 +89,7 @@ foreach($ordered as $order)
                                                 $amount = $payment['amount'];
                                                 $type = $payment['type'];
                                                 ?>
-                                              <p>Amount : <?= '₦' . number_format($amount); ?> <span class="badge badge-soft-success"><?= $type; ?> </span></p>
+                                              <p class="mb-0">Amount : <?= '₦' . number_format($amount); ?> <span class="badge badge-soft-success"><?= $type; ?> </span></p>
                                                 <?php
                                             }
                                         }else {
@@ -99,7 +110,7 @@ foreach($ordered as $order)
 
                 <footer class="card-footer d-flex align-items-center">
                     <div class="ml-auto">
-                        <a class="btn btn-dark" data-toggle="modal" href="#addPaymentModal" onclick="$('.order_id').val('<?= $order_id; ?>'); $('.customer_id').val('<?= $customer_id; ?>'); $('.order_cost').val('<?= $cost; ?>');">Add Payment</a>
+                        <a class="btn btn-dark" data-toggle="modal" href="#addPaymentModal" onclick="$('.order_id').val('<?= $order_id; ?>'); $('.customer_id').val('<?= $customer_id; ?>'); $('.order_cost').val('<?= $balance; ?>');">Add Payment</a>
                         <a class="btn btn-dark" data-toggle="modal" href="#addNoteModal" onclick="$('.order_id').val('<?= $order_id; ?>');">Add note</a>
                     </div>
                 </footer>

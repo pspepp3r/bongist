@@ -46,6 +46,10 @@
               account::login($_POST['email'], $_POST['password']);
             }
 
+          if (isset($_POST['forgotPassword'])) {
+            account::forgot_password($_POST['email']);
+          }
+
           ?>
 
           <div class="form-group mb-4">
@@ -95,5 +99,39 @@
     </div>
   </div>
 </main>
+
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgot-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <form action="" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Forgot your password?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <p class="text-dark">Enter your email address below and we'll get you back on track.</p>
+            <label for="newPassword">Email Address</label>
+            <input type="email" class="form-control" name="email" required id="newPassword" placeholder="Enter Email Address">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" name="forgotPassword" class="btn btn-dark">Request Reset Link</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+<script src="assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
+
 </body>
 </html>
+

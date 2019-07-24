@@ -161,7 +161,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="editOrder" class="btn btn-dark">Edit Order</button>
+                    <button type="submit" name="editOrder" class="btn btn-dark">Update Order</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </form>

@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="col-md-12 form-group mb-3">
-                        <label for="">Amount</label>
+                        <label for="">Balance</label>
                         <input type="number" name="amount" placeholder="Amount" class="order_cost form-control">
                     </div>
 

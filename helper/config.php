@@ -46,7 +46,7 @@ class config {
     }
 
     public static function logo() {
-        return 'assets/images/logo.svg';
+        return 'assets/images/logo.png';
     }
 
     public static function favicon() {

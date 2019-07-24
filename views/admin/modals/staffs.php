@@ -143,3 +143,33 @@
         </div>
     </div>
 </div>
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <form action="" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="newPassword">New Password*</label>
+            <input type="password" class="form-control" name="newPassword" required id="newPassword" placeholder="Enter New Password">
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password*</label>
+            <input type="password" class="form-control" name="confirmPassword" required id="confirmPassword" placeholder="Enter Confirm Password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" name="changePassword" class="btn btn-dark">Update Password</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

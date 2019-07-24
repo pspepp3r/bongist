@@ -15,7 +15,7 @@ if ($routes[3] == 'admin') {
     $order_id = $routes[3];
     $ordered = order::details($order_id);
     if (!$ordered) {
-//      header('location: admin/orders');
+      header('location: admin/orders');
       return false;
     }
     $page = 'details';

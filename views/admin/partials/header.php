@@ -405,7 +405,7 @@
                 </a>
               </li>
               <li class="mb-4">
-                <a class="d-flex align-items-center link-dark" href="#password" data-toggle="modal">
+                <a class="d-flex align-items-center link-dark" href="#changePassword" data-toggle="modal">
                   <span class="h3 mb-0"><i class="far fa-list-alt text-muted mr-3"></i></span> Change Password
                 </a>
               </li>
@@ -560,4 +560,8 @@
 
 if (isset($_POST['addOrder'])) {
     order::add($staff_id, $_POST['customer_name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['cost'], $_POST['dod'], $_POST['deposit'], $_POST['status'], $_POST['type_id'], $_POST['subcat_id'] = !empty($_POST['subcat_id'][1]) ? $_POST['subcat_id'][1] : $_POST['subcat_id'][2], $_POST['note']);
+}
+
+if (isset($_POST['changePassword'])) {
+  staff::change_password($_POST['newPassword'], $_POST['confirmPassword']);
 }

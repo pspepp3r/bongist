@@ -49,7 +49,7 @@ class staff {
     {
         global $db;
 
-        $staffs = $db->query("SELECT staff.*, role_type FROM staff LEFT JOIN staff_role ON role = staff_role.id");
+        $staffs = $db->query("SELECT staff.*, role_type FROM staff LEFT JOIN staff_role ON role = staff_role.id WHERE role != 1");
         if($staffs > 0)
         {
             return $staffs;
@@ -194,4 +194,32 @@ class staff {
 
         return $staff_orders;
     }
+
+  public static function change_password($new_password, $repeat_password) {
+    global $db, $staff_id;
+
+    $pwd = request::secureTxt($new_password);
+    $repeat_pwd = request::secureTxt($repeat_password);
+
+    if ($pwd != $repeat_pwd) {
+      respond::alert('warning', '', "Confirmed password doesn't match new password");
+    }else{
+      $password = request::securePwd($new_password);
+
+      $statement = "UPDATE staff SET password = :password WHERE id = :staff_id";
+      $param = array(
+        'password' => $password,
+        'staff_id' => $staff_id
+      );
+
+      if ($db->query($statement, $param)) {
+        respond::alert('success', '', 'Password successfully changed');
+      }else{
+        respond::alert('danger', '', 'Unable to change password');
+      }
+
+    }
+
+  }
+  // CHANGE PASSWORD
 }
