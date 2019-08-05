@@ -1,6 +1,6 @@
 <?php
 
-$pages = array("login", "reset-password", "logout", "orders", "profile");
+$pages = array("login", "reset-password", "logout", "orders", "profile", "signup", "edit", "password");
 
 if ($routes[2] != 'account') {
 
@@ -18,31 +18,34 @@ if ($routes[2] != 'account') {
     $page = 'orders';
 }
 
-if ($page == 'login' || $page == 'reset-password') {
-    if (isset($_SESSION['logged_staff'])) {
+if ($page == 'login' || $page == 'reset-password' || $page == 'signup') {
+    if (isset($_SESSION['logged_customer'])) {
         $page = 'orders';
     }
     require('views/account/'.$page.'.php');
 } else{
 
-    if (!isset($_SESSION['logged_staff'])) {
+    if (!isset($_SESSION['logged_customer'])) {
         $page = 'login';
     }else{
-      $email = $_SESSION['logged_staff'];
-        $account = $db->query("SELECT * FROM staff WHERE email = :email", array('email' => $email), false);
+      $email = $_SESSION['logged_customer'];
+        $account = $db->query("SELECT * FROM customers WHERE email = :email", array('email' => $email), false);
 
         if ($account) {
-            $staff_id = $account['id'];
-            $role = $account['role'];
-            $name = $account['name'];
+            $customer_id = $account['id'];
+            $customer_name = $account['customer_name'];
+            $customer_email = $account['email'];
+            $customer_photo = $account['photo'];
+            $customer_address = $account['address'];
+            $customer_phone = $account['phone'];
         }else{
-            unset($_SESSION['logged_staff']);
+            unset($_SESSION['logged_customer']);
             $page = 'login';
         }
     }
 
 
-    if ($page == 'login' || $page == 'reset-password') {
+    if ($page == 'login' || $page == 'reset-password' || $page == 'signup') {
         require('views/account/'.$page.'.php');
     }else {
         require('views/account/partials/header.php');

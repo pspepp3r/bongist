@@ -1,4 +1,4 @@
 <?php
 
-unset($_SESSION['logged_user']);
-header("location: ../account/login");
+unset($_SESSION['logged_customer']);
+header("location:../account");

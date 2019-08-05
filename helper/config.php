@@ -9,7 +9,7 @@
 class config {
 
 //      static $url = "http://localhost/bongist/";
-      static $url = "https://bongist.dev";
+      static $url = "http://localhost/bongist/";
 
 
     public static function base() {
@@ -17,7 +17,7 @@ class config {
     }
 
     public static function email() {
-        return "bongistk@gmail.com";
+        return "lilkenzy02@gmail.com";
     }
 
     public static function name() {
@@ -49,8 +49,16 @@ class config {
         return 'assets/images/logo.png';
     }
 
+    public static function altLogo() {
+        return '../assets/images/logo.png';
+    }
+
     public static function favicon() {
         return 'assets/images/favicon.png';
+    }
+
+    public static function altFavicon() {
+        return '../assets/images/favicon.png';
     }
 
     public static function baseUploadStaffUrl() {
@@ -67,6 +75,10 @@ class config {
 
     public static function baseUploadProfileUrl() {
         return 'assets/images/customers/';
+    }
+
+    public static function baseUploadProfileUrlTwo() {
+        return '../assets/images/customers/';
     }
 
     public static function paymentActivity()
@@ -117,6 +129,11 @@ class config {
     public static function customerActivity()
     {
         return 'added a customer';
+    }
+
+    public static function customerRegisterActivity()
+    {
+        return 'registered as a customer';
     }
 
 

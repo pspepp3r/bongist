@@ -155,8 +155,7 @@ class mail {
                  // More headers
                  $headers .= 'From: '.$sender.' <'.$from.'>' . "\r\n";
                  $headers .= 'Reply-To: '.$sender.' <'.$from.'>' . "\r\n";
-
-
+//                 ini_set('sendmail_from','lilkenzy02@gmail.com');
                  if (mail($to, $subject, $message, $headers)) {
                      return true;
                  }else {

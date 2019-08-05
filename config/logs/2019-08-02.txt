@@ -1,0 +1,7 @@
+Time : 14:14:23
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'customer_id' in where clause is ambiguous
+Raw SQL : SELECT orders.*, status_name, type, category, amount FROM orders LEFT JOIN order_status ON status = order_status.id LEFT JOIN order_type ON type_id = order_type.id LEFT JOIN type_category ON subcat_id = type_category.id LEFT JOIN payments ON orders.customer_id = payments.customer_id WHERE customer_id = :customer_id ORDER BY id DESC
+
+Time : 12:20:19
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order.*, status_name FROM orders LEFT JOIN order_status ON status = order_status' at line 1
+Raw SQL : SELECT order.*, status_name FROM orders LEFT JOIN order_status ON status = order_status.id WHERE customer_id = :customer_id

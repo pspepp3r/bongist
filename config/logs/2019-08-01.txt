@@ -1,0 +1,17 @@
+Time : 20:27:44
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.customer' doesn't exist
+Raw SQL : SELECT * FROM customer WHERE password = :password
+
+Time : 20:22:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.accounts' doesn't exist
+Raw SQL : SELECT * FROM accounts WHERE email = :email
+
+Time : 12:40:17
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.accounts' doesn't exist
+Raw SQL : SELECT * FROM accounts WHERE email = :email
+
+Time : 10:49:55
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+
+Time : 10:36:21
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)

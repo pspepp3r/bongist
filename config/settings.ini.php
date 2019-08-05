@@ -2,5 +2,5 @@
 [SQL]
 host = localhost
 user = root
-password = psalm294u
+password =
 dbname = bongist

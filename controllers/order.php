@@ -20,11 +20,13 @@ class order {
       }else {
           $photo = config::defaultPhoto();
 
-        $db->query("INSERT INTO customers (customer_name, email, phone, address, photo, timestamp, month, year) VALUES (:customer_name, :email, :phone, :address, :photo, :now, :month, :year)", array(
+          $password = request::generateRandomID(10);
+        $customer = $db->query("INSERT INTO customers (customer_name, email, phone, address, password, photo, timestamp, month, year) VALUES (:customer_name, :email, :phone, :address, :password, :photo, :now, :month, :year)", array(
           'customer_name' => $customer_name,
           'email' => $email,
           'phone' => $phone,
           'address' => $address,
+          'password' => $password,
           'photo' => $photo,
           'now' => time(),
           'month' => date("M"),
@@ -32,6 +34,20 @@ class order {
         ));
 
         $customer_id = $db->lastInsertId();
+
+        if($customer)
+        {
+            $from = config::email();
+            $sender = config::name();
+            $to = $email;
+            $subject = "Welcome to ".config::name();
+
+            $msg = '<p style="color: #3E4095; font-size: 28px;"><span><b style="color: #288feb;">Congratulations, '.$customer_name.' your password is:</b></span></p>
+                    <p>'. $password .'</p>
+                ';
+
+            mail::send($from, $sender, $to, $subject, $msg);
+        }
 
       }
 
@@ -296,4 +312,28 @@ class order {
         }
 
     }// remove customer
+
+    public static function customer_orders($customer_id)
+    {
+        global $db;
+
+        $orders = $db->query("SELECT orders.*, status_name, type, category FROM orders LEFT JOIN order_status ON status = order_status.id LEFT JOIN order_type ON type_id = order_type.id LEFT JOIN type_category ON subcat_id = type_category.id WHERE customer_id = :customer_id ORDER BY id DESC", array('customer_id' => $customer_id));
+
+        if($orders)
+        {
+            return $orders;
+        }else
+        {
+            return respond::alert('info', '', 'You currently have no orders');
+        }
+    }
+
+    public static function order_payment($order_id)
+    {
+        global $db;
+
+        $payments = $db->query("SELECT SUM(amount) FROM payments WHERE order_id = :order_id", array('order_id' => $order_id));
+
+        return $payments;
+    }
 }

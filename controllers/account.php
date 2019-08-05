@@ -37,7 +37,7 @@ class account {
                 $page = $_SESSION['redirect_page'];
                 header('location: '.$page);
             }else {
-                header('location: ../admin/dashboard');
+                header('location:admin/dashboard');
             }
 
     }// LOGIN METHOD
@@ -70,12 +70,12 @@ class account {
                 <p style="color: #000000; font-size: 22px;">Click on the button below to verify your account with us</p>
                 </p><br>
                 <p>
-                    <a href="https://ctifund.biz/verify/'.$v_code.'" style="background-color: #288feb; border-color: #288feb!important; padding: 15px; margin-top: 20px; color: #fff; border-radius: 4px; text-decoration: none; font-size: 18px;"><b>Verify Account</b></a>
+                    <a href="http://localhost/bongist/account'.$v_code.'" style="background-color: #288feb; border-color: #288feb!important; padding: 15px; margin-top: 20px; color: #fff; border-radius: 4px; text-decoration: none; font-size: 18px;"><b>Verify Account</b></a>
                 </p>
                 <p style="margin-top: 30px;">
                     Or<br><br>
                     Copy and paste the link below on your browser to verify your account<br>
-                    <a href="https://ctifund.biz/verify/'.$v_code.'"><b>https://ctifund.biz/verify/'.$v_code.'</b></a>
+                    <a href="http://localhost/bongist/account'.$v_code.'"><b>https://ctifund.biz/verify/'.$v_code.'</b></a>
                 </p>';
 
                 mail::send($from, $sender, $to, $subject, $msg);
@@ -275,5 +275,6 @@ class account {
         $user = $db->query("SELECT * FROM accounts WHERE username = :username", array('username' => $username), false);
         return $user;
     }
+
 
 }

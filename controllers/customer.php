@@ -75,7 +75,7 @@ class customer {
 			'email' => request::secureTxt($email)
 		);
 
-		$account = $db->query("SELECT * FROM accounts WHERE email = :email", $param, false);
+		$account = $db->query("SELECT * FROM customers WHERE email = :email", $param, false);
 
 		if (!$account) {
             respond::alert('warning', '', 'Invalid email address');
@@ -89,8 +89,14 @@ class customer {
         $pwd = crypt($password, $account_pwd);
 
         if ($account_pwd != $pwd) {
-            respond::alert('warning', '', 'Invalid account password');
-            return false;
+
+            $pass = $db->query("SELECT * FROM customers WHERE password = :password", array('password' => $password));
+
+            if(!$pass)
+            {
+                respond::alert('warning', '', 'Invalid account password');
+                return false;
+            }
         }
 
         if ($suspend == 1) {
@@ -98,8 +104,8 @@ class customer {
             return false;
         }
 
-        $_SESSION['logged_user'] = $email;
-        header('location: ../account/orders');
+        $_SESSION['logged_customer'] = $email;
+        header('location:account/orders');
 
 
 	}// LOGIN METHOD
@@ -211,23 +217,23 @@ class customer {
 	static function check($value, $column, $id = null) {
 		global $db;
 
-    $param = array(
-      'value' => $value
-    );
-		if ($id == null) {
-      $statement = "SELECT * FROM customers WHERE $column = :value";
-    }else {
-      $statement = "SELECT * FROM customers WHERE $column = :value AND id != :id";
-      $param['id'] = $id;
-    }
+        $param = array(
+          'value' => $value
+        );
+            if ($id == null) {
+          $statement = "SELECT * FROM customers WHERE $column = :value";
+        }else {
+          $statement = "SELECT * FROM customers WHERE $column = :value AND id != :id";
+          $param['id'] = $id;
+        }
 
-		$user = $db->query($statement, $param, false);
+            $user = $db->query($statement, $param, false);
 
-		if ($user) {
-			return $user;
-		}else {
-			return false;
-		}
+            if ($user) {
+                return $user;
+            }else {
+                return false;
+            }
 
 	}// CHECK USERNAME
 
@@ -266,6 +272,7 @@ class customer {
 
 	public static function photo() {
 	    global $db;
+
 	    $username = $_SESSION['customer'];
 	    $photo = $db->single("SELECT photo FROM accounts WHERE username = :username", array('username' => $username));
         return config::baseUploadUrl().$photo;
@@ -415,4 +422,98 @@ class customer {
 
   }// remove customer
 
+    public static function signUp($customer_name, $email, $password)
+    {
+        global $db;
+
+        $month = date("M");
+        $year = date("Y");
+
+        $sign = $db->query("INSERT INTO customers (customer_name, email, password, timestamp, month, year) VALUES (:customer_name, :email, :password, :timestamp, :month, :year)", array(
+            'customer_name' => $customer_name,
+            'email' => $email,
+            'password' => request::securePwd($password),
+            'timestamp' => time(),
+            'month' => $month,
+            'year' => $year
+        ));
+
+        if($sign)
+        {
+            $customer_id = $db->lastInsertId();
+            $activity = $db->query("INSERT INTO activities (customer_id, comment, timestamp) VALUES (:customer_id, :comment, :timestamp)", array(
+                'customer_id' => $customer_id,
+                'comment' => config::customerRegisterActivity(),
+                'timestamp' => time()
+            ));
+
+            if($activity)
+            {
+                $_SESSION['logged_customer'] = $email;
+                header("location:../account");
+            }
+        }
+    }
+
+    public static function editnotify($customer_id)
+    {
+        global $db;
+
+        $notify = $db->query("SELECT address FROM customers WHERE id = :customer_id", array(
+            'customer_id' => $customer_id
+        ), false);
+
+        if($notify)
+        {
+            return $notify;
+        }
+    }
+
+    public static function editProfile($id, $customer_name, $address, $phone, $photo = array())
+    {
+        global $db;
+
+        $upload = upload::add($photo, config::baseUploadProfileUrl());
+        $photo = $upload['file'];
+
+        if(empty($photo))
+        {
+            $edit = $db->query("UPDATE customers SET customer_name = :customer_name, address = :address, phone = :phone WHERE id = :id", array(
+                'customer_name' => $customer_name,
+                'address' => $address,
+                'phone' => $phone,
+                'id' => $id
+            ));
+        }else {
+            $edit = $db->query("UPDATE customers SET customer_name = :customer_name, address = :address, phone = :phone, photo = :photo WHERE id = :id", array(
+                'customer_name' => $customer_name,
+                'address' => $address,
+                'phone' => $phone,
+                'photo' => $photo,
+                'id' => $id
+            ));
+        }
+
+        if($edit)
+        {
+            header("location:edit");
+            return respond::alert('success', '', 'Profile has been edited successfully');
+        }
+    }
+
+    public static function changePassword($id, $password)
+    {
+        global $db;
+
+        $password = $db->query("UPDATE customers SET password = :password WHERE id = :id", array(
+            'password' => request::securePwd($password),
+            'id' => $id
+        ));
+
+        if($password)
+        {
+            header("location:account");
+            return respond::alert('success', '', 'Password has been changed successfully');
+        }
+    }
 }

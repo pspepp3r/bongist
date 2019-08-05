@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Libs CSS -->
-    <link rel="stylesheet" href="assets/home/fonts/Feather/feather.css">
-    <link rel="stylesheet" href="assets/home/libs/aos/dist/aos.css">
+    <link rel="stylesheet" href="../assets/home/fonts/Feather/feather.css">
+    <link rel="stylesheet" href="../assets/home/libs/aos/dist/aos.css">
 
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="assets/home/css/theme.min.css">
+    <link rel="stylesheet" href="../assets/home/css/theme.min.css">
 
     <title><?php echo ucfirst($page).' | '.config::name(); ?></title>
     <?php echo config::meta(); ?>
@@ -28,14 +28,14 @@
             <div class="col-8 col-md-6 col-lg-7 offset-md-1 order-md-2 mt-auto mt-md-0 pt-8 pb-4 py-md-11">
 
                 <!-- Image -->
-                <img src="assets/home/img/illustrations/illustration-2.png" alt="..." class="img-fluid">
+                <img src="../assets/home/img/illustrations/illustration-8.png" alt="..." class="img-fluid">
 
             </div>
             <div class="col-12 col-md-5 col-lg-4 order-md-1 mb-auto mb-md-0 pb-8 py-md-11">
 
                 <!-- Heading -->
                 <h1 class="mb-0 font-weight-bold text-center">
-                    Sign in
+                    Register
                 </h1>
 
                 <!-- Text -->
@@ -44,14 +44,22 @@
                 </p>
 
                 <?php
-                if(isset($_POST['login']))
+                if(isset($_POST['signUp']))
                 {
-                    customer::login($_POST['email'], $_POST['password']);
+                    customer::signUp($_POST['customer_name'], $_POST['email'], $_POST['password']);
                 }
                 ?>
                 <!-- Form -->
                 <form class="mb-6" method="post" action="">
 
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="customer_name">
+                            Full name
+                        </label>
+                        <input type="text" name="customer_name" class="form-control" id="customer_name" placeholder="Example : John Doe">
+                    </div>
 
                     <!-- Email -->
                     <div class="form-group">
@@ -70,7 +78,7 @@
                     </div>
 
                     <!-- Submit -->
-                    <button class="btn btn-block btn-primary" name="login" type="submit">
+                    <button class="btn btn-block btn-primary" name="signUp" type="submit">
                         Sign in
                     </button>
 
@@ -78,7 +86,7 @@
 
                 <!-- Text -->
                 <p class="mb-0 font-size-sm text-center text-muted">
-                    Don't have an account yet? <a href="account/signup">Sign up</a>.
+                    Already have an account? <a href="../account">Log In</a>.
                 </p>
 
             </div>
@@ -86,13 +94,13 @@
     </div> <!-- / .container -->
 </section>
 
-<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
-<script src="assets/home/libs/aos/dist/aos.js"></script>
-<script src="assets/home/libs/smooth-scroll/dist/smooth-scroll.min.js"></script>
+<script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="../assets/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="../assets/home/libs/aos/dist/aos.js"></script>
+<script src="../assets/home/libs/smooth-scroll/dist/smooth-scroll.min.js"></script>
 
 
-<script src="assets/home/js/theme.min.js"></script>
+<script src="../assets/home/js/theme.min.js"></script>
 
 </body>
 </html>
