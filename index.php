@@ -2,7 +2,7 @@
 session_start();
 ob_start();
 error_reporting(E_ALL);
-require("config/Db.class.php");
+require "config/Db.class.php";
 
 // Creates the instance
 $db = new Db();
@@ -26,11 +26,7 @@ spl_autoload_register( function($class) {
 
 
 function getBaseUrl(){
-    if(isset($_SERVER['HTTPS'])){
-        $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
-    } else {
-        $protocol = 'http';
-    }
+    $protocol = isset($_SERVER['HTTPS']) ? (($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http") : 'http';
     // return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     return $protocol . "://" . $_SERVER['HTTP_HOST'] . pathinfo($_SERVER['PHP_SELF'], PATHINFO_DIRNAME).'/';
 }
@@ -55,7 +51,7 @@ function getCurrentUri()
 }
 
 $base_url = getCurrentUri();
-$routes = array();
+$routes = [];
 $routes = explode('/', $base_url);
 foreach($routes as $route)
 {
@@ -67,30 +63,16 @@ foreach($routes as $route)
 Now, $routes will contain all the routes. $routes[0] will correspond to first route. For e.g. in above example $routes[0] is search, $routes[1] is book and $routes[2] is fitzgerald
 */
 
-$pages = array("home", "admin", "account");
+$pages = ["home", "admin", "account"];
 
-if ($routes[1] != '') {
-
-    if(in_array($routes[1], $pages)){
-
-        $page = $routes[1];
-
-    }else{
-
-        $page = 'home';
-
-    }
-
-}else {
-    $page = 'home';
-}
+$page = ($routes[1] != '') ? ((in_array($routes[1], $pages)) ? $routes[1] : '404') : 'home';
 
 if($page == 'admin' || $page == 'account') {
-    require('views/'.$page.'.php');
+    require "views/$page.php";
 }else {
-    require('views/partials/header.php');
-    require('views/'.$page.'.php');
-    require('views/partials/footer.php');
+    require 'views/partials/header.php';
+    require "views/$page.php";
+    require 'views/partials/footer.php';
 }
 
 

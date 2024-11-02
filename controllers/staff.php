@@ -70,7 +70,7 @@ class staff {
 
             if($file != 'avatar.png')
             {
-                upload::remove($file, config::baseUploadStaffUrl(), true);
+                upload::remove($file, config::baseUploadStaffUrl());
             }
 
             $upload = upload::add($photo, config::baseUploadStaffUrl(), true);

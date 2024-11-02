@@ -1,30 +1,30 @@
 <?php
 $year = date("Y");
-$months = array(
-    'jan',
-    'feb',
-    'mar',
-    'apr',
-    'may',
-    'jun',
-    'jul',
-    'aug',
-    'sep',
-    'oct',
-    'nov',
-    'dec',
-);
-$data1 = array();
+$months = [
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dec',
+];
+$data1 = [];
 $data1 = $months;
 $data2 = [];
 $data3 = [];
 foreach($months as $key => $value)
 {
-    $results = $db->query("SELECT id FROM orders WHERE month = :month AND year = :year", array('month' => $value, 'year' => $year));
+    $results = $db->query("SELECT id FROM orders WHERE month = :month AND year = :year", ['month' => $value, 'year' => $year]);
     $count = count($results);
     $data2[] = $count;
 
-    $results2 = $db->query("SELECT id FROM customers WHERE month = :month AND year = :year", array('month' => $value, 'year' => $year));
+    $results2 = $db->query("SELECT id FROM customers WHERE month = :month AND year = :year", ['month' => $value, 'year' => $year]);
     $count2 = count($results2);
     $data3[] = $count2;
 

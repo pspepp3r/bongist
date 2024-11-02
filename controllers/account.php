@@ -230,15 +230,15 @@ class account {
             $file = $db->single("SELECT photo FROM accounts WHERE username = :username", array('username' => $username));
 
             if ($file != 'avatar.png') {
-                upload::remove($file, config::baseUploadUrl());
+                upload::remove($file, config::baseUploadProfileUrl());
             }
 
-            $upload = upload::add($photo, config::baseUploadUrl(), true);
+            $upload = upload::add($photo, config::baseUploadProfileUrl(), true);
             $photo = $upload['file'];
 
             $db->query("UPDATE accounts SET photo = :photo WHERE username = :username", array('photo' => $photo, 'username' => $username));
 
-            $photo = config::baseUploadUrl().$photo;
+            $photo = config::baseUploadProfileUrl().$photo;
 
             ?>
             <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -267,7 +267,7 @@ class account {
         global $db;
         $username = $_SESSION['customer'];
         $photo = $db->single("SELECT photo FROM accounts WHERE username = :username", array('username' => $username));
-        return config::baseUploadUrl().$photo;
+        return config::baseUploadProfileUrl().$photo;
     }
 
     public static function getDetails($username) {
