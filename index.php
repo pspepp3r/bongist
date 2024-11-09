@@ -68,11 +68,11 @@ $pages = ["home", "admin", "account"];
 $page = ($routes[1] != '') ? ((in_array($routes[1], $pages)) ? $routes[1] : '404') : 'home';
 
 if($page == 'admin' || $page == 'account') {
-    require "views/$page.php";
+    require_once "views/$page.php";
 }else {
-    require 'views/partials/header.php';
-    require "views/$page.php";
-    require 'views/partials/footer.php';
+    require_once 'views/partials/header.php';
+    require_once "views/$page.php";
+    require_once 'views/partials/footer.php';
 }
 
 

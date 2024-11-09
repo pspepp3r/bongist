@@ -103,7 +103,7 @@
                                                         <small class="text-muted ml-md-auto"><?= request::timeago($timestamp); ?></small>
                                                     </div>
 
-                                                    <p class="mb-0"><?= $name . ' ' . $comment ?></p>
+                                                    <p class="mb-0"><?= "$name $comment" ?></p>
                                                 </div>
                                             </div>
                                         </a>
@@ -240,6 +240,58 @@
                                                 <div class="media-body">
                                                     <div class="d-md-flex align-items-center">
                                                         <h4 class="mb-1"><span class="badge badge-soft-info mx-1">New staff Update</span></h4>
+                                                        <small class="text-muted ml-md-auto"><?= request::timeago($timestamp); ?></small>
+                                                    </div>
+
+                                                    <p class="mb-0"><?= $name . ' ' . $comment ?></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <?php
+                                    } elseif ($comment == config::invoiceActivity()) {
+                                        ?>
+                                        <a class="list-group-item list-group-item-action" href="admin/accounting/invoices">
+                                            <div class="media">
+                                                <?php
+                                                if (!empty($photo)) {
+                                                    ?>
+                                                        <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl() . $photo; ?>" alt="Image description">
+                                                        <?php
+                                                } else {
+                                                    ?>
+                                                        <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl() . config::defaultPhoto(); ?>" alt="Image description">
+                                                        <?php
+                                                }
+                                                ?>
+                                                <div class="media-body">
+                                                    <div class="d-md-flex align-items-center">
+                                                        <h4 class="mb-1"><span class="badge badge-soft-secondary mx-1">New Invoice</span></h4>
+                                                        <small class="text-muted ml-md-auto"><?= request::timeago($timestamp); ?></small>
+                                                    </div>
+
+                                                    <p class="mb-0"><?= "$name $comment" ?></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <?php
+                                    }elseif($comment == config::invoiceUpdateActivity()){
+                                        ?>
+                                        <a class="list-group-item list-group-item-action" href="admin/accounting/invoices">
+                                            <div class="media">
+                                                <?php
+                                                if (!empty($photo)) {
+                                                    ?>
+                                                        <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl() . $photo; ?>" alt="Image description">
+                                                        <?php
+                                                } else {
+                                                    ?>
+                                                        <img class="u-avatar rounded-circle mr-3" src="<?= config::baseUploadStaffUrl() . config::defaultPhoto(); ?>" alt="Image description">
+                                                        <?php
+                                                }
+                                                ?>
+                                                <div class="media-body">
+                                                    <div class="d-md-flex align-items-center">
+                                                        <h4 class="mb-1"><span class="badge badge-soft-info mx-1">New Invoice Update</span></h4>
                                                         <small class="text-muted ml-md-auto"><?= request::timeago($timestamp); ?></small>
                                                     </div>
 

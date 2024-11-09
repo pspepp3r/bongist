@@ -100,6 +100,20 @@ foreach($details as $detail)
                                                 <a class="u-link u-link--primary" href="#!"><?= $name . ' ', $comment; ?></a>
                                             </p>
                                             <?php
+                                        } elseif ($comment == config::invoiceActivity()) {
+                                            ?>
+                                                <h3 class="mb-0 badge badge-soft-info">New Invoice</h3>
+                                                <p class="mb-2">
+                                                    <a class="u-link u-link--primary" href="admin/accounting/invoice"><?= $name . ' ', $comment; ?></a>
+                                                </p>
+                                                <?php
+                                        } elseif ($comment == config::invoiceUpdateActivity()) {
+                                            ?>
+                                                    <h3 class="mb-0 badge badge-soft-info">New Invoice Update</h3>
+                                                    <p class="mb-2">
+                                                        <a class="u-link u-link--primary" href="admin/accounting/invoice"><?= $name . ' ', $comment; ?></a>
+                                                    </p>
+                                                    <?php
                                         }
                                         ?>
                                     </div>

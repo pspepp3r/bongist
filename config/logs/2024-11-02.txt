@@ -1,0 +1,11 @@
+Time : 23:05:28
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'invoices.invoice_number' in 'field list'
+Raw SQL : SELECT invoices.invoice_number, customers.customer_name, invoices.invoice_date, invoices.total  
+        FROM invoices  
+        JOIN customers AS customers ON invoices.customer_id = customers.id
+
+Time : 22:52:23
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.new_customers' doesn't exist
+Raw SQL : SELECT invoices.invoice_id, invoices.invoice_number, customers.customer_name, invoices.invoice_date, invoices.total  
+        FROM invoices  
+        JOIN new_customers AS customers ON invoices.customer_id = customers.customer_id

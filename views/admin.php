@@ -1,6 +1,6 @@
 <?php
 
-$pages = ["login", "reset-password", "logout", "orders", "customers", "dashboard", "staff", "transactions", "activities", "account"];
+$pages = ["login", "reset-password", "logout", "orders", "customers", "dashboard", "staff", "transactions", "activities", "account", "accounting"];
 
 $page = ($routes[2] != 'admin') ? ((in_array($routes[2], $pages)) ? $routes[2] : 'dashboard') : 'dashboard';
 
@@ -21,9 +21,9 @@ if ($page == 'login' || $page == 'reset-password') {
         $page = 'login';
     }
 
-    require 'views/admin/partials/header.php';
-    require "views/admin/$page.php";
-    require 'views/admin/partials/footer.php';
+    require_once 'views/admin/partials/header.php';
+    require_once "views/admin/$page.php";
+    require_once 'views/admin/partials/footer.php';
     
 } else{
 
@@ -45,10 +45,10 @@ if ($page == 'login' || $page == 'reset-password') {
 
 
     if ($page == 'login' || $page == 'reset-password') {
-        require "views/admin/$page.php";
+        require_once "views/admin/$page.php";
     }else {
-        require 'views/admin/partials/header.php';
-        require "views/admin/$page.php";
-        require 'views/admin/partials/footer.php';
+        require_once 'views/admin/partials/header.php';
+        require_once "views/admin/$page.php";
+        require_once 'views/admin/partials/footer.php';
     }
 }

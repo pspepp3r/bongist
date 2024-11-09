@@ -27,4 +27,4 @@ switch ($routes[3]) {
 
 
 
-require('views/admin/orders/'. $page .'.php');
+require_once "views/admin/orders/$page.php";

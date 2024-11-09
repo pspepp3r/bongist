@@ -1,0 +1,3 @@
+Time : 00:27:53
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.invoice_item' doesn't exist
+Raw SQL : UPDATE invoice_item SET description = :desc, quantity = :quantity, unit_price = :price, total_price = :total, product_name = :product_name WHERE invoice_id = :invoice_id

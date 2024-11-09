@@ -1,10 +1,11 @@
-
 <!-- Footer -->
 <footer class="u-footer d-md-flex align-items-md-center text-center text-md-left text-muted text-muted">
-  <p class="h5 mb-2 mb-md-0">
-    &copy; <?php echo date('Y'); ?> <a class="link-muted" href="/"><?php echo config::name(); ?></a>. All Rights Reserved.
-  </p>
-  <p class="h5 mb-0 ml-auto">Developed by <a class="link-muted" href="https://codekago.com" target="_blank">Codekago Interactive</a></p>
+    <p class="h5 mb-2 mb-md-0">
+        &copy; <?php echo date('Y'); ?> <a class="link-muted" href="/"><?php echo config::name(); ?></a>. All Rights
+        Reserved.
+    </p>
+    <p class="h5 mb-0 ml-auto">Developed by <a class="link-muted" href="https://codekago.com" target="_blank">Codekago
+            Interactive</a></p>
 
 </footer>
 <!-- End Footer -->
@@ -14,11 +15,13 @@
 
 <?php
 
-  include 'views/admin/modals/customers.php';
-  include 'views/admin/modals/orders.php';
-  include 'views/admin/modals/staffs.php';
-  include 'views/admin/modals/expenses.php';
-  include 'views/admin/modals/payments.php';
+require_once 'views/admin/modals/customers.php';
+require_once 'views/admin/modals/orders.php';
+require_once 'views/admin/modals/staffs.php';
+require_once 'views/admin/modals/expenses.php';
+require_once 'views/admin/modals/payments.php';
+require_once 'views/admin/modals/invoices.php';
+require_once 'views/admin/modals/receipts.php';
 
 ?>
 
@@ -37,7 +40,7 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/dashboard-page-scripts.js"></script>
 <script>
-    $(document).on('ready', function() {
+    $(document).on('ready', function () {
         $('.js-overall-income-chart').each(function (i, el) {
             var chart = new Chart(el, {
                 type: 'line',
@@ -54,17 +57,17 @@
                         backgroundColor: 'rgba(41,114,250,0.6)',
                         data: <?= json_encode($data3); ?>
                     }
-                    // , {
-                    //     label: 'Total Orders',
-                    //     borderColor: 'rgba(97,200,167,0.6)',
-                    //     backgroundColor: 'rgba(97,200,167,0.6)',
-                    //     data: [3500, 2700, 3800, 17000, 8000, 5500, 3200, 6000, 8500, 4000, 2600, 2500]
-                    // }, {
-                    //     label: 'Total Expenses',
-                    //     borderColor: 'rgba(251,65,67,0.6)',
-                    //     backgroundColor: 'rgba(251,65,67,0.6)',
-                    //     data: [0, 2000, 3500, 4000, 3500, 2000, 2100, 5500, 15000, 5500, 2000, 2100]
-                    // }
+                        // , {
+                        //     label: 'Total Orders',
+                        //     borderColor: 'rgba(97,200,167,0.6)',
+                        //     backgroundColor: 'rgba(97,200,167,0.6)',
+                        //     data: [3500, 2700, 3800, 17000, 8000, 5500, 3200, 6000, 8500, 4000, 2600, 2500]
+                        // }, {
+                        //     label: 'Total Expenses',
+                        //     borderColor: 'rgba(251,65,67,0.6)',
+                        //     backgroundColor: 'rgba(251,65,67,0.6)',
+                        //     data: [0, 2000, 3500, 4000, 3500, 2000, 2100, 5500, 15000, 5500, 2000, 2100]
+                        // }
                     ]
                 },
                 options: {
@@ -169,7 +172,7 @@
                             tooltipEl.style.left = (position.left + tooltipModel.caretX - tooltipWidth / 2) + 'px';
                             tooltipEl.style.top = (position.top + tooltipModel.caretY - tooltipHeight - 15) + 'px';
 
-                            $(window).on('scroll', function() {
+                            $(window).on('scroll', function () {
                                 var position = $self._chart.canvas.getBoundingClientRect(),
                                     tooltipWidth = $(tooltipEl).outerWidth(),
                                     tooltipHeight = $(tooltipEl).outerHeight();
@@ -186,4 +189,5 @@
     })
 </script>
 </body>
+
 </html>

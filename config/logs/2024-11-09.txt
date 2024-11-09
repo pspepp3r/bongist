@@ -1,0 +1,3 @@
+Time : 22:03:16
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bongist.receipt' doesn't exist
+Raw SQL : SELECT * FROM receipt

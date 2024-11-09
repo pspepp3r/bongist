@@ -1,112 +1,110 @@
 <?php
 
-class payment {
+class payment
+{
 
-    public static function add($order_id, $customer_id, $payment_method, $amount)
-    {
-        global $db, $staff_id;
+  public static function add($order_id, $customer_id, $payment_method, $amount)
+  {
+    global $db, $staff_id;
 
-        $check = self::checkPayment($order_id, $payment_method);
+    $check = self::checkPayment($order_id, $payment_method);
 
-        $order = $db->query("SELECT orders.* FROM orders LEFT JOIN payments ON orders.order_id = payments.order_id WHERE orders.order_id = :order_id", array('order_id' => $order_id), false);
-        $balance = $order['balance'];
+    $order = $db->query("SELECT orders.* FROM orders LEFT JOIN payments ON orders.order_id = payments.order_id WHERE orders.order_id = :order_id", array('order_id' => $order_id), false);
+    $balance = $order['balance'];
 
-        if ($amount > $balance) {
-          respond::alert('warning', 'Payment amount is more than balance', 'Current balance for order is ₦'.number_format($balance));
-          return false;
-        }
+    if ($amount > $balance) {
+      respond::alert('warning', 'Payment amount is more than balance', 'Current balance for order is ₦' . number_format($balance));
+      return false;
+    }
 
-        if($check) {
+    if ($check) {
 
-          $db->query("UPDATE payments SET amount = amount + :amount, timestamp = :now WHERE id = :id", array(
-            'amount' => $amount,
-            'id' => $check['id'],
-            'now' => time()
-          ));
+      $db->query("UPDATE payments SET amount = amount + :amount, timestamp = :now WHERE id = :id", array(
+        'amount' => $amount,
+        'id' => $check['id'],
+        'now' => time()
+      ));
 
-          $payment_id = $check['id'];
+      $payment_id = $check['id'];
 
-        }else {
+    } else {
 
-            $db->query("INSERT INTO payments (order_id, customer_id, payment_method, amount, timestamp, staff_id) VALUES (:order_id, :customer_id, :payment_method, :amount, :timestamp, :staff_id)", array(
-                'order_id' => $order_id,
-                'customer_id' => $customer_id,
-                'staff_id' => $staff_id,
-                'payment_method' => $payment_method,
-                'amount' => $amount,
-                'timestamp' => time()
-            ));
-
-          $payment_id = $db->lastInsertId();
-
-        }
-
-
-      $activity = $db->query("INSERT INTO activities (payment_id, comment, timestamp, staff_id) VALUES (:payment_id, :comment, :timestamp, :staff_id)", array(
-        'payment_id' => $payment_id,
+      $db->query("INSERT INTO payments (order_id, customer_id, payment_method, amount, timestamp, staff_id) VALUES (:order_id, :customer_id, :payment_method, :amount, :timestamp, :staff_id)", array(
+        'order_id' => $order_id,
+        'customer_id' => $customer_id,
         'staff_id' => $staff_id,
-        'comment' => config::paymentActivity(),
+        'payment_method' => $payment_method,
+        'amount' => $amount,
         'timestamp' => time()
       ));
 
-      if ($activity) {
-
-        $db->query("UPDATE orders SET balance = balance - :amount WHERE order_id = :order_id", array('amount' => $amount, 'order_id' => $order_id));
-
-        respond::alert('success', '', 'payment has been successfully added');
-      } else {
-        respond::alert('danger', '', 'Unable to add payment');
-      }
+      $payment_id = $db->lastInsertId();
 
     }
 
-    public static function all()
-    {
-        global $db;
 
-        $payments = $db->query("SELECT payments.*, customer_name, type FROM payments LEFT JOIN customers ON customer_id = customers.id LEFT JOIN payment_category ON payment_method = payment_category.id");
+    $activity = $db->query("INSERT INTO activities (payment_id, comment, timestamp, staff_id) VALUES (:payment_id, :comment, :timestamp, :staff_id)", array(
+      'payment_id' => $payment_id,
+      'staff_id' => $staff_id,
+      'comment' => config::paymentActivity(),
+      'timestamp' => time()
+    ));
 
-        if($payments > 0)
-        {
-            return $payments;
-        }
+    if ($activity) {
+
+      $db->query("UPDATE orders SET balance = balance - :amount WHERE order_id = :order_id", array('amount' => $amount, 'order_id' => $order_id));
+
+      respond::alert('success', '', 'payment has been successfully added');
+    } else {
+      respond::alert('danger', '', 'Unable to add payment');
     }
 
-    public static function paymentCategory()
-    {
-        global $db;
+  }
 
-        $categories = $db->query("SELECT * FROM payment_category");
+  public static function all()
+  {
+    global $db;
 
-        if($categories > 0)
-        {
-            return $categories;
-        }
+    $payments = $db->query("SELECT payments.*, customer_name, type FROM payments LEFT JOIN customers ON customer_id = customers.id LEFT JOIN payment_category ON payment_method = payment_category.id");
+
+    if ($payments > 0) {
+      return $payments;
     }
+  }
 
-    public static function checkPayment($order_id, $payment_method) {
+  public static function paymentCategory()
+  {
+    global $db;
 
-        global $db;
+    $categories = $db->query("SELECT * FROM payment_category");
 
-        $check = $db->query("SELECT * FROM payments WHERE order_id = :order_id AND payment_method = :payment_method", array('order_id' => $order_id, 'payment_method' => $payment_method), false);
-
-        if($check)
-        {
-            return $check;
-        }
+    if ($categories > 0) {
+      return $categories;
     }
+  }
 
-    public static function order_payment($order_id)
-    {
-        global $db;
+  public static function checkPayment($order_id, $payment_method)
+  {
 
-        $payments = $db->query("SELECT payments.*, type FROM payments LEFT JOIN payment_category ON payment_method = payment_category.id WHERE order_id = :order_id", array('order_id' => $order_id));
+    global $db;
 
-        if($payments)
-        {
-            return $payments;
-        }else {
-            return false;
-        }
+    $check = $db->query("SELECT * FROM payments WHERE order_id = :order_id AND payment_method = :payment_method", array('order_id' => $order_id, 'payment_method' => $payment_method), false);
+
+    if ($check) {
+      return $check;
     }
+  }
+
+  public static function order_payment($order_id)
+  {
+    global $db;
+
+    $payments = $db->query("SELECT payments.*, type FROM payments LEFT JOIN payment_category ON payment_method = payment_category.id WHERE order_id = :order_id", array('order_id' => $order_id));
+
+    if ($payments) {
+      return $payments;
+    } else {
+      return false;
+    }
+  }
 }

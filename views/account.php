@@ -22,7 +22,7 @@ if ($page == 'login' || $page == 'reset-password' || $page == 'signup') {
     if (isset($_SESSION['logged_customer'])) {
         $page = 'orders';
     }
-    require('views/account/'.$page.'.php');
+    require_once "views/account/$page.php";
 } else{
 
     if (!isset($_SESSION['logged_customer'])) {
@@ -46,10 +46,10 @@ if ($page == 'login' || $page == 'reset-password' || $page == 'signup') {
 
 
     if ($page == 'login' || $page == 'reset-password' || $page == 'signup') {
-        require('views/account/'.$page.'.php');
+        require_once "views/account/$page.php";
     }else {
-        require('views/account/partials/header.php');
-        require('views/account/'.$page.'.php');
-        require('views/account/partials/footer.php');
+        require_once 'views/account/partials/header.php';
+        require_once "views/account/$page.php";
+        require_once 'views/account/partials/footer.php';
     }
 }

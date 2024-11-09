@@ -1,5 +1,6 @@
 <div class="u-body">
-    <button style="margin-left: -15px;margin-bottom: 10px;" class="btn btn-dark" data-target="#addExpenseCategoryModal" data-toggle="modal" onclick="$('#addExpenseCategoryrModal').modal('show')">Add Expense Category</button>
+    <button style="margin-left: -15px;margin-bottom: 10px;" class="btn btn-dark" data-target="#addExpenseCategoryModal"
+        data-toggle="modal" onclick="$('#addExpenseCategoryrModal').modal('show')">Add Expense Category</button>
     <div class="row">
         <div class="card col-md-4" style="max-height: 500px;">
             <header class="card-header">
@@ -8,18 +9,15 @@
             <form action="" method="post">
 
                 <?php
-                if(isset($_POST['addExpenseCategory']))
-                {
+                if (isset($_POST['addExpenseCategory'])) {
                     expense::addExpenseCategory($_POST['category'], $staff_id);
                 }
 
-                if(isset($_POST['addExpense']))
-                {
-                    expense::add($staff_id,$_POST['title'], $_POST['expense_type'], $_POST['cost'], $_POST['category_id']);
+                if (isset($_POST['addExpense'])) {
+                    expense::add($staff_id, $_POST['title'], $_POST['expense_type'], $_POST['cost'], $_POST['category_id']);
                 }
 
-                if(isset($_POST['removeExpense']))
-                {
+                if (isset($_POST['removeExpense'])) {
                     expense::delete($_POST['id'], $staff_id);
                 }
                 ?>
@@ -45,8 +43,7 @@
                         <?php
                         $categories = expense_category::all();
 
-                        foreach($categories as $category)
-                        {
+                        foreach ($categories as $category) {
                             $id = $category['id'];
                             $name = $category['category'];
                             ?>
@@ -77,13 +74,12 @@
                                 <!-- Comment -->
                                 <?php
 
-                                if(isset($_POST['editExpense']))
-                                {
+                                if (isset($_POST['editExpense'])) {
                                     expense::edit($_POST['id'], $_POST['title'], $_POST['cost'], $staff_id);
                                 }
 
                                 $expenseAct = activity::expenseActivity($staff_id);
-                                foreach($expenseAct as $act) {
+                                foreach ($expenseAct as $act) {
                                     $id = $act['id'];
                                     $title = $act['title'];
                                     $category = $act['category'];
@@ -93,8 +89,8 @@
                                     ?>
                                     <div class="list-group-item list-group-item-action" href="#">
                                         <div class="media">
-                                            <img class="u-avatar rounded-circle mr-3"
-                                                 src="assets/img/avatars/img1.jpg" alt="Image description">
+                                            <img class="u-avatar rounded-circle mr-3" src="assets/img/avatars/img1.jpg"
+                                                alt="Image description">
 
                                             <div class="media-body">
                                                 <div class="d-md-flex align-items-center">
@@ -102,14 +98,17 @@
                                                         <?php echo '<strong>' . $category . '</strong>' . ' - ' . '₦' . $cost; ?>
                                                     </h4>
                                                     <?php
-                                                    if($role == 1)
-                                                    {
+                                                    if ($role == 1) {
                                                         ?>
                                                         <span class="text-muted ml-md-auto">
-                                                        <a data-toggle="modal" href="#editExpenseModal" onclick="$('.expense_id').val('<?php echo $id; ?>'); $('.expense_title').val('<?php echo $title; ?>'); $('.expense_cost').val('<?php echo $cost; ?>');"><i class="fas fa-edit text-info"></i></a>
-                                                        <a class="" data-toggle="modal" href="#removeExpenseModal" onclick="$('.expense_id').val('<?php echo $id; ?>');"><i class="fa fa-trash text-danger"></i></a>
-                                                    </span>
-                                                    <?php
+                                                            <a data-toggle="modal" href="#editExpenseModal"
+                                                                onclick="$('.expense_id').val('<?php echo $id; ?>'); $('.expense_title').val('<?php echo $title; ?>'); $('.expense_cost').val('<?php echo $cost; ?>');"><i
+                                                                    class="fas fa-edit text-info"></i></a>
+                                                            <a class="" data-toggle="modal" href="#removeExpenseModal"
+                                                                onclick="$('.expense_id').val('<?php echo $id; ?>');"><i
+                                                                    class="fa fa-trash text-danger"></i></a>
+                                                        </span>
+                                                        <?php
                                                     }
                                                     ?>
                                                 </div>
@@ -118,7 +117,7 @@
                                                     ?>
                                                 </p>
                                                 <small class="mb-0">
-                                                    <?php echo request::timeago($timestamp);?>
+                                                    <?php echo request::timeago($timestamp); ?>
                                                 </small>
                                             </div>
                                         </div>

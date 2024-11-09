@@ -28,82 +28,83 @@
 
       if ($customers) {
         ?>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Email Address</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">No of Order(s)</th>
-            <th scope="col">Date Added</th>
-              <?php
-              if($role == 1)
-              {
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">No of Order(s)</th>
+                <th scope="col">Date Added</th>
+                <?php
+                if ($role == 1) {
                   ?>
                   <th class="text-center" scope="col">Actions</th>
                   <?php
-              }
-              ?>
-          </tr>
-          </thead>
-
-          <tbody>
-          <?php
-
-          foreach ($customers as $customer) {
-            $id = $customer['id'];
-            $name = $customer['customer_name'];
-            $email = $customer['email'];
-            $phone = $customer['phone'];
-            $address = $customer['address'];
-            ?>
-            <tr>
-              <td><?php echo $name; ?></td>
-              <td><?php echo $email; ?></td>
-              <td><?php echo $phone; ?></td>
-              <td><?php echo count(customer::orders($id)); ?></td>
-              <td>
-                <span class="badge badge-dark"><?php echo request::timeago($customer['timestamp']); ?></span>
-              </td>
-                <?php
-                if($role == 1)
-                {
-                    ?>
-                    <td class="text-center">
-                        <a id="actions1Invoker" class="link-muted" href="#!" aria-haspopup="true" aria-expanded="false"
-                           data-toggle="dropdown">
-                            <i class="fa fa-sliders-h"></i>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;" aria-labelledby="actions1Invoker">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>'); $('.customer_email').val('<?php echo $email; ?>'); $('.customer_phone').val('<?php echo $phone; ?>'); $('.customer_name').val('<?php echo $name; ?>'); $('.customer_address').val('<?php echo $address; ?>');">
-                                        <i class="fa fa-plus mr-2"></i> Edit Customer
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#removeCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>');">
-                                        <i class="fa fa-minus mr-2"></i> Remove
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                <?php
                 }
                 ?>
-            </tr>
-          <?php
-            }
+              </tr>
+            </thead>
 
-          ?>
-          </tbody>
-        </table>
-      </div>
-      <?php
-      }else {
+            <tbody>
+              <?php
+
+              foreach ($customers as $customer) {
+                $id = $customer['id'];
+                $name = $customer['customer_name'];
+                $email = $customer['email'];
+                $phone = $customer['phone'];
+                $address = $customer['address'];
+                ?>
+                <tr>
+                  <td><?php echo $name; ?></td>
+                  <td><?php echo $email; ?></td>
+                  <td><?php echo $phone; ?></td>
+                  <td><?php echo count(customer::orders($id)); ?></td>
+                  <td>
+                    <span class="badge badge-dark"><?php echo request::timeago($customer['timestamp']); ?></span>
+                  </td>
+                  <?php
+                  if ($role == 1) {
+                    ?>
+                    <td class="text-center">
+                      <a id="actions1Invoker" class="link-muted" href="#!" aria-haspopup="true" aria-expanded="false"
+                        data-toggle="dropdown">
+                        <i class="fa fa-sliders-h"></i>
+                      </a>
+
+                      <div class="dropdown-menu dropdown-menu-right dropdown" style="width: 150px;"
+                        aria-labelledby="actions1Invoker">
+                        <ul class="list-unstyled mb-0">
+                          <li>
+                            <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal" href="#editCustomer"
+                              onclick="$('.customer_id').val('<?php echo $id; ?>'); $('.customer_email').val('<?php echo $email; ?>'); $('.customer_phone').val('<?php echo $phone; ?>'); $('.customer_name').val('<?php echo $name; ?>'); $('.customer_address').val('<?php echo $address; ?>');">
+                              <i class="fa fa-plus mr-2"></i> Edit Customer
+                            </a>
+                          </li>
+                          <li>
+                            <a class="d-flex align-items-center link-muted py-2 px-3" data-toggle="modal"
+                              href="#removeCustomer" onclick="$('.customer_id').val('<?php echo $id; ?>');">
+                              <i class="fa fa-minus mr-2"></i> Remove
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <?php
+                  }
+                  ?>
+                </tr>
+                <?php
+              }
+
+              ?>
+            </tbody>
+          </table>
+        </div>
+        <?php
+      } else {
         respond::alert('info', '', 'No customer account has been created');
       }
       ?>
@@ -112,5 +113,3 @@
 
 
 </div>
-
-

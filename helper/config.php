@@ -105,6 +105,16 @@ class config {
     {
         return 'updated an order';
     }
+    
+    public static function invoiceActivity()
+    {
+        return 'added an invoice';
+    }
+
+    public static function invoiceUpdateActivity()
+    {
+        return 'updated an invoice';
+    }
 
     public static function noteActivity()
     {

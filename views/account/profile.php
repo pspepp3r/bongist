@@ -24,7 +24,7 @@
                             customer::update($email, $_POST['fname'], $_POST['lname'], $_POST['phone'], $_FILES['photo']);
                         }
 
-                    $account = customer::check($email);
+                    $account = customer::check($email, 'email');
 
                     ?>
                     <div class="block-body">
@@ -112,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <?php require 'views/account/layout/sidebar.php'; ?>
+            <?php require_once 'views/account/layout/sidebar.php'; ?>
         </div>
     </div>
 </section>

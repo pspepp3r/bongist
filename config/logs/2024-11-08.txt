@@ -1,0 +1,13 @@
+Time : 09:00:05
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'invoice.invoice_id' in 'field list'
+Raw SQL : SELECT invoice.invoice_id, invoice.timestamp, invoice.due_date, invoice.subtotal, invoice.tax, invoice.total, invoice.amount_paid, invoice.balance_due, invoice.status, invoice.staff_id, invoice.customer_id FROM invoices
+
+Time : 08:59:41
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'invoice.invoice_id' in 'field list'
+Raw SQL : SELECT invoice.invoice_id, invoice.timestamp, invoice.due_date, invoice.subtotal, invoice.tax, invoice.total, invoice.amount_paid, invoice.balance_due, invoice.status, invoice.staff_id, invoice.customer_id FROM invoices  
+        JOIN customers AS customers ON invoices.customer_id = customers.id
+
+Time : 08:57:53
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'invoice.invoice_id' in 'field list'
+Raw SQL : SELECT invoice.invoice_id, invoice.timestamp, invoice.due_date, invoice.subtotal, invoice.tax, invoice.total, invoice.amount_paid, invoice.balance_due, invoice.status, invoice.staff_id FROM invoices  
+        JOIN customers AS customers ON invoices.customer_id = customers.id

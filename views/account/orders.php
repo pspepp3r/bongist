@@ -12,4 +12,4 @@
         $page = 'single';
     }
 
-    require('views/account/orders/'. $page .'.php');
+    require_once "views/account/orders/$page.php";
