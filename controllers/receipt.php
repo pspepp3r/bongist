@@ -54,7 +54,7 @@ class receipt
     );
 
     $db->query(
-      "UPDATE invoices SET amount_paid = :amount WHERE invoice_id = :invoice_id",
+      "UPDATE invoices SET amount_paid = amount_paid + :amount WHERE invoice_id = :invoice_id",
       [
         "amount" => $amount,
         "invoice_id" => $invoice_id
