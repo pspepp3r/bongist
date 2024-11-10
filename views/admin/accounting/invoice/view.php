@@ -21,7 +21,7 @@ if (isset($_GET['params'])) {
       <a class="btn btn-dark ml-4 float-right" href="#addReceipt" data-toggle="modal">Generate Receipt</a>
       <a class="btn btn-dark ml-4 float-right" href="admin/accounting/receipt/view?params=<?= $invoice_id ?>">View
         Receipts</a>
-      <a class="btn btn-dark ml-4 float-right" href="javascript:void(0);" onclick="window.print()"><i class=""></i>
+      <a class="btn btn-dark ml-4 float-right" href="javascript:void(0);" onclick="window.print()"><i class="fas fa-print"></i>
         Print</a>
       <div class="float-right">
         <a class="btn btn-dark btn-block" href="admin/accounting/invoices">Go back</a>
@@ -38,8 +38,7 @@ if (isset($_GET['params'])) {
           <div class="row">
             <div class="col-md-6">
               <h5>From:</h5>
-              <p><?= config::address() ?><br>Phone: <?= config::phone() ?><br>Website:
-                <a href="<?= config::url() ?>"><?= config::url() ?></a>
+              <p><?= config::address() ?><br>Phone: <?= config::phone() ?>
               </p>
             </div>
             <div class="col-md-6 text-right">

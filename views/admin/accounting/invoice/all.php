@@ -68,7 +68,8 @@
                   <td><?= $name; ?></td>
                   <td>
                     <!-- <a href="admin/accounting/invoices/<? //=$invoice_id ?>/details" class="btn btn-secondary"><? //=$invoice_id ?></a> -->
-                    <a href="admin/accounting/invoice/view?params=<?= $invoice_id ?>" style="text-transform: uppercase;" class="btn btn-secondary">
+                    <a href="admin/accounting/invoice/view?params=<?= $invoice_id ?>" style="text-transform: uppercase;"
+                      class="btn btn-secondary">
                       <?= $invoice_id; ?>
                     </a>
                   </td>

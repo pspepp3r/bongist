@@ -575,7 +575,7 @@
               <!-- Base Accounting UI -->
               <li class="u-sidebar-nav-menu__item">
                 <a class="u-sidebar-nav-menu__link" href="#!" data-target="#baseAccountingUI">
-                  <i class="far fa-credit-card u-sidebar-nav-menu__item-icon"></i>
+                  <i class="fas fa-coins u-sidebar-nav-menu__item-icon"></i>
                   <span class="u-sidebar-nav-menu__item-title">Accounting</span>
                   <i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
                   <span class="u-sidebar-nav-menu__indicator"></span>
@@ -585,13 +585,13 @@
                   style="display: none;">
                   <li class="u-sidebar-nav-menu__item">
                     <a class="u-sidebar-nav-menu__link" href="admin/accounting/invoice">
-                      <i class="far fa-wallet u-sidebar-nav-menu__item-icon"></i>
+                      <i class="far fa-file-alt u-sidebar-nav-menu__item-icon"></i>
                       <span class="u-sidebar-nav-menu__item-title">Invoices</span>
                     </a>
                   </li>
                   <li class="u-sidebar-nav-menu__item">
                     <a class="u-sidebar-nav-menu__link" href="admin/accounting/receipt">
-                      <i class="far fa-book u-sidebar-nav-menu__item-icon"></i>
+                      <i class="fas fa-receipt u-sidebar-nav-menu__item-icon"></i>
                       <span class="u-sidebar-nav-menu__item-title">Receipts</span>
                     </a>
                   </li>
